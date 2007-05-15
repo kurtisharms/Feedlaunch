@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>RSS News</title>
+    <link>http://opcode.110mb.com/</link>
+    <description>Opcode Community new provides...</description>
+    <item>
+      <title>Microsoft releases XNA Refresh!</title>
+      <link>http://xna.creators.com/</link>
+      <description>XNA is a new technology which....</description>
+    </item>
+  </channel>
+</rss>

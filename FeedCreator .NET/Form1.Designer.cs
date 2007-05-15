@@ -287,9 +287,11 @@ namespace FeedCreator.NET
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.helpToolStripMenuItem.Text = "&Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // searchHelpToolStripMenuItem
             // 
+            this.searchHelpToolStripMenuItem.Enabled = false;
             this.searchHelpToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("searchHelpToolStripMenuItem.Image")));
             this.searchHelpToolStripMenuItem.Name = "searchHelpToolStripMenuItem";
             this.searchHelpToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
@@ -316,12 +318,14 @@ namespace FeedCreator.NET
             this.visitCommToolStripMenuItem.Name = "visitCommToolStripMenuItem";
             this.visitCommToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.visitCommToolStripMenuItem.Text = "&Visit Community Website...";
+            this.visitCommToolStripMenuItem.Click += new System.EventHandler(this.visitCommToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.aboutToolStripMenuItem.Text = "&About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // channelsBox
             // 
@@ -533,11 +537,11 @@ namespace FeedCreator.NET
             this.toolStripContainer1.ContentPanel.Controls.Add(this.feedList);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.itemsBox);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.channelsBox);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(627, 420);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(627, 415);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(627, 491);
+            this.toolStripContainer1.Size = new System.Drawing.Size(627, 486);
             this.toolStripContainer1.TabIndex = 5;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -575,11 +579,11 @@ namespace FeedCreator.NET
             // 
             this.toolStripContainer2.ContentPanel.AutoScroll = true;
             this.toolStripContainer2.ContentPanel.Controls.Add(this.toolStripContainer1);
-            this.toolStripContainer2.ContentPanel.Size = new System.Drawing.Size(627, 491);
+            this.toolStripContainer2.ContentPanel.Size = new System.Drawing.Size(627, 486);
             this.toolStripContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer2.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer2.Name = "toolStripContainer2";
-            this.toolStripContainer2.Size = new System.Drawing.Size(627, 516);
+            this.toolStripContainer2.Size = new System.Drawing.Size(627, 511);
             this.toolStripContainer2.TabIndex = 6;
             this.toolStripContainer2.Text = "toolStripContainer2";
             // 
@@ -610,7 +614,7 @@ namespace FeedCreator.NET
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(627, 516);
+            this.ClientSize = new System.Drawing.Size(627, 511);
             this.Controls.Add(this.toolStripContainer2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;

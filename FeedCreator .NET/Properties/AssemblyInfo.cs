@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FeedCreator .NET")]
-[assembly: AssemblyDescription("FeedCreator .NET answers all your needs for creating web feeds. Upload projects and feeds directly from the application via FTP")]
+[assembly: AssemblyTitle("FeedLaunch .NET")]
+[assembly: AssemblyDescription("FeedLaunch .NET answers all your needs for creating web feeds. Upload projects and feeds directly from the application via FTP")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FeedCreator .NET")]
-[assembly: AssemblyCopyright("Copyright ©  2007 Kurtis Harms")]
+[assembly: AssemblyCompany("Released under the GPL(Gnu Public License)")]
+[assembly: AssemblyProduct("FeedLaunch .NET")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
