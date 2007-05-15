@@ -15,16 +15,29 @@ namespace FeedCreator.NET
 {
     public partial class Form1 : Form
     {
+        //Here is the class to store the channel info
         ChannelClass ChannelInfo;
-           newChannelForm newChannel;
+        //here are our forms
+        newChannelForm newChannel;
         createItemForm createItemForm1;
+        explorer ExplorerForm1;
+        explorer HelpExplorerForm1;
+        //Here is the list which is used to store all the feed items
+        //in memory
         List<FeedItem> FeedItemList;
+        //This is our XmlTextWriter which we will
+        //use to write our feed with
         XmlTextWriter writer;
+        //This is our Xml Read which we will read the feeds with
+        XmlTextReader reader;
+        //this variable is true if the item is saved; other false
         bool saved = false;
-        const string title = "FeedCreator .NET- ";
+        //this string stores the beggining title text
+        const string title = "FeedLaunch .NET- ";
+        //the filename
         string fileName = "Feed1.xml";
-        public string[] channel1 = new string[8];
-        public string[,] feedItems1 = new string[15,8];
+        //public string[] channel1 = new string[8];
+        //public string[,] feedItems1 = new string[15,8];
         public Form1()
         {
             InitializeComponent();
@@ -43,7 +56,8 @@ namespace FeedCreator.NET
             feedButton.Text = "Create RSS 2.0 Feed";
             createItemForm1.CreateFeedItem += new createItemForm.CustomEventDelegate(addNewItem);
             newChannel.CreateFeed += new newChannelForm.CustomEventDelegate(manage_Channel);
-            this.Text = "FeedCreator .NET- Feed1.xml";
+            feedList.SelectedIndexChanged +=new EventHandler(feedList_SelectedIndexChanged);
+            this.Text = "FeedLaunch .NET- Feed1.xml";
             this.Text = string.Concat(this.Text, "*");
 
         }
@@ -98,7 +112,7 @@ namespace FeedCreator.NET
 
         private void deleteChannelButton_Click(object sender, EventArgs e)
         {
-            channel1 = null;
+            
         }
         private void manage_Channel(object sender, EventArgs e)
         {
@@ -108,6 +122,10 @@ namespace FeedCreator.NET
                 ChannelInfo.link = newChannel.linkBox.Text;
                 ChannelInfo.pubDate = newChannel.dateTimePicker1.Value.ToString();
                 ChannelInfo.buildDate = newChannel.dateTimePicker2.Value.ToString();
+                ChannelInfo.copyright = newChannel.copyrightBox.Text;
+                ChannelInfo.language = newChannel.listBox1.SelectedValue.ToString();
+                ChannelInfo.webmaster = newChannel.webmasterBox.Text;
+                ChannelInfo.ttl = newChannel.numericUpDown1.Value;
                 titleLabel.Text = ChannelInfo.title;
                 linkLabel.Text = ChannelInfo.link;
             }
@@ -115,6 +133,7 @@ namespace FeedCreator.NET
             {
                 MessageBox.Show("An Error has been encountered. Please submit a bug report if this problem persists!", "Error Handled!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            saved = false;
         }
 
         private void editChannelButton_Click(object sender, EventArgs e)
@@ -160,6 +179,7 @@ namespace FeedCreator.NET
                         FeedItemList.Remove(f);
                     }
                 });
+                saved = false;
             }
             }
 
@@ -173,6 +193,7 @@ namespace FeedCreator.NET
                     int tmpIndex = itemList.SelectedIndex;
                     itemList.Items.Remove(tmpObject);
                     itemList.Items.Insert(tmpIndex - 1, tmpObject);
+                    saved = false;
                 }
             }
         }
@@ -189,6 +210,7 @@ namespace FeedCreator.NET
                         int tmpIndex = itemList.SelectedIndex;
                         itemList.Items.Remove(tmpObject);
                         itemList.Items.Insert(tmpIndex + 1, tmpObject);
+                        saved = false;
                     }
                 }
             }
@@ -201,12 +223,17 @@ namespace FeedCreator.NET
 
         private void editItemButton_Click(object sender, EventArgs e)
         {
+            //Make sure we aren't selecting an empty(null) item
             if(itemList.SelectedItem != null)
             {
-
+            //create the form
             createItemForm1 = new createItemForm();
+            //assign the form's event handler which is called when the user hits
+            //"Create" or "OK"
             createItemForm1.EditFeedItem += new createItemForm.CustomEventDelegate(editFeedItem);
+            //Assign the correct title text
             createItemForm1.Text = "Edit Feed Item";
+            //Display our form
             createItemForm1.Show();
             }
 
@@ -281,7 +308,40 @@ namespace FeedCreator.NET
             }
 
         }
-        
+
+        private void visitCommToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Create a new explorer form
+            ExplorerForm1 = new explorer();
+            //Assign the new url to the form- make sure to assign this
+            //before the explorer form loads
+            ExplorerForm1.urlLocation = new System.Uri("http://feedlaunch.sourceforge.net/");
+            //And now just display our explorer form
+            ExplorerForm1.Show();
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Create a new explorer form
+            HelpExplorerForm1 = new explorer();
+            //Set the form's title text
+            HelpExplorerForm1.Text = "FeedLaunch On-line Help and Documentation";
+            //Assign the new url to the form- make sure to assign this
+            //before the help form loads
+            HelpExplorerForm1.urlLocation = new System.Uri("http://feedlaunch.sourceforge.net/docs/");
+            //And now just display our help form
+            HelpExplorerForm1.Show();
+        }
+        private void feedList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //selection is changed, so we'll just set the "saved" variable as false
+            saved = false;
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Application.ProductName + "\n" + "Version " + Application.ProductVersion + "\n" + Application.CompanyName, "About FeedLaunch", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
     }
 }

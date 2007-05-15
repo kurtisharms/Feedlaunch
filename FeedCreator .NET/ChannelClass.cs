@@ -14,6 +14,6 @@ namespace FeedCreator.NET
         public string language;
         public string copyright;
         public string webmaster;
-        public int ttl;
+        public decimal ttl;
     }
 }

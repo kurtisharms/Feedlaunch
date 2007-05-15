@@ -7,8 +7,8 @@
     <ProjectGuid>{D1B2ED14-086B-447B-9E06-27646F416D7D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FeedCreator.NET</RootNamespace>
-    <AssemblyName>FeedCreator .NET</AssemblyName>
+    <RootNamespace>FeedLaunch.NET</RootNamespace>
+    <AssemblyName>FeedLaunch .NET</AssemblyName>
     <ApplicationIcon>FeedCreatorIcon.ico</ApplicationIcon>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>http://localhost/FeedCreator .NET/</PublishUrl>
@@ -66,6 +66,12 @@
     <Compile Include="createItemForm.Designer.cs">
       <DependentUpon>createItemForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="explorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="explorer.Designer.cs">
+      <DependentUpon>explorer.cs</DependentUpon>
+    </Compile>
     <Compile Include="FeedItem.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -89,6 +95,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>createItemForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="explorer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>explorer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Form1.cs</DependentUpon>
@@ -105,6 +115,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
