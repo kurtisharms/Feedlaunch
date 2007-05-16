@@ -60,8 +60,6 @@ namespace FeedCreator.NET
         const string title = "FeedLaunch .NET- ";
         //the filename
         string fileName = "Feed1.xml";
-        //public string[] channel1 = new string[8];
-        //public string[,] feedItems1 = new string[15,8];
         public Form1()
         {
             InitializeComponent();
@@ -140,6 +138,7 @@ namespace FeedCreator.NET
         }
         private void manage_Channel(object sender, EventArgs e)
         {
+            ChannelInfo = new ChannelClass();
             try {
                 ChannelInfo.title = newChannel.titleBox.Text;
                 ChannelInfo.description = newChannel.descriptionBox.Text;
@@ -147,7 +146,14 @@ namespace FeedCreator.NET
                 ChannelInfo.pubDate = newChannel.dateTimePicker1.Value.ToString();
                 ChannelInfo.buildDate = newChannel.dateTimePicker2.Value.ToString();
                 ChannelInfo.copyright = newChannel.copyrightBox.Text;
-                ChannelInfo.language = newChannel.listBox1.SelectedValue.ToString();
+                if (newChannel.listBox1.SelectedValue != null)
+                {
+                    ChannelInfo.language = newChannel.listBox1.SelectedValue.ToString();
+                }
+                else
+                {
+                    ChannelInfo.language = "en";
+                }
                 ChannelInfo.webmaster = newChannel.webmasterBox.Text;
                 ChannelInfo.ttl = newChannel.numericUpDown1.Value;
                 titleLabel.Text = ChannelInfo.title;
@@ -155,9 +161,9 @@ namespace FeedCreator.NET
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An Error has been encountered. Please submit a bug report if this problem persists!", "Error Handled!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("An Error has been encountered. Please submit a bug report if this problem persists!", ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            saved = false;
+            this.saved = false;
         }
 
         private void editChannelButton_Click(object sender, EventArgs e)
@@ -292,10 +298,11 @@ namespace FeedCreator.NET
                 //Create a temporary List which will store the currently open
                 //items in the "items" listview
                 List<FeedItem> TMPopened = new List<FeedItem>();
-                int i = 0;
+                List<FeedItem> SortedList = new List<FeedItem>();
+                
 
                 //Environment.GetEnvironmentVariable("TEMP");
-                writer = new XmlTextWriter("feed1.xml", System.Text.Encoding.UTF8);
+                writer = new XmlTextWriter(this.fileName, System.Text.Encoding.UTF8);
                 writer.Formatting = Formatting.Indented;
                 //Open Document
                 writer.WriteStartDocument();
@@ -308,17 +315,16 @@ namespace FeedCreator.NET
                 writer.WriteElementString("description", ChannelInfo.description);
 
 
-                //Now begin writing the feed items
+                
                 TMPopened = FeedItemList.FindAll(delegate(FeedItem f)
                 {
                     return itemList.Items.Contains(f.title) == true;
                 });
-                TMPopened.Sort(delegate(FeedItem f1, FeedItem f2) 
-                {
-                    return f1.order.CompareTo(f2.order);
-                });
+             
+                       
 
 
+                //Now begin writing the feed items
                 TMPopened.ForEach(delegate(FeedItem f)
                 {
                     writer.WriteStartElement("item");
@@ -370,6 +376,104 @@ namespace FeedCreator.NET
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(Application.ProductName + "\n" + "Version " + Application.ProductVersion + "\n" + Application.CompanyName, "About FeedLaunch", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            bool run = true;
+            try
+            {
+
+                if (feedList.SelectedItem.ToString() != "RSS 2.0")
+                {
+                    DialogResult result;
+                    result = MessageBox.Show("ATOM Feeds are currently unsupported. Do you wish to save your feed as RSS instead?", "Save as RSS Feed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    if (result == DialogResult.No)
+                    {
+                        run = false;
+                    }
+                }
+                if (run == true)
+                {
+                    if (fileName == "Feed1.xml")
+                    {
+
+                        MessageBox.Show("You have not selected a destination for this feed. The next dialog will allow you to choose one.", "No Destination Found!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss"; //|ATOM Feed (*.atom)|*.atom";
+                        saveFileDialog1.FilterIndex = 1;
+                        saveFileDialog1.Title = "Select a destination folder and filename";
+                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                        {
+                            if (saveFileDialog1.FileName != null)
+                            {
+                                fileName = saveFileDialog1.FileName;
+                                saved = true;
+                                feedButton_Click(sender, e);
+                                statusLabel.Text = "Feed successfully saved";
+                            }
+                        }
+                    }
+                    if (fileName == "_SaveAsFeed1.system")
+                    {
+                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss"; // |ATOM Feed (*.atom)|*.atom";
+                        saveFileDialog1.FilterIndex = 1;
+                        saveFileDialog1.Title = "Save As...";
+                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                        {
+                            if (saveFileDialog1.FileName != null)
+                            {
+                                fileName = saveFileDialog1.FileName;
+                                feedButton_Click(sender, e);
+                                saved = true;
+                                statusLabel.Text = "Feed successfully saved";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (fileName != null)
+                        {
+                            feedButton_Click(sender, e);
+                            saved = true;
+                            statusLabel.Text = "Feed successfully saved";
+                        }
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An Error has been encountered. Please submit a bug report if this problem persists!", ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+                
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolStripButton3_Click(sender, e);
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fileName = "_SaveAsFeed1.system";
+            toolStripButton3_Click(sender, e);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            FeedItemList.Clear();
+            ChannelInfo = null;
+            itemList.Items.Clear();
+            fileName = "Feed1.xml";
+            this.Text = title + fileName + "*";
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolStripButton1_Click(sender, e);
+            
         }
 
     }
