@@ -1,3 +1,27 @@
+ /*---------------------------------------------------------------------------------
+    This source file is a part of FeedLaunch .NET
+   
+    For the latest information, please visit http://feedlaunch.sourceforge.net/
+    
+    Copyright (C) 2007 The FeedLaunch Team
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+---------------------------------------------------------------------------------*/
+
+
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -153,7 +177,12 @@ namespace FeedCreator.NET
 
         private void addNewItem(object sender, EventArgs e)
         {
-  FeedItemList.Add(new FeedItem(createItemForm1.titleBox.Text, 
+            string txt = createItemForm1.titleBox.Text;
+            while (itemList.Items.Contains(txt))
+            {
+                txt = String.Concat(txt, " ");
+            }
+  FeedItemList.Add(new FeedItem(txt, 
                 createItemForm1.descriptionBox.Text,
                 createItemForm1.linkBox.Text, itemList.Items.Count + 1));
             itemList.Items.Clear();
