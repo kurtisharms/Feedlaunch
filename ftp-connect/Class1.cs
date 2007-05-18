@@ -817,9 +817,9 @@ public class Test {
 
        FTPConnect ff = new FTPConnect();
        ff.setDebug(true);
-       ff.setRemoteHost("192.168.0.30");
-       ff.setRemoteUser("jaimon");
-       ff.setRemotePass("mathew");
+       ff.setRemoteHost("127.0.0.1");
+       ff.setRemoteUser("Kurtis");
+       ff.setRemotePass("Harms");
        ff.login();
        ff.chdir("incoming");
 
