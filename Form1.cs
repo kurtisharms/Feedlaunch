@@ -157,6 +157,9 @@ namespace FeedCreator.NET
                 }
                 ChannelInfo.webmaster = newChannel.webmasterBox.Text;
                 ChannelInfo.ttl = newChannel.numericUpDown1.Value;
+                ChannelInfo.imageText = newChannel.imageText.Text;
+                ChannelInfo.imageWidth = newChannel.numericUpDown2.Value;
+                ChannelInfo.imageHeight = newChannel.numericUpDown3.Value;
                 titleLabel.Text = ChannelInfo.title;
                 linkLabel.Text = ChannelInfo.link;
             }
@@ -324,8 +327,14 @@ namespace FeedCreator.NET
                 writer.WriteElementString("generator", "FeedLaunch .NET- http://feedlaunch.sourceforge.net/ or http://www.sourceforge.net/feedlaunch");
                 writer.WriteElementString("docs", "http://cyber.law.harvard.edu/rss/rss.html");
                 writer.WriteElementString("ttl", ChannelInfo.ttl.ToString());
-
-
+                if (ChannelInfo.imageText != null || ChannelInfo.imageText != "")
+                {
+                    writer.WriteStartElement("image");
+                    writer.WriteElementString("url", ChannelInfo.imageText);
+                    writer.WriteElementString("width", ChannelInfo.imageWidth.ToString());
+                    writer.WriteElementString("height", ChannelInfo.imageHeight.ToString());
+                    writer.WriteEndElement();
+                }
                 
                 TMPopened = FeedItemList.FindAll(delegate(FeedItem f)
                 {

@@ -1,0 +1,12 @@
+bin\Release\FeedLaunch .NET.exe
+bin\Release\FeedLaunch .NET.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\FeedCreator.NET.About.resources
+obj\Release\FeedCreator.NET.createItemForm.resources
+obj\Release\FeedCreator.NET.explorer.resources
+obj\Release\FeedCreator.NET.Form1.resources
+obj\Release\FeedCreator.NET.newChannelForm.resources
+obj\Release\FeedLaunch.NET.Properties.Resources.resources
+obj\Release\FeedLaunch .NET.csproj.GenerateResource.Cache
+obj\Release\FeedLaunch .NET.exe
+obj\Release\FeedLaunch .NET.pdb

@@ -36,5 +36,8 @@ namespace FeedCreator.NET
         public string copyright;
         public string webmaster;
         public decimal ttl;
+        public string imageText;
+        public decimal imageWidth;
+        public decimal imageHeight;
     }
 }
