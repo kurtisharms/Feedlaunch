@@ -428,12 +428,12 @@ namespace FeedCreator.NET
         public System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.TextBox imageText;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        public System.Windows.Forms.TextBox imageText;
+        public System.Windows.Forms.NumericUpDown numericUpDown3;
+        public System.Windows.Forms.NumericUpDown numericUpDown2;
     }
 }
