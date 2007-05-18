@@ -38,7 +38,17 @@ namespace FeedCreator.NET
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.authorEmail = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.SourceGroupBox = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.sourceText = new System.Windows.Forms.TextBox();
+            this.sourceURL = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.SourceGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -60,7 +70,7 @@ namespace FeedCreator.NET
             // 
             // descriptionBox
             // 
-            this.descriptionBox.Location = new System.Drawing.Point(103, 66);
+            this.descriptionBox.Location = new System.Drawing.Point(103, 61);
             this.descriptionBox.Name = "descriptionBox";
             this.descriptionBox.Size = new System.Drawing.Size(304, 96);
             this.descriptionBox.TabIndex = 2;
@@ -80,7 +90,7 @@ namespace FeedCreator.NET
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(16, 192);
+            this.label3.Location = new System.Drawing.Point(14, 169);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 4;
@@ -88,7 +98,7 @@ namespace FeedCreator.NET
             // 
             // linkBox
             // 
-            this.linkBox.Location = new System.Drawing.Point(103, 192);
+            this.linkBox.Location = new System.Drawing.Point(103, 166);
             this.linkBox.Name = "linkBox";
             this.linkBox.Size = new System.Drawing.Size(304, 20);
             this.linkBox.TabIndex = 5;
@@ -117,12 +127,94 @@ namespace FeedCreator.NET
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 205);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(72, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Author (Email)";
+            // 
+            // authorEmail
+            // 
+            this.authorEmail.Location = new System.Drawing.Point(103, 202);
+            this.authorEmail.Name = "authorEmail";
+            this.authorEmail.Size = new System.Drawing.Size(304, 20);
+            this.authorEmail.TabIndex = 9;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(17, 249);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(85, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Publication Date";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(108, 245);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(209, 20);
+            this.dateTimePicker1.TabIndex = 11;
+            // 
+            // SourceGroupBox
+            // 
+            this.SourceGroupBox.Controls.Add(this.sourceURL);
+            this.SourceGroupBox.Controls.Add(this.sourceText);
+            this.SourceGroupBox.Controls.Add(this.label7);
+            this.SourceGroupBox.Controls.Add(this.label6);
+            this.SourceGroupBox.Location = new System.Drawing.Point(20, 302);
+            this.SourceGroupBox.Name = "SourceGroupBox";
+            this.SourceGroupBox.Size = new System.Drawing.Size(387, 82);
+            this.SourceGroupBox.TabIndex = 12;
+            this.SourceGroupBox.TabStop = false;
+            this.SourceGroupBox.Text = "Source";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(35, 20);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(28, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Text";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(35, 58);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(29, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "URL";
+            // 
+            // sourceText
+            // 
+            this.sourceText.Location = new System.Drawing.Point(118, 17);
+            this.sourceText.Name = "sourceText";
+            this.sourceText.Size = new System.Drawing.Size(263, 20);
+            this.sourceText.TabIndex = 2;
+            // 
+            // sourceURL
+            // 
+            this.sourceURL.Location = new System.Drawing.Point(118, 50);
+            this.sourceURL.Name = "sourceURL";
+            this.sourceURL.Size = new System.Drawing.Size(263, 20);
+            this.sourceURL.TabIndex = 3;
+            // 
             // createItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 460);
             this.ControlBox = false;
+            this.Controls.Add(this.SourceGroupBox);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.authorEmail);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.linkBox);
@@ -137,6 +229,8 @@ namespace FeedCreator.NET
             this.Text = "Create Feed Item";
             this.Load += new System.EventHandler(this.createItemForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.SourceGroupBox.ResumeLayout(false);
+            this.SourceGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,5 +247,14 @@ namespace FeedCreator.NET
         public System.Windows.Forms.RichTextBox descriptionBox;
         public System.Windows.Forms.TextBox linkBox;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.TextBox authorEmail;
+        private System.Windows.Forms.GroupBox SourceGroupBox;
+        public System.Windows.Forms.TextBox sourceURL;
+        public System.Windows.Forms.TextBox sourceText;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        public System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label5;
     }
 }

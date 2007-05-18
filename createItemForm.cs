@@ -13,6 +13,7 @@ namespace FeedCreator.NET
         public delegate void CustomEventDelegate(object sender, EventArgs e);
         public event CustomEventDelegate CreateFeedItem;
         public event CustomEventDelegate EditFeedItem;
+        private string titleOnLoad = null;
         public createItemForm()
         {
             InitializeComponent();
@@ -36,6 +37,14 @@ namespace FeedCreator.NET
             {
                 errorProvider1.SetError(linkBox, "Link can't be empty!");
                 exit = true;
+            }
+            if (authorEmail.Text != "" && authorEmail.Text != null)
+            {
+                if (authorEmail.Text.Contains("@") != true)
+                {
+                    errorProvider1.SetError(authorEmail, "Invalid Email address!");
+                    exit = true;
+                }
             }
             
             if (exit != true)
@@ -62,7 +71,7 @@ namespace FeedCreator.NET
 
         private void createItemForm_Load(object sender, EventArgs e)
         {
-
+            titleOnLoad = this.titleBox.Text;
         }
     }
 }
