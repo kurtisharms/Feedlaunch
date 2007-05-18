@@ -357,10 +357,26 @@ namespace FeedCreator.NET
                 originalSelectedIndex = itemList.SelectedIndex;
                 if (itemList.Items.Count > 0)
                 {
-
+                    int i = 0;
+                    while(i < itemList.Items.Count)
+                    {
+                        itemList.SelectedIndex = i;
+                        TMPopened.ForEach(delegate(FeedItem f)
+                        {
+                            
+                            if (f.title == itemList.SelectedItem.ToString())
+                            {
+                                f.order = i;
+                            }
+                        });
+                        i = i + 1;
+                    }
                 }
-                       
-
+                itemList.SelectedIndex = originalSelectedIndex;
+                TMPopened.Sort(delegate(FeedItem f1, FeedItem f2)
+                {
+                    return f1.order.CompareTo(f2.order);
+                });
 
                 //Now begin writing the feed items
                 TMPopened.ForEach(delegate(FeedItem f)
