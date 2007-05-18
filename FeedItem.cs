@@ -34,12 +34,23 @@ namespace FeedCreator.NET
         public string description = null;
         public string link = null;
         public int order = 0;
-        public FeedItem(string refTitle, string refDescription, string refLink, int refOrder)
+        public DateTime pubDate;
+        public string authorEmail = null;
+        public string sourceText = null;
+        public string sourceURL = null;
+        public FeedItem(string refTitle, string refDescription, string refLink, int refOrder, string refAuthor, DateTime refDate, string refText, string refURL)
         {
             title = refTitle;
             description = refDescription;
             link = refLink;
             order = refOrder;
+            pubDate = refDate;
+            authorEmail = refAuthor;
+            sourceText = refText;
+            sourceURL = refURL;
+        }
+        public FeedItem()
+        {
         }
 
     }

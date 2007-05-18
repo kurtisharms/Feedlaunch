@@ -75,7 +75,13 @@ namespace FeedCreator.NET
         private void goButton_Click(object sender, EventArgs e)
         {
             //the user clicked "Go" so update the webbrowser control
-            webBrowser1.Url = new System.Uri(locationBox.Text, UriKind.RelativeOrAbsolute);
+            try
+            {
+                webBrowser1.Url = new System.Uri(locationBox.Text, UriKind.RelativeOrAbsolute);
+            }
+            catch (Exception ex)
+            {
+            }
         }
         private void webBrowser1_DocumentTitleChanged(object sender, EventArgs e)
         {

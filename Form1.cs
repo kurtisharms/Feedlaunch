@@ -67,6 +67,7 @@ namespace FeedCreator.NET
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             ChannelInfo = new ChannelClass();
             newChannel = new newChannelForm();
             createItemForm1 = new createItemForm();
@@ -207,7 +208,7 @@ namespace FeedCreator.NET
             }
   FeedItemList.Add(new FeedItem(txt, 
                 createItemForm1.descriptionBox.Text,
-                createItemForm1.linkBox.Text, itemList.Items.Count + 1));
+                createItemForm1.linkBox.Text, itemList.Items.Count + 1, createItemForm1.authorEmail.Text, createItemForm1.dateTimePicker1.Value, createItemForm1.sourceText.Text, createItemForm1.sourceURL.Text));
             itemList.Items.Clear();
             FeedItemList.ForEach(delegate(FeedItem f)
             {
@@ -275,18 +276,36 @@ namespace FeedCreator.NET
 
         private void editItemButton_Click(object sender, EventArgs e)
         {
+            FeedItem fi = new FeedItem();
             //Make sure we aren't selecting an empty(null) item
             if(itemList.SelectedItem != null)
             {
-            //create the form
-            createItemForm1 = new createItemForm();
-            //assign the form's event handler which is called when the user hits
-            //"Create" or "OK"
-            createItemForm1.EditFeedItem += new createItemForm.CustomEventDelegate(editFeedItem);
-            //Assign the correct title text
-            createItemForm1.Text = "Edit Feed Item";
-            //Display our form
-            createItemForm1.Show();
+                if (itemList.SelectedItem != "EMPTY")
+                {
+                    //create the form
+                    createItemForm1 = new createItemForm();
+                    //assign the form's event handler which is called when the user hits
+                    //"Create" or "OK"
+                    createItemForm1.EditFeedItem += new createItemForm.CustomEventDelegate(editFeedItem);
+                    FeedItemList.ForEach(delegate(FeedItem f)
+                    {
+                        if (f.title == itemList.SelectedItem.ToString())
+                        {
+                            createItemForm1.titleBox.Text = f.title;
+                            createItemForm1.descriptionBox.Text = f.description;
+                            createItemForm1.linkBox.Text = f.link;
+                            createItemForm1.authorEmail.Text = f.authorEmail;
+                            createItemForm1.dateTimePicker1.Value = f.pubDate;
+                            createItemForm1.sourceText.Text = f.sourceText;
+                            createItemForm1.sourceURL.Text = f.sourceURL;
+                        }
+                    });
+                    //Assign the correct title text
+                    createItemForm1.Text = "Edit Feed Item";
+
+                    //Display our form
+                    createItemForm1.Show();
+                }
             }
 
         }
@@ -318,7 +337,7 @@ namespace FeedCreator.NET
                 List<FeedItem> SortedList = new List<FeedItem>();
                 int originalSelectedIndex;
 
-                //Environment.GetEnvironmentVariable("TEMP");
+                
                 writer = new XmlTextWriter(this.fileName, System.Text.Encoding.UTF8);
                 writer.Formatting = Formatting.Indented;
                 //Open Document
@@ -385,6 +404,12 @@ namespace FeedCreator.NET
                     writer.WriteElementString("title", f.title.ToString());
                     writer.WriteElementString("link", f.link.ToString());
                     writer.WriteElementString("description", f.description.ToString());
+                    writer.WriteElementString("author", f.authorEmail);
+                    writer.WriteElementString("pubDate", f.pubDate.ToString());
+                    writer.WriteStartElement("source");
+                    writer.WriteAttributeString("url", f.sourceURL);
+                    writer.WriteRaw(f.sourceText);
+                    writer.WriteEndElement();
                     writer.WriteEndElement();
                 });
                 writer.WriteEndElement();
