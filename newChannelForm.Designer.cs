@@ -71,8 +71,17 @@ namespace FeedCreator.NET
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label10 = new System.Windows.Forms.Label();
+            this.imageText = new System.Windows.Forms.TextBox();
+            this.browseButton = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -252,7 +261,7 @@ namespace FeedCreator.NET
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(143, 434);
+            this.okButton.Location = new System.Drawing.Point(142, 500);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 20;
@@ -262,7 +271,7 @@ namespace FeedCreator.NET
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(245, 434);
+            this.cancelButton.Location = new System.Drawing.Point(245, 500);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 21;
@@ -274,12 +283,91 @@ namespace FeedCreator.NET
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(25, 426);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(73, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Path to Image";
+            // 
+            // imageText
+            // 
+            this.imageText.Location = new System.Drawing.Point(120, 426);
+            this.imageText.Name = "imageText";
+            this.imageText.Size = new System.Drawing.Size(200, 20);
+            this.imageText.TabIndex = 23;
+            // 
+            // browseButton
+            // 
+            this.browseButton.Location = new System.Drawing.Point(340, 426);
+            this.browseButton.Name = "browseButton";
+            this.browseButton.Size = new System.Drawing.Size(75, 23);
+            this.browseButton.TabIndex = 24;
+            this.browseButton.Text = "Browse...";
+            this.browseButton.UseVisualStyleBackColor = true;
+            this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(142, 462);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            144,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(75, 20);
+            this.numericUpDown2.TabIndex = 25;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            88,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(245, 462);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(75, 20);
+            this.numericUpDown3.TabIndex = 26;
+            this.numericUpDown3.Value = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(28, 462);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(98, 13);
+            this.label11.TabIndex = 27;
+            this.label11.Text = "Image width/height";
+            // 
             // newChannelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(460, 479);
+            this.ClientSize = new System.Drawing.Size(460, 535);
             this.ControlBox = false;
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.numericUpDown3);
+            this.Controls.Add(this.numericUpDown2);
+            this.Controls.Add(this.browseButton);
+            this.Controls.Add(this.imageText);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.numericUpDown1);
@@ -310,6 +398,8 @@ namespace FeedCreator.NET
             this.Load += new System.EventHandler(this.newChannelForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -338,5 +428,12 @@ namespace FeedCreator.NET
         public System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.TextBox imageText;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button browseButton;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
     }
 }

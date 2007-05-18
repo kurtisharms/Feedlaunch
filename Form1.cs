@@ -92,6 +92,7 @@ namespace FeedCreator.NET
         private void itemList_SelectedIndexChanged(object sender, EventArgs e)
         {
             
+
         }
         private void Form1_Disposed(object sender, EventArgs e)
         {
@@ -313,6 +314,16 @@ namespace FeedCreator.NET
                 writer.WriteElementString("title", ChannelInfo.title);
                 writer.WriteElementString("link", ChannelInfo.link);
                 writer.WriteElementString("description", ChannelInfo.description);
+                writer.WriteElementString("language", ChannelInfo.language);
+                writer.WriteElementString("copyright", ChannelInfo.copyright);
+                writer.WriteElementString("managingEditor", "");
+                writer.WriteElementString("webMaster", ChannelInfo.webmaster);
+                writer.WriteElementString("pubDate", ChannelInfo.pubDate.ToString());
+                writer.WriteElementString("lastBuildDate", ChannelInfo.buildDate.ToString());
+                writer.WriteElementString("category", "");
+                writer.WriteElementString("generator", "FeedLaunch .NET- http://feedlaunch.sourceforge.net/ or http://www.sourceforge.net/feedlaunch");
+                writer.WriteElementString("docs", "http://cyber.law.harvard.edu/rss/rss.html");
+                writer.WriteElementString("ttl", ChannelInfo.ttl.ToString());
 
 
                 
@@ -401,7 +412,7 @@ namespace FeedCreator.NET
                         MessageBox.Show("You have not selected a destination for this feed. The next dialog will allow you to choose one.", "No Destination Found!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss"; //|ATOM Feed (*.atom)|*.atom";
                         saveFileDialog1.FilterIndex = 1;
-                        saveFileDialog1.Title = "Select a destination folder and filename";
+                        saveFileDialog1.Title = "Select a destination folder and filename-";
                         if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                         {
                             if (saveFileDialog1.FileName != null)
@@ -474,6 +485,33 @@ namespace FeedCreator.NET
         {
             toolStripButton1_Click(sender, e);
             
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (itemList.SelectedValue != null)
+            {
+                itemList.Select();
+                DialogResult result;
+                result = MessageBox.Show("Are you sure that you want to delete this feed?", "Delete Feed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    FeedItemList.ForEach(delegate(FeedItem f)
+                    {
+                        if (f.title == itemList.SelectedItem.ToString())
+                        {
+                            itemList.Items.Remove(itemList.SelectedItem);
+                            FeedItemList.Remove(f);
+                        }
+                    });
+                    saved = false;
+                }
+            }
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+
         }
 
     }
