@@ -64,5 +64,19 @@ namespace FeedCreator.NET
         {
 
         }
+
+        private void browseButton_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "Gif Images (*.gif)|*.gif|JPEG Images (*.jpg)|*.jpg|PNG Images (*.png)|*.png";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.Title = "Select an Image to add to feed-";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (openFileDialog1.FileName != null)
+                {
+                    this.imageText.Text = openFileDialog1.FileName;
+                }
+            }
+        }
     }
 }
