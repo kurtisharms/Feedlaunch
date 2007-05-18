@@ -91,8 +91,7 @@ namespace FeedCreator.NET
 
         private void itemList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-
+          
         }
         private void Form1_Disposed(object sender, EventArgs e)
         {
@@ -144,8 +143,22 @@ namespace FeedCreator.NET
                 ChannelInfo.title = newChannel.titleBox.Text;
                 ChannelInfo.description = newChannel.descriptionBox.Text;
                 ChannelInfo.link = newChannel.linkBox.Text;
-                ChannelInfo.pubDate = newChannel.dateTimePicker1.Value.ToString();
-                ChannelInfo.buildDate = newChannel.dateTimePicker2.Value.ToString();
+                if (newChannel.dateTimePicker1.Value != null)
+                {
+                    ChannelInfo.pubDate = newChannel.dateTimePicker1.Value.ToString();
+                }
+                else
+                {
+                    ChannelInfo.pubDate = "";
+                }
+                if (newChannel.dateTimePicker2.Value != null)
+                {
+                    ChannelInfo.buildDate = newChannel.dateTimePicker2.Value.ToString();
+                }
+                else
+                {
+                    ChannelInfo.buildDate = "";
+                }
                 ChannelInfo.copyright = newChannel.copyrightBox.Text;
                 if (newChannel.listBox1.SelectedValue != null)
                 {
@@ -303,7 +316,7 @@ namespace FeedCreator.NET
                 //items in the "items" listview
                 List<FeedItem> TMPopened = new List<FeedItem>();
                 List<FeedItem> SortedList = new List<FeedItem>();
-                
+                int originalSelectedIndex;
 
                 //Environment.GetEnvironmentVariable("TEMP");
                 writer = new XmlTextWriter(this.fileName, System.Text.Encoding.UTF8);
@@ -321,8 +334,8 @@ namespace FeedCreator.NET
                 writer.WriteElementString("copyright", ChannelInfo.copyright);
                 writer.WriteElementString("managingEditor", "");
                 writer.WriteElementString("webMaster", ChannelInfo.webmaster);
-                writer.WriteElementString("pubDate", ChannelInfo.pubDate.ToString());
-                writer.WriteElementString("lastBuildDate", ChannelInfo.buildDate.ToString());
+                writer.WriteElementString("pubDate", ChannelInfo.pubDate);
+                writer.WriteElementString("lastBuildDate", ChannelInfo.buildDate);
                 writer.WriteElementString("category", "");
                 writer.WriteElementString("generator", "FeedLaunch .NET- http://feedlaunch.sourceforge.net/ or http://www.sourceforge.net/feedlaunch");
                 writer.WriteElementString("docs", "http://cyber.law.harvard.edu/rss/rss.html");
@@ -340,7 +353,12 @@ namespace FeedCreator.NET
                 {
                     return itemList.Items.Contains(f.title) == true;
                 });
-             
+                itemList.Select();
+                originalSelectedIndex = itemList.SelectedIndex;
+                if (itemList.Items.Count > 0)
+                {
+
+                }
                        
 
 

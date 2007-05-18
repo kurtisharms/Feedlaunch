@@ -10,3 +10,15 @@ obj\Release\FeedLaunch.NET.Properties.Resources.resources
 obj\Release\FeedLaunch .NET.csproj.GenerateResource.Cache
 obj\Release\FeedLaunch .NET.exe
 obj\Release\FeedLaunch .NET.pdb
+bin\Debug\FeedLaunch .NET.exe
+bin\Debug\FeedLaunch .NET.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\FeedCreator.NET.About.resources
+obj\Debug\FeedCreator.NET.createItemForm.resources
+obj\Debug\FeedCreator.NET.explorer.resources
+obj\Debug\FeedCreator.NET.Form1.resources
+obj\Debug\FeedCreator.NET.newChannelForm.resources
+obj\Debug\FeedLaunch.NET.Properties.Resources.resources
+obj\Debug\FeedLaunch .NET.csproj.GenerateResource.Cache
+obj\Debug\FeedLaunch .NET.exe
+obj\Debug\FeedLaunch .NET.pdb
