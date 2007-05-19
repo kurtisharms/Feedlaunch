@@ -176,6 +176,9 @@ namespace FeedCreator.NET
                 ChannelInfo.imageHeight = newChannel.numericUpDown3.Value;
                 titleLabel.Text = ChannelInfo.title;
                 linkLabel.Text = ChannelInfo.link;
+                pictureBox1.Image = Image.FromFile(ChannelInfo.imageText);
+                pictureBox1.Width = System.Convert.ToInt32(ChannelInfo.imageWidth);
+                pictureBox1.Height = System.Convert.ToInt32(ChannelInfo.imageHeight);
             }
             catch (Exception ex)
             {
@@ -192,6 +195,7 @@ namespace FeedCreator.NET
 
         private void newItemButton_Click(object sender, EventArgs e)
         {
+            itemList.Enabled = false;
             createItemForm1 = new createItemForm();
             createItemForm1.CreateFeedItem += new createItemForm.CustomEventDelegate(addNewItem);
             createItemForm1.Text = "Create New Feed Item";
@@ -202,6 +206,7 @@ namespace FeedCreator.NET
         private void addNewItem(object sender, EventArgs e)
         {
             string txt = createItemForm1.titleBox.Text;
+            itemList.Enabled = true;
             while (itemList.Items.Contains(txt))
             {
                 txt = String.Concat(txt, " ");
@@ -214,7 +219,6 @@ namespace FeedCreator.NET
             {
                 itemList.Items.Add(f.title);
             });
-
 
         }
 
@@ -302,7 +306,7 @@ namespace FeedCreator.NET
                     });
                     //Assign the correct title text
                     createItemForm1.Text = "Edit Feed Item";
-
+                    itemList.Enabled = false;
                     //Display our form
                     createItemForm1.Show();
                 }
@@ -311,7 +315,26 @@ namespace FeedCreator.NET
         }
         private void editFeedItem(object sender, EventArgs e)
         {
-            
+            FeedItemList.ForEach(delegate(FeedItem f)
+            {
+                if (f.title != null && createItemForm1.titleOnLoad != null)
+                {
+                    if (f.title == createItemForm1.titleOnLoad)
+                    {
+                        f.title = createItemForm1.titleBox.Text;
+                        f.description = createItemForm1.descriptionBox.Text;
+                        f.link = createItemForm1.linkBox.Text;
+                        f.authorEmail = createItemForm1.authorEmail.Text;
+                        f.pubDate = createItemForm1.dateTimePicker1.Value;
+                        f.sourceText = createItemForm1.sourceText.Text;
+                        f.sourceURL = createItemForm1.sourceURL.Text;
+                        itemList.Enabled = true;
+                        itemList.SelectedItem = f.title;
+                    }
+                }
+            });
+            itemList.Enabled = true;
+  
         }
         private void feedList_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -321,9 +344,9 @@ namespace FeedCreator.NET
         private void feedButton_Click(object sender, EventArgs e)
         {
             
-            if (feedList.SelectedItem.ToString() == "ATOM 3.0")
+            if (feedList.SelectedItem.ToString() == "ATOM 1.0")
             {
-                //ATOM 3.0 Feeds aren't currently supported
+                //ATOM 1.0 Feeds aren't currently supported
                 //Therefore, play a system "Beep" on the speakers and 
                 //display a message box
                 SystemSounds.Beep.Play();
@@ -557,10 +580,10 @@ namespace FeedCreator.NET
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            itemList.Select();
             if (itemList.SelectedValue != null)
             {
-                itemList.Select();
-                DialogResult result;
+               DialogResult result;
                 result = MessageBox.Show("Are you sure that you want to delete this feed?", "Delete Feed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
@@ -579,7 +602,37 @@ namespace FeedCreator.NET
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
+            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if(openFileDialog1.FileName != null)
+                {
+                    string feedType = "";
+                    reader = new XmlTextReader(openFileDialog1.FileName);
+                    reader.WhitespaceHandling = WhitespaceHandling.None;
+                    while(reader.Read())
+                        switch (reader.NodeType)
+                        {
+                            case XmlNodeType.Element:
+                                if(reader.Name == "rss")
+                                {
+                                    feedType = "RSS";
+                                }
+                                break;
+                            case XmlNodeType.Text:
+                                break;
+                        }
+                }
+            }
+        }
 
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolStripButton2_Click(sender, e);
         }
 
     }
