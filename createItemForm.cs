@@ -13,7 +13,7 @@ namespace FeedCreator.NET
         public delegate void CustomEventDelegate(object sender, EventArgs e);
         public event CustomEventDelegate CreateFeedItem;
         public event CustomEventDelegate EditFeedItem;
-        private string titleOnLoad = null;
+        public string titleOnLoad = null;
         public createItemForm()
         {
             InitializeComponent();
