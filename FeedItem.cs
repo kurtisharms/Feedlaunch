@@ -25,6 +25,8 @@ using System.Text;
 using System.Xml;
 using System.IO;
 using System.Collections;
+using FeedLaunch.NET;
+using FeedCreator.NET;
 
 namespace FeedCreator.NET
 {

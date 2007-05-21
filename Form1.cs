@@ -34,6 +34,8 @@ using System.Xml.Schema;
 using System.Threading;
 using System.IO;
 using System.Media;
+using FeedLaunch.NET;
+using FeedCreator.NET;
 
 namespace FeedCreator.NET
 {
@@ -42,6 +44,7 @@ namespace FeedCreator.NET
         //Here is the class to store the channel info
         ChannelClass ChannelInfo;
         //here are our forms
+        UploadForm uploadFeedForm;
         newChannelForm newChannel;
         createItemForm createItemForm1;
         explorer ExplorerForm1;
@@ -67,7 +70,6 @@ namespace FeedCreator.NET
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
             ChannelInfo = new ChannelClass();
             newChannel = new newChannelForm();
             createItemForm1 = new createItemForm();
@@ -82,6 +84,7 @@ namespace FeedCreator.NET
             feedList.SelectedIndexChanged +=new EventHandler(feedList_SelectedIndexChanged);
             this.Text = "FeedLaunch .NET- Feed1.xml";
             this.Text = string.Concat(this.Text, "*");
+            feedList.SelectedIndex = 0;
 
         }
 
@@ -107,16 +110,28 @@ namespace FeedCreator.NET
             }
             else
             {
-                DialogResult result;
-                result = MessageBox.Show("The current feed isn't saved. Save it?", "Unsaved Feed!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (result == DialogResult.No)
+                if (saved == false)
                 {
-                    this.Dispose();
+                    DialogResult result;
+                    result = MessageBox.Show("The current feed isn't saved. Save it?", "Unsaved Feed!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (result == DialogResult.No)
+                    {
+                        this.Dispose();
+                    }
+                    if (result == DialogResult.Yes)
+                    {
+                        saveFeed();
+                        this.Dispose();
+                    }
                 }
-                if (result == DialogResult.Yes)
+                else
                 {
-                    saveFeed();
-                    this.Dispose();
+                    DialogResult result;
+                    result = MessageBox.Show("Are you sure that you want to exit FeedLaunch?", "Exit?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Dispose();
+                    }
                 }
             }
 
@@ -224,21 +239,31 @@ namespace FeedCreator.NET
 
         private void deleteItemButton_Click(object sender, EventArgs e)
         {
-            DialogResult result;
-            result = MessageBox.Show("Are you sure that you want to delete this feed?", "Delete Feed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+            object tmpObj = "EMPTY";
+            object tmpObj2 = "";
+            if (itemList.SelectedItem != tmpObj && itemList.SelectedItem != tmpObj2 && itemList.SelectedItem != null)
             {
-                FeedItemList.ForEach(delegate(FeedItem f)
+                DialogResult result;
+                result = MessageBox.Show("Are you sure that you want to delete this feed?", "Delete Feed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
-                    if (f.title == itemList.SelectedItem.ToString())
+                    FeedItemList.ForEach(delegate(FeedItem f)
                     {
-                        itemList.Items.Remove(itemList.SelectedItem);
-                        FeedItemList.Remove(f);
-                    }
-                });
-                saved = false;
+                        if (f.title == itemList.SelectedItem.ToString())
+                        {
+                            itemList.Items.Remove(itemList.SelectedItem);
+                            FeedItemList.Remove(f);
+                        }
+                    });
+                    saved = false;
+                }
             }
+            else
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("There is no item to delete!", "No Item to Delete!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
             }
+        }
 
         private void upItemButton_Click(object sender, EventArgs e)
         {
@@ -633,6 +658,22 @@ namespace FeedCreator.NET
         private void openStripMenuItem_Click(object sender, EventArgs e)
         {
             toolStripButton2_Click(sender, e);
+        }
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
+        }
+
+        private void uploadFeedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            uploadFeedForm = new UploadForm();
+            uploadFeedForm.uploadButton.Click +=new EventHandler(uploadButtonForm_Click);
+            uploadFeedForm.Show();
+        }
+        private void uploadButtonForm_Click(object sender, EventArgs e)
+        {
+
         }
 
     }
