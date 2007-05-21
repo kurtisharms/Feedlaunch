@@ -22,3 +22,9 @@ obj\Debug\FeedLaunch.NET.Properties.Resources.resources
 obj\Debug\FeedLaunch .NET.csproj.GenerateResource.Cache
 obj\Debug\FeedLaunch .NET.exe
 obj\Debug\FeedLaunch .NET.pdb
+obj\Release\FeedCreator.NET.UploadForm.resources
+bin\Release\ftp-connect.dll
+bin\Release\ftp-connect.pdb
+bin\Debug\ftp-connect.dll
+bin\Debug\ftp-connect.pdb
+obj\Debug\FeedCreator.NET.UploadForm.resources
