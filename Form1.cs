@@ -60,7 +60,7 @@ namespace FeedCreator.NET
         //this variable is true if the item is saved; other false
         bool saved = false;
         //this string stores the beggining title text
-        const string title = "FeedLaunch .NET- ";
+        const string title = "Feed Launch .NET- ";
         //the filename
         string fileName = "Feed1.xml";
         public Form1()
@@ -155,26 +155,13 @@ namespace FeedCreator.NET
         private void manage_Channel(object sender, EventArgs e)
         {
             ChannelInfo = new ChannelClass();
-            try {
+            try
+            {
                 ChannelInfo.title = newChannel.titleBox.Text;
                 ChannelInfo.description = newChannel.descriptionBox.Text;
                 ChannelInfo.link = newChannel.linkBox.Text;
-                if (newChannel.dateTimePicker1.Value != null)
-                {
-                    ChannelInfo.pubDate = newChannel.dateTimePicker1.Value.ToString();
-                }
-                else
-                {
-                    ChannelInfo.pubDate = "";
-                }
-                if (newChannel.dateTimePicker2.Value != null)
-                {
-                    ChannelInfo.buildDate = newChannel.dateTimePicker2.Value.ToString();
-                }
-                else
-                {
-                    ChannelInfo.buildDate = "";
-                }
+                ChannelInfo.pubDate = newChannel.dateTimePicker1.Value.ToString();
+                ChannelInfo.buildDate = newChannel.dateTimePicker2.Value.ToString();
                 ChannelInfo.copyright = newChannel.copyrightBox.Text;
                 if (newChannel.listBox1.SelectedValue != null)
                 {
@@ -368,14 +355,102 @@ namespace FeedCreator.NET
 
         private void feedButton_Click(object sender, EventArgs e)
         {
-            
+
             if (feedList.SelectedItem.ToString() == "ATOM 1.0")
             {
-                //ATOM 1.0 Feeds aren't currently supported
-                //Therefore, play a system "Beep" on the speakers and 
-                //display a message box
-                SystemSounds.Beep.Play();
-                MessageBox.Show("Sorry, support for ATOM feeds is a planned feature. Please use RSS 2.0 Feeds instead.", "Planned Feature", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                List<FeedItem> TMPopened = new List<FeedItem>();
+                List<FeedItem> SortedList = new List<FeedItem>();
+                int originalSelectedIndex;
+
+                //Prepare to write the ATOM feed
+                //First, create a new copy of XmlTextWriter
+                writer = new XmlTextWriter(this.fileName, System.Text.Encoding.UTF8);
+                //We'll use nice, indented formatting for readability
+                writer.Formatting = Formatting.Indented;
+                //Open the copy of XmlTextWriter for writing
+                writer.WriteStartDocument();
+                writer.WriteStartElement("feed");
+                writer.WriteAttributeString("xlmns", "http://www.w3.org/2005/Atom");
+                writer.WriteElementString("title", ChannelInfo.title);
+                writer.WriteRaw("<link href=\"" + ChannelInfo.link + "\"/>");
+                writer.WriteElementString("updated", ChannelInfo.buildDate);
+                writer.WriteElementString("id", ChannelInfo.link);
+
+                //Start the "author" element
+                writer.WriteStartElement("author");
+                writer.WriteElementString("name", ChannelInfo.webmaster);
+                //End the "author" element
+                writer.WriteEndElement();
+
+                writer.WriteElementString("rights", ChannelInfo.copyright);
+                writer.WriteStartElement("generator");
+                writer.WriteAttributeString("uri", "http://feedlaunch.sourceforge.net/");
+                writer.WriteAttributeString("version", "1.0.0");
+                writer.WriteRaw("Feed Launch .NET");
+                writer.WriteEndElement();
+
+
+                TMPopened = FeedItemList.FindAll(delegate(FeedItem f)
+                {
+                    return itemList.Items.Contains(f.title) == true;
+                });
+                itemList.Select();
+                originalSelectedIndex = itemList.SelectedIndex;
+                if (itemList.Items.Count > 0)
+                {
+                    int i = 0;
+                    while (i < itemList.Items.Count)
+                    {
+                        itemList.SelectedIndex = i;
+                        TMPopened.ForEach(delegate(FeedItem f)
+                        {
+
+                            if (f.title == itemList.SelectedItem.ToString())
+                            {
+                                f.order = i;
+                            }
+                        });
+                        i = i + 1;
+                    }
+                }
+                itemList.SelectedIndex = originalSelectedIndex;
+                TMPopened.Sort(delegate(FeedItem f1, FeedItem f2)
+                {
+                    return f1.order.CompareTo(f2.order);
+                });
+
+                TMPopened.ForEach(delegate(FeedItem f)
+                {
+                    writer.WriteStartElement("entry");
+                    writer.WriteElementString("title", f.title);
+                    writer.WriteRaw("<link href=\"" + f.link.Trim() + "\"/>");
+                    writer.WriteElementString("id", ChannelInfo.link + "::" + f.title.Trim());
+                    writer.WriteElementString("published", f.pubDate.ToString());
+
+                    writer.WriteStartElement("author");
+                    writer.WriteElementString("email", f.authorEmail);
+                    writer.WriteEndElement();
+
+                    writer.WriteStartElement("content");
+                    writer.WriteAttributeString("type", "xhtml");
+                    writer.WriteAttributeString("xml:lang", ChannelInfo.language);
+                    writer.WriteAttributeString("xml:base", ChannelInfo.link);
+                    writer.WriteStartElement("div");
+                    writer.WriteAttributeString("xmlns", "http://www.w3.org/1999/xhtml");
+                    writer.WriteRaw(f.description);
+                    writer.WriteEndElement();
+                    writer.WriteEndElement();
+
+                    writer.WriteEndElement();
+                });
+
+                //This writes the end of the feed by completint the Element "</feed>"
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+                writer.Close();
+                //Update the status label, notifying the user that
+                //the operation was successful
+                statusLabel.Text = "Finished writing ATOM 1.0 Feed";
             }
             else
             {
@@ -384,8 +459,8 @@ namespace FeedCreator.NET
                 List<FeedItem> TMPopened = new List<FeedItem>();
                 List<FeedItem> SortedList = new List<FeedItem>();
                 int originalSelectedIndex;
-
-                
+                //
+                //
                 writer = new XmlTextWriter(this.fileName, System.Text.Encoding.UTF8);
                 writer.Formatting = Formatting.Indented;
                 //Open Document
@@ -415,7 +490,7 @@ namespace FeedCreator.NET
                     writer.WriteElementString("height", ChannelInfo.imageHeight.ToString());
                     writer.WriteEndElement();
                 }
-                
+
                 TMPopened = FeedItemList.FindAll(delegate(FeedItem f)
                 {
                     return itemList.Items.Contains(f.title) == true;
@@ -425,12 +500,12 @@ namespace FeedCreator.NET
                 if (itemList.Items.Count > 0)
                 {
                     int i = 0;
-                    while(i < itemList.Items.Count)
+                    while (i < itemList.Items.Count)
                     {
                         itemList.SelectedIndex = i;
                         TMPopened.ForEach(delegate(FeedItem f)
                         {
-                            
+
                             if (f.title == itemList.SelectedItem.ToString())
                             {
                                 f.order = i;
@@ -668,12 +743,13 @@ namespace FeedCreator.NET
         private void uploadFeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             uploadFeedForm = new UploadForm();
+            uploadFeedForm.strFileName = this.fileName;
             uploadFeedForm.uploadButton.Click +=new EventHandler(uploadButtonForm_Click);
             uploadFeedForm.Show();
         }
         private void uploadButtonForm_Click(object sender, EventArgs e)
         {
-
+            feedButton_Click(sender, e);
         }
 
     }

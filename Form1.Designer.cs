@@ -73,6 +73,7 @@ namespace FeedCreator.NET
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uploadFeedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,7 +111,6 @@ namespace FeedCreator.NET
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.uploadFeedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.channelsBox.SuspendLayout();
@@ -309,6 +309,13 @@ namespace FeedCreator.NET
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
             this.connectToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.connectToolStripMenuItem.Text = "&Connect";
+            // 
+            // uploadFeedToolStripMenuItem
+            // 
+            this.uploadFeedToolStripMenuItem.Name = "uploadFeedToolStripMenuItem";
+            this.uploadFeedToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.uploadFeedToolStripMenuItem.Text = "&Upload Feed...";
+            this.uploadFeedToolStripMenuItem.Click += new System.EventHandler(this.uploadFeedToolStripMenuItem_Click);
             // 
             // helToolStripMenuItem
             // 
@@ -676,17 +683,10 @@ namespace FeedCreator.NET
             this.toolTip1.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.toolTip1.InitialDelay = 500;
             this.toolTip1.IsBalloon = true;
-            this.toolTip1.ReshowDelay = 75;
+            this.toolTip1.ReshowDelay = 100;
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.toolTip1.ToolTipTitle = "FeedLaunch Interactive Help";
+            this.toolTip1.ToolTipTitle = "Feed Launch Interactive Help";
             this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
-            // 
-            // uploadFeedToolStripMenuItem
-            // 
-            this.uploadFeedToolStripMenuItem.Name = "uploadFeedToolStripMenuItem";
-            this.uploadFeedToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.uploadFeedToolStripMenuItem.Text = "&Upload Feed...";
-            this.uploadFeedToolStripMenuItem.Click += new System.EventHandler(this.uploadFeedToolStripMenuItem_Click);
             // 
             // Form1
             // 
