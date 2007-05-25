@@ -62,7 +62,7 @@ namespace FeedCreator.NET
             this.toolTip1.IsBalloon = true;
             this.toolTip1.ReshowDelay = 100;
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.toolTip1.ToolTipTitle = "Feed Launch Interactive Help";
+            this.toolTip1.ToolTipTitle = "Feed Launch .NET Interactive Help";
             // 
             // serverTextBox
             // 

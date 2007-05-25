@@ -60,7 +60,7 @@ namespace FeedCreator.NET
         //this variable is true if the item is saved; other false
         bool saved = false;
         //this string stores the beggining title text
-        const string title = "Feed Launch .NET- ";
+        const string mainTitle = "Feed Launch .NET- ";
         //the filename
         string fileName = "Feed1.xml";
         public Form1()
@@ -145,6 +145,21 @@ namespace FeedCreator.NET
         {
            newChannel = new newChannelForm();
            newChannel.CreateFeed += new newChannelForm.CustomEventDelegate(manage_Channel);
+           if (ChannelInfo.empty == false)
+           {
+               newChannel.titleBox.Text = ChannelInfo.title;
+               newChannel.linkBox.Text = ChannelInfo.link;
+               newChannel.descriptionBox.Text = ChannelInfo.description;
+               newChannel.dateTimePicker1.Value = System.Convert.ToDateTime(ChannelInfo.pubDate);
+               newChannel.dateTimePicker2.Value = System.Convert.ToDateTime(ChannelInfo.buildDate);
+               newChannel.copyrightBox.Text = ChannelInfo.copyright;
+               newChannel.listBox1.SelectedValue = ChannelInfo.language;
+               newChannel.webmasterBox.Text = ChannelInfo.webmaster;
+               newChannel.numericUpDown1.Value = ChannelInfo.ttl;
+               newChannel.imageText.Text = ChannelInfo.imageText;
+               newChannel.numericUpDown2.Value = ChannelInfo.imageWidth;
+               newChannel.numericUpDown3.Value = ChannelInfo.imageHeight;
+           }
             newChannel.Show();
         }
 
@@ -154,9 +169,6 @@ namespace FeedCreator.NET
         }
         private void manage_Channel(object sender, EventArgs e)
         {
-            ChannelInfo = new ChannelClass();
-            try
-            {
                 ChannelInfo.title = newChannel.titleBox.Text;
                 ChannelInfo.description = newChannel.descriptionBox.Text;
                 ChannelInfo.link = newChannel.linkBox.Text;
@@ -178,20 +190,29 @@ namespace FeedCreator.NET
                 ChannelInfo.imageHeight = newChannel.numericUpDown3.Value;
                 titleLabel.Text = ChannelInfo.title;
                 linkLabel.Text = ChannelInfo.link;
-                pictureBox1.Image = Image.FromFile(ChannelInfo.imageText);
+                try
+                {
+                    if (ChannelInfo.imageText != "" && ChannelInfo.imageText != null)
+                    {
+                        pictureBox1.Image = Image.FromFile(ChannelInfo.imageText);
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
                 pictureBox1.Width = System.Convert.ToInt32(ChannelInfo.imageWidth);
                 pictureBox1.Height = System.Convert.ToInt32(ChannelInfo.imageHeight);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An Error has been encountered. Please submit a bug report if this problem persists!", ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //We update the "empty" variable to signify that the ChannelInfo class contains data
+            //This is used by the function which opens the newChannel form.
+            //If the ChannelInfo class is "empty," then the form is obviously opened for
+            //the first time.
+                ChannelInfo.empty = false;
+            //    MessageBox.Show("An Error has been encountered. Please submit a bug report if this problem persists!", ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             this.saved = false;
         }
 
         private void editChannelButton_Click(object sender, EventArgs e)
         {
-            
             newChannelButton_Click(sender, e);
         }
 
@@ -200,8 +221,13 @@ namespace FeedCreator.NET
             itemList.Enabled = false;
             createItemForm1 = new createItemForm();
             createItemForm1.CreateFeedItem += new createItemForm.CustomEventDelegate(addNewItem);
+            createItemForm1.CancelCreateFeedItem +=new createItemForm.CustomEventDelegate(createItemForm1_CancelCreateFeedItem);
             createItemForm1.Text = "Create New Feed Item";
             createItemForm1.Show();
+        }
+        private void createItemForm1_CancelCreateFeedItem(object sender, EventArgs e)
+        {
+            itemList.Enabled = true;
         }
 
 
@@ -294,7 +320,7 @@ namespace FeedCreator.NET
         {
             FeedItem fi = new FeedItem();
             //Make sure we aren't selecting an empty(null) item
-            if(itemList.SelectedItem != null)
+            if (itemList.SelectedItem != null)
             {
                 if (itemList.SelectedItem != "EMPTY")
                 {
@@ -303,6 +329,7 @@ namespace FeedCreator.NET
                     //assign the form's event handler which is called when the user hits
                     //"Create" or "OK"
                     createItemForm1.EditFeedItem += new createItemForm.CustomEventDelegate(editFeedItem);
+                    createItemForm1.CancelCreateFeedItem += new createItemForm.CustomEventDelegate(createItemForm1_CancelCreateFeedItem);
                     FeedItemList.ForEach(delegate(FeedItem f)
                     {
                         if (f.title == itemList.SelectedItem.ToString())
@@ -322,6 +349,16 @@ namespace FeedCreator.NET
                     //Display our form
                     createItemForm1.Show();
                 }
+                else
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("There is no item selected to edit!", "No item selected!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                }
+            }
+            else
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("There is no item selected to edit!", "No item selected!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
             }
 
         }
@@ -582,26 +619,14 @@ namespace FeedCreator.NET
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            bool run = true;
+            string shortFileName = "";
             try
             {
-
-                if (feedList.SelectedItem.ToString() != "RSS 2.0")
-                {
-                    DialogResult result;
-                    result = MessageBox.Show("ATOM Feeds are currently unsupported. Do you wish to save your feed as RSS instead?", "Save as RSS Feed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-                    if (result == DialogResult.No)
-                    {
-                        run = false;
-                    }
-                }
-                if (run == true)
-                {
-                    if (fileName == "Feed1.xml")
+                if (fileName == "Feed1.xml")
                     {
 
                         MessageBox.Show("You have not selected a destination for this feed. The next dialog will allow you to choose one.", "No Destination Found!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss"; //|ATOM Feed (*.atom)|*.atom";
+                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM Feed (*.atom)|*.atom";
                         saveFileDialog1.FilterIndex = 1;
                         saveFileDialog1.Title = "Select a destination folder and filename-";
                         if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -612,22 +637,29 @@ namespace FeedCreator.NET
                                 saved = true;
                                 feedButton_Click(sender, e);
                                 statusLabel.Text = "Feed successfully saved";
+                                this.Text = mainTitle + fileName;
                             }
                         }
                     }
                     if (fileName == "_SaveAsFeed1.system")
                     {
-                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss"; // |ATOM Feed (*.atom)|*.atom";
+                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM Feed (*.atom)|*.atom";
                         saveFileDialog1.FilterIndex = 1;
                         saveFileDialog1.Title = "Save As...";
                         if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                         {
+                            saveFileDialog1.FileName.Trim();
                             if (saveFileDialog1.FileName != null)
                             {
+                                if (saveFileDialog1.FileName.EndsWith(".rss"))
+                                    feedList.SelectedIndex = 0;
+                                else
+                                    feedList.SelectedIndex = 1;
                                 fileName = saveFileDialog1.FileName;
                                 feedButton_Click(sender, e);
                                 saved = true;
                                 statusLabel.Text = "Feed successfully saved";
+                                this.Text = mainTitle + fileName;
                             }
                         }
                     }
@@ -635,12 +667,17 @@ namespace FeedCreator.NET
                     {
                         if (fileName != null)
                         {
+                            if (fileName.EndsWith(".rss"))
+                                feedList.SelectedIndex = 0;
+                            else
+                                feedList.SelectedIndex = 1;
                             feedButton_Click(sender, e);
                             saved = true;
                             statusLabel.Text = "Feed successfully saved";
+                            this.Text = mainTitle + fileName;
                         }
                     }
-                }
+                
 
 
             }
@@ -669,7 +706,7 @@ namespace FeedCreator.NET
             ChannelInfo = null;
             itemList.Items.Clear();
             fileName = "Feed1.xml";
-            this.Text = title + fileName + "*";
+            this.Text = mainTitle + fileName + "*";
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)

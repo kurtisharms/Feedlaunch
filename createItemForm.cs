@@ -12,6 +12,7 @@ namespace FeedCreator.NET
     {
         public delegate void CustomEventDelegate(object sender, EventArgs e);
         public event CustomEventDelegate CreateFeedItem;
+        public event CustomEventDelegate CancelCreateFeedItem;
         public event CustomEventDelegate EditFeedItem;
         public string titleOnLoad = null;
         public createItemForm()
@@ -66,6 +67,7 @@ namespace FeedCreator.NET
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            CancelCreateFeedItem(sender, e);
             this.Dispose();
         }
 

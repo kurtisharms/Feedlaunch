@@ -89,7 +89,7 @@ namespace FeedCreator.NET
                 UploadConnection.setRemotePass(passwordTextBox.Text);
                 UploadConnection.setRemotePort(Convert.ToInt32(portTextBox.Text));
                 UploadConnection.login();
-                if (directoryPath.Text != "" || strTMP != "/")
+                if (directoryPath.Text != "" && strTMP != "/")
                 {
                     UploadConnection.chdir(directoryPath.Text);
                 }
@@ -97,25 +97,13 @@ namespace FeedCreator.NET
                 UploadConnection.upload(strFileName);
                 progressBar1.Increment(25);
                 UploadConnection.close();
-            }
-            catch (Exception ex)
-            {
-                if (uploadTry < 11)
-                {
-                    uploadTry = uploadTry + 1;
-                    upload(sender, e);
-                }
-                else
-                {
-                    MessageBox.Show("Connection Failed! It is possible that the FTP server you specified is unable to handle more connections currently, in which case try again later. Also verify your username, password, connection port, and desired output directory.", ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1);
-                }
-            }
-            if (uploadTry < 11)
-            {
                 MessageBox.Show("Feed successfully uploaded!", "Upload Successful!", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                 this.Dispose();
             }
-            uploadTry = 1;
+            catch (Exception ex)
+            {
+                    MessageBox.Show("Connection Failed! It is possible that the FTP server you specified is unable to handle more connections currently, in which case try again later. Also verify your username, password, connection port, and desired output directory.", ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1);
+            }
             progressBar1.Value = 0;
             
         }
