@@ -39,5 +39,6 @@ namespace FeedCreator.NET
         public string imageText;
         public decimal imageWidth;
         public decimal imageHeight;
+        public bool empty = true;
     }
 }

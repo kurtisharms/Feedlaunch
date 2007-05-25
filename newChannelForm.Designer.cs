@@ -78,6 +78,7 @@ namespace FeedCreator.NET
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -100,6 +101,7 @@ namespace FeedCreator.NET
             this.titleBox.Name = "titleBox";
             this.titleBox.Size = new System.Drawing.Size(323, 20);
             this.titleBox.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.titleBox, "The title for the feed.");
             // 
             // label2
             // 
@@ -119,6 +121,7 @@ namespace FeedCreator.NET
             this.descriptionBox.Size = new System.Drawing.Size(323, 96);
             this.descriptionBox.TabIndex = 3;
             this.descriptionBox.Text = "";
+            this.toolTip1.SetToolTip(this.descriptionBox, "A description for the feed.");
             // 
             // label3
             // 
@@ -136,6 +139,7 @@ namespace FeedCreator.NET
             this.linkBox.Name = "linkBox";
             this.linkBox.Size = new System.Drawing.Size(323, 20);
             this.linkBox.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.linkBox, "The link of the feed. This is usually the website home.");
             // 
             // label4
             // 
@@ -185,6 +189,7 @@ namespace FeedCreator.NET
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(182, 43);
             this.listBox1.TabIndex = 11;
+            this.toolTip1.SetToolTip(this.listBox1, "Select a language for the feed.");
             // 
             // label7
             // 
@@ -201,6 +206,7 @@ namespace FeedCreator.NET
             this.copyrightBox.Name = "copyrightBox";
             this.copyrightBox.Size = new System.Drawing.Size(182, 20);
             this.copyrightBox.TabIndex = 13;
+            this.toolTip1.SetToolTip(this.copyrightBox, "Copyright text.");
             // 
             // dateTimePicker1
             // 
@@ -209,6 +215,7 @@ namespace FeedCreator.NET
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 14;
+            this.toolTip1.SetToolTip(this.dateTimePicker1, "Select the feed\'s publication date.");
             // 
             // dateTimePicker2
             // 
@@ -216,6 +223,7 @@ namespace FeedCreator.NET
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker2.TabIndex = 15;
+            this.toolTip1.SetToolTip(this.dateTimePicker2, "Select the feed last build date.");
             // 
             // label8
             // 
@@ -232,6 +240,7 @@ namespace FeedCreator.NET
             this.webmasterBox.Name = "webmasterBox";
             this.webmasterBox.Size = new System.Drawing.Size(182, 20);
             this.webmasterBox.TabIndex = 17;
+            this.toolTip1.SetToolTip(this.webmasterBox, "The name and/or email of the website webmaster/administrator.");
             // 
             // label9
             // 
@@ -253,6 +262,7 @@ namespace FeedCreator.NET
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(182, 20);
             this.numericUpDown1.TabIndex = 19;
+            this.toolTip1.SetToolTip(this.numericUpDown1, "Time(in milliseconds) before the feed should be refreshed.");
             this.numericUpDown1.Value = new decimal(new int[] {
             180,
             0,
@@ -266,6 +276,7 @@ namespace FeedCreator.NET
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 20;
             this.okButton.Text = "OK";
+            this.toolTip1.SetToolTip(this.okButton, "Click OK to make changes to the feed\'s channel.");
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.createButton_Click);
             // 
@@ -276,6 +287,7 @@ namespace FeedCreator.NET
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 21;
             this.cancelButton.Text = "Cancel";
+            this.toolTip1.SetToolTip(this.cancelButton, "Click Cancel to quit this form without storing any changes.");
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
@@ -298,6 +310,7 @@ namespace FeedCreator.NET
             this.imageText.Name = "imageText";
             this.imageText.Size = new System.Drawing.Size(200, 20);
             this.imageText.TabIndex = 23;
+            this.toolTip1.SetToolTip(this.imageText, "The image path.");
             // 
             // browseButton
             // 
@@ -306,6 +319,7 @@ namespace FeedCreator.NET
             this.browseButton.Size = new System.Drawing.Size(75, 23);
             this.browseButton.TabIndex = 24;
             this.browseButton.Text = "Browse...";
+            this.toolTip1.SetToolTip(this.browseButton, "Opens an OpenFileDialog to select an image.");
             this.browseButton.UseVisualStyleBackColor = true;
             this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
             // 
@@ -324,6 +338,7 @@ namespace FeedCreator.NET
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(75, 20);
             this.numericUpDown2.TabIndex = 25;
+            this.toolTip1.SetToolTip(this.numericUpDown2, "The width of the image.");
             this.numericUpDown2.Value = new decimal(new int[] {
             88,
             0,
@@ -341,6 +356,7 @@ namespace FeedCreator.NET
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(75, 20);
             this.numericUpDown3.TabIndex = 26;
+            this.toolTip1.SetToolTip(this.numericUpDown3, "The height of the image.");
             this.numericUpDown3.Value = new decimal(new int[] {
             31,
             0,
@@ -355,6 +371,16 @@ namespace FeedCreator.NET
             this.label11.Size = new System.Drawing.Size(98, 13);
             this.label11.TabIndex = 27;
             this.label11.Text = "Image width/height";
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.AutoPopDelay = 10000;
+            this.toolTip1.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.toolTip1.InitialDelay = 500;
+            this.toolTip1.IsBalloon = true;
+            this.toolTip1.ReshowDelay = 100;
+            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.toolTip1.ToolTipTitle = "Feed Launch .NET Interactive Help";
             // 
             // newChannelForm
             // 
@@ -435,5 +461,6 @@ namespace FeedCreator.NET
         public System.Windows.Forms.TextBox imageText;
         public System.Windows.Forms.NumericUpDown numericUpDown3;
         public System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
