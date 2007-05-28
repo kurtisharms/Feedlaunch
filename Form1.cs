@@ -739,21 +739,39 @@ namespace FeedCreator.NET
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
+            
             if(openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 if(openFileDialog1.FileName != null)
                 {
                     string feedType = "";
+                    bool isHeader = true;
                     reader = new XmlTextReader(openFileDialog1.FileName);
                     reader.WhitespaceHandling = WhitespaceHandling.None;
                     while(reader.Read())
                         switch (reader.NodeType)
                         {
                             case XmlNodeType.Element:
-                                if(reader.Name == "rss")
+                                if(reader.Name.ToLower() == "rss")
                                 {
                                     feedType = "RSS";
                                 }
+                                if (reader.Name.ToLower() == "feed")
+                                {
+                                    feedType = "ATOM";
+                                }
+                                if (reader.Name.ToLower() == "title")
+                                {
+                                    if (isHeader == true)
+                                    {
+                                        ChannelInfo.title = reader.Value;
+                                        isHeader = false;
+                                    }
+                                    else
+                                    {
+                                    }
+                                }
+                        
                                 break;
                             case XmlNodeType.Text:
                                 break;

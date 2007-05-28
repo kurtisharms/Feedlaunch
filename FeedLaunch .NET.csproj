@@ -8,8 +8,8 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FeedLaunch.NET</RootNamespace>
-    <AssemblyName>FeedLaunch .NET</AssemblyName>
-    <ApplicationIcon>FeedCreatorIcon.ico</ApplicationIcon>
+    <AssemblyName>Feed Launch .NET</AssemblyName>
+    <ApplicationIcon>rss2.ico</ApplicationIcon>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>http://localhost/FeedCreator .NET/</PublishUrl>
     <Install>true</Install>
@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FeedCreatorIcon.ico" />
+    <Content Include="rss2.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">

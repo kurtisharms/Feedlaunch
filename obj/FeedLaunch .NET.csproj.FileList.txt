@@ -1,5 +1,3 @@
-bin\Release\FeedLaunch .NET.exe
-bin\Release\FeedLaunch .NET.pdb
 obj\Release\ResolveAssemblyReference.cache
 obj\Release\FeedCreator.NET.About.resources
 obj\Release\FeedCreator.NET.createItemForm.resources
@@ -8,10 +6,6 @@ obj\Release\FeedCreator.NET.Form1.resources
 obj\Release\FeedCreator.NET.newChannelForm.resources
 obj\Release\FeedLaunch.NET.Properties.Resources.resources
 obj\Release\FeedLaunch .NET.csproj.GenerateResource.Cache
-obj\Release\FeedLaunch .NET.exe
-obj\Release\FeedLaunch .NET.pdb
-bin\Debug\FeedLaunch .NET.exe
-bin\Debug\FeedLaunch .NET.pdb
 obj\Debug\ResolveAssemblyReference.cache
 obj\Debug\FeedCreator.NET.About.resources
 obj\Debug\FeedCreator.NET.createItemForm.resources
@@ -20,11 +14,17 @@ obj\Debug\FeedCreator.NET.Form1.resources
 obj\Debug\FeedCreator.NET.newChannelForm.resources
 obj\Debug\FeedLaunch.NET.Properties.Resources.resources
 obj\Debug\FeedLaunch .NET.csproj.GenerateResource.Cache
-obj\Debug\FeedLaunch .NET.exe
-obj\Debug\FeedLaunch .NET.pdb
 obj\Release\FeedCreator.NET.UploadForm.resources
 bin\Release\ftp-connect.dll
 bin\Release\ftp-connect.pdb
 bin\Debug\ftp-connect.dll
 bin\Debug\ftp-connect.pdb
 obj\Debug\FeedCreator.NET.UploadForm.resources
+bin\Release\Feed Launch .NET.exe
+bin\Release\Feed Launch .NET.pdb
+obj\Release\Feed Launch .NET.exe
+obj\Release\Feed Launch .NET.pdb
+bin\Debug\Feed Launch .NET.exe
+bin\Debug\Feed Launch .NET.pdb
+obj\Debug\Feed Launch .NET.exe
+obj\Debug\Feed Launch .NET.pdb
