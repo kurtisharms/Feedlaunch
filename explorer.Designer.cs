@@ -51,14 +51,14 @@ namespace FeedCreator.NET
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(explorer));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.backButton = new System.Windows.Forms.ToolStripButton();
             this.forwardButton = new System.Windows.Forms.ToolStripButton();
-            this.locationBox = new System.Windows.Forms.ToolStripComboBox();
             this.goButton = new System.Windows.Forms.ToolStripButton();
+            this.locationBox = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.toolStrip1.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -81,25 +81,6 @@ namespace FeedCreator.NET
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripContainer1
-            // 
-            // 
-            // toolStripContainer1.ContentPanel
-            // 
-            this.toolStripContainer1.ContentPanel.Controls.Add(this.webBrowser1);
-            this.toolStripContainer1.ContentPanel.Controls.Add(this.statusStrip2);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(692, 441);
-            this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
-            this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(692, 466);
-            this.toolStripContainer1.TabIndex = 1;
-            this.toolStripContainer1.Text = "toolStripContainer1";
-            // 
-            // toolStripContainer1.TopToolStripPanel
-            // 
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
-            // 
             // backButton
             // 
             this.backButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -120,13 +101,6 @@ namespace FeedCreator.NET
             this.forwardButton.Text = "Forwards";
             this.forwardButton.Click += new System.EventHandler(this.forwardButton_Click);
             // 
-            // locationBox
-            // 
-            this.locationBox.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.locationBox.Margin = new System.Windows.Forms.Padding(200, 0, 1, 0);
-            this.locationBox.Name = "locationBox";
-            this.locationBox.Size = new System.Drawing.Size(200, 25);
-            // 
             // goButton
             // 
             this.goButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -137,6 +111,41 @@ namespace FeedCreator.NET
             this.goButton.Size = new System.Drawing.Size(23, 22);
             this.goButton.Text = "toolStripButton3";
             this.goButton.Click += new System.EventHandler(this.goButton_Click);
+            // 
+            // locationBox
+            // 
+            this.locationBox.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.locationBox.Margin = new System.Windows.Forms.Padding(200, 0, 1, 0);
+            this.locationBox.Name = "locationBox";
+            this.locationBox.Size = new System.Drawing.Size(200, 25);
+            // 
+            // toolStripContainer1
+            // 
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.webBrowser1);
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.statusStrip2);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(692, 441);
+            this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer1.Name = "toolStripContainer1";
+            this.toolStripContainer1.Size = new System.Drawing.Size(692, 466);
+            this.toolStripContainer1.TabIndex = 1;
+            this.toolStripContainer1.Text = "toolStripContainer1";
+            // 
+            // toolStripContainer1.TopToolStripPanel
+            // 
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(0, 3);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(689, 413);
+            this.webBrowser1.TabIndex = 2;
+            this.webBrowser1.Url = new System.Uri("http://TESTING.com/", System.UriKind.Absolute);
             // 
             // statusStrip2
             // 
@@ -153,15 +162,6 @@ namespace FeedCreator.NET
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(38, 17);
             this.statusLabel.Text = "Ready";
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Location = new System.Drawing.Point(0, 3);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(689, 413);
-            this.webBrowser1.TabIndex = 2;
-            this.webBrowser1.Url = new System.Uri("http://TESTING.com/", System.UriKind.Absolute);
             // 
             // explorer
             // 

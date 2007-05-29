@@ -1,9 +1,9 @@
 /*---------------------------------------------------------------------------------
-   This source file is a part of FeedLaunch .NET
+   This source file is a part of Feed Launch .NET
    
    For the latest information, please visit http://feedlaunch.sourceforge.net/
     
-   Copyright (C) 2007 The FeedLaunch Team
+   Copyright (C) 2007 The Feed Launch .NET Team
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -55,6 +55,10 @@ namespace FeedCreator.NET
             //We will use it for indicating that the form's title needs to be
             //updated
             this.webBrowser1.DocumentTitleChanged +=new EventHandler(webBrowser1_DocumentTitleChanged);
+            //We will now add an event to locationbox which will call an event which checks
+            //if the user hit "return" or "enter." In either case, this indicates that the
+            //browser control's url should be updated/refreshed
+            this.locationBox.KeyPress +=new KeyPressEventHandler(locationBox_KeyPress);
         }
         private void webBrowser1_StatusTextChanged(object sender, EventArgs e)
         {
@@ -89,6 +93,19 @@ namespace FeedCreator.NET
         {
             //Update the form's title text
             this.Text = this.webBrowser1.DocumentText + " - FeedLaunch Explorer";
+        }
+        private void locationBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == 13)
+                {
+                    webBrowser1.Url = new System.Uri(locationBox.Text, UriKind.RelativeOrAbsolute);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }
