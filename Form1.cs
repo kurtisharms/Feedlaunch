@@ -1,23 +1,23 @@
- /*---------------------------------------------------------------------------------
-    This source file is a part of FeedLaunch .NET
+/*---------------------------------------------------------------------------------
+   This source file is a part of Feed Launch .NET
    
-    For the latest information, please visit http://feedlaunch.sourceforge.net/
+   For the latest information, please visit http://feedlaunch.sourceforge.net/
     
-    Copyright (C) 2007 The FeedLaunch Team
+   Copyright (C) 2007 The Feed Launch .NET Team
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+   You should have received a copy of the GNU General Public License along
+   with this program; if not, write to the Free Software Foundation, Inc.,
+   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ---------------------------------------------------------------------------------*/
 
 
@@ -737,49 +737,6 @@ namespace FeedCreator.NET
             }
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-            
-            if(openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                if(openFileDialog1.FileName != null)
-                {
-                    string feedType = "";
-                    bool isHeader = true;
-                    reader = new XmlTextReader(openFileDialog1.FileName);
-                    reader.WhitespaceHandling = WhitespaceHandling.None;
-                    while(reader.Read())
-                        switch (reader.NodeType)
-                        {
-                            case XmlNodeType.Element:
-                                if(reader.Name.ToLower() == "rss")
-                                {
-                                    feedType = "RSS";
-                                }
-                                if (reader.Name.ToLower() == "feed")
-                                {
-                                    feedType = "ATOM";
-                                }
-                                if (reader.Name.ToLower() == "title")
-                                {
-                                    if (isHeader == true)
-                                    {
-                                        ChannelInfo.title = reader.Value;
-                                        isHeader = false;
-                                    }
-                                    else
-                                    {
-                                    }
-                                }
-                        
-                                break;
-                            case XmlNodeType.Text:
-                                break;
-                        }
-                }
-            }
-        }
-
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -799,12 +756,87 @@ namespace FeedCreator.NET
         {
             uploadFeedForm = new UploadForm();
             uploadFeedForm.strFileName = this.fileName;
-            uploadFeedForm.uploadButton.Click +=new EventHandler(uploadButtonForm_Click);
+            uploadFeedForm.uploadButton.Click += new EventHandler(uploadButtonForm_Click);
             uploadFeedForm.Show();
         }
         private void uploadButtonForm_Click(object sender, EventArgs e)
         {
             feedButton_Click(sender, e);
+        }
+
+        private void toolStripSplitButton1_Click(object sender, EventArgs e)
+        {
+            uploadFeedToolStripMenuItem_Click(sender, e);
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            
+            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if(openFileDialog1.FileName != null)
+                {
+                    reader = new XmlTextReader(openFileDialog1.FileName);
+                    reader.WhitespaceHandling = WhitespaceHandling.None;
+                    while(reader.Read())
+                        switch (reader.NodeType)
+                        {
+                            case XmlNodeType.Element:
+                                if(reader.Name.ToLower() == "rss")
+                                {
+                                    readRSS(sender, e, openFileDialog1.FileName);
+                                    break;
+                                }
+                                if (reader.Name.ToLower() == "feed")
+                                {
+                                    readATOM(sender, e, openFileDialog1.FileName);
+                                    break;
+                                }
+                                Thread.Sleep(50);
+                        
+                                break;
+                            case XmlNodeType.Text:
+                                break;
+                        }
+                    reader.Close();
+                }
+            }
+        }
+
+        
+        private void readRSS(object sender, EventArgs e, string openFileName)
+        {
+            XmlTextReader reader = new XmlTextReader(openFileName);
+            reader.WhitespaceHandling = WhitespaceHandling.None;
+            bool isHeaderTitle = true;
+            if (reader.Name.ToLower() == "title")
+            {
+                if (isHeaderTitle == true)
+                {
+                    ChannelInfo.title = reader.Value;
+                    isHeaderTitle = false;
+                }
+                else
+                {
+                }
+            }
+        }
+        private void readATOM(object sender, EventArgs e, string openFileName)
+        {
+            XmlTextReader reader = new XmlTextReader(openFileName);
+            reader.WhitespaceHandling = WhitespaceHandling.None;
+            bool isHeaderTitle = true;
+            if (reader.Name.ToLower() == "title")
+            {
+                if (isHeaderTitle == true)
+                {
+                    ChannelInfo.title = reader.Value;
+                    isHeaderTitle = false;
+                }
+                else
+                {
+                }
+            }
         }
 
     }
