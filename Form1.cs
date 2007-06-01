@@ -20,7 +20,8 @@
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ---------------------------------------------------------------------------------*/
 
-
+//If this program is being debugged, then define the following proprocessor variable:
+#define APP_DEBUG
 
 using System;
 using System.Collections.Generic;
@@ -70,6 +71,9 @@ namespace FeedCreator.NET
 
         private void Form1_Load(object sender, EventArgs e)
         {
+#if(APP_DEBUG)
+#warning The proprossor "APP_DEBUG" is defined. Feed Launch .NET will be compiled with optimizations for debugging. If you plan to distribute this app, please consider undefing this preprocessor variable before recompiling.
+#endif
             ChannelInfo = new ChannelClass();
             newChannel = new newChannelForm();
             createItemForm1 = new createItemForm();
@@ -82,7 +86,7 @@ namespace FeedCreator.NET
             createItemForm1.CreateFeedItem += new createItemForm.CustomEventDelegate(addNewItem);
             newChannel.CreateFeed += new newChannelForm.CustomEventDelegate(manage_Channel);
             feedList.SelectedIndexChanged +=new EventHandler(feedList_SelectedIndexChanged);
-            this.Text = "FeedLaunch .NET- Feed1.xml";
+            this.Text = "Feed Launch .NET- Feed1.xml";
             this.Text = string.Concat(this.Text, "*");
             feedList.SelectedIndex = 0;
 
@@ -516,7 +520,7 @@ namespace FeedCreator.NET
                 writer.WriteElementString("pubDate", ChannelInfo.pubDate);
                 writer.WriteElementString("lastBuildDate", ChannelInfo.buildDate);
                 writer.WriteElementString("category", "");
-                writer.WriteElementString("generator", "FeedLaunch .NET- http://feedlaunch.sourceforge.net/ or http://www.sourceforge.net/feedlaunch");
+                writer.WriteElementString("generator", "Feed Launch .NET- http://feedlaunch.sourceforge.net/ or http://www.sourceforge.net/feedlaunch");
                 writer.WriteElementString("docs", "http://cyber.law.harvard.edu/rss/rss.html");
                 writer.WriteElementString("ttl", ChannelInfo.ttl.ToString());
                 if (ChannelInfo.imageText != null || ChannelInfo.imageText != "")
@@ -806,23 +810,192 @@ namespace FeedCreator.NET
         
         private void readRSS(object sender, EventArgs e, string openFileName)
         {
-            XmlTextReader reader = new XmlTextReader(openFileName);
-            reader.WhitespaceHandling = WhitespaceHandling.None;
-            bool isHeaderTitle = true;
-            if (reader.Name.ToLower() == "title")
+            /*try
+            {*/
+                MessageBox.Show("This is an RSS feed!");
+                XmlTextReader reader = new XmlTextReader(openFileName);
+                reader.WhitespaceHandling = WhitespaceHandling.None;
+                bool isHeaderTitle = true;
+                bool firstItem = true;
+                FeedItem tmp = new FeedItem();
+                bool isImage = false;
+                //We need to clear the FeedItem List
+                FeedItemList.Clear();
+
+                while(reader.Read())
+                    switch (reader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            if (reader.Name.ToLower() == "item")
+                            {
+                                isHeaderTitle = false;
+                            }
+                            if (isHeaderTitle == true)
+                            {
+                                if (reader.Name.ToLower() == "title")
+                                {
+                                    ChannelInfo.title = reader.ReadString();
+                                    titleLabel.Text = ChannelInfo.title;
+                                    ChannelInfo.empty = false;
+                                }
+                                else if (reader.Name.ToLower() == "link")
+                                {
+                                    ChannelInfo.link = reader.ReadString();
+                                    linkLabel.Text = ChannelInfo.link;
+                                    ChannelInfo.empty = false;
+                                }
+                                else if (reader.Name.ToLower() == "description")
+                                {
+                                    ChannelInfo.description = reader.ReadString();
+                                    ChannelInfo.empty = false;
+                                }
+                                else if (reader.Name.ToLower() == "language")
+                                {
+                                    ChannelInfo.language = reader.ReadString();
+                                }
+                                else if (reader.Name.ToLower() == "copyright")
+                                {
+                                    ChannelInfo.copyright = reader.ReadString();
+                                }
+                                else if (reader.Name.ToLower() == "webmaster")
+                                {
+                                    ChannelInfo.webmaster = reader.ReadString();
+                                }
+                                else if (reader.Name.ToLower() == "pubdate")
+                                {
+                                    ChannelInfo.pubDate = reader.ReadString();
+                                }
+                                else if (reader.Name.ToLower() == "lastbuilddate")
+                                {
+                                    ChannelInfo.buildDate = reader.ReadString();
+                                }
+                                else if (reader.Name.ToLower() == "ttl")
+                                {
+                                    ChannelInfo.ttl = reader.ReadElementContentAsDecimal();
+                                }
+                                else if (reader.Name.ToLower() == "image")
+                                {
+                                    isImage = true;
+                                }
+                                else if (reader.Name.ToLower() == "url")
+                                {
+                                    if (isImage == true)
+                                    {
+                                        ChannelInfo.imageText = reader.ReadString();
+                                    }
+                                }
+                                else if (reader.Name.ToLower() == "width")
+                                {
+                                    if (isImage == true)
+                                    {
+                                        ChannelInfo.imageWidth = reader.ReadContentAsDecimal();
+                                    }
+                                }
+                                else if (reader.Name.ToLower() == "height")
+                                {
+                                    if (isImage == true)
+                                    {
+                                        ChannelInfo.imageHeight = reader.ReadContentAsDecimal();
+                                    }
+                                }
+                                else if (reader.Name.ToLower() == "/image")
+                                {
+                                    isImage = false;
+                                }
+                                else if (reader.Name.ToLower() == "/rss")
+                                {
+                                    reader.Close();
+                                }
+
+                            }
+                            if (isHeaderTitle == false)
+                            {
+                                
+                                /*if (firstItem == true)
+                                {
+                                    firstItem = false;
+                                }*/
+                                if (reader.Name.ToLower() == "title")
+                                {
+                                    tmp.title = reader.ReadString();
+                                }
+                                else if (reader.Name.ToLower() == "link")
+                                {
+                                    tmp.link = reader.ReadString();
+                                }
+                                else if (reader.Name.ToLower() == "description")
+                                {
+                                    tmp.description = reader.ReadString();
+                                }
+                                else if (reader.Name.ToLower() == "author")
+                                {
+                                    tmp.authorEmail = reader.ReadString();
+                                }
+                                else if (reader.Name.ToLower() == "pubdate")
+                                {
+                                    try
+                                    {
+                                        tmp.pubDate = DateTime.Parse(reader.ReadString());
+                                    }
+                                    catch (Exception ex)
+                                    {
+#if(APP_DEBUG)
+                                        throw ex;
+#endif
+                                    }
+                                }
+                                else if (reader.Name.ToLower() == "source")
+                                {
+                                    tmp.sourceText = reader.ReadString();
+                                    tmp.sourceURL = reader.GetAttribute("url");
+                                }
+                                else if (reader.Name.ToLower() == "item")
+                                {
+                                    if (firstItem == false)
+                                    {
+                                        FeedItemList.Add(tmp);
+                                        tmp = new FeedItem();
+                                    }
+                                    else
+                                    {
+                                        firstItem = false;
+                                    }
+                                }
+                                else if (reader.Name.ToLower() == "/rss")
+                                {
+                                    reader.Close();
+                                    itemList.Items.Clear();
+                                    FeedItemList.ForEach(delegate(FeedItem f)
+                                    {
+                                        itemList.Items.Add(f.title);
+                                    });
+                                        
+                                }
+                            }
+
+
+                            break;
+                    }
+             
+                if(isHeaderTitle == false)
+                {
+                }
+            /*}
+         catch (Exception ex)
             {
-                if (isHeaderTitle == true)
-                {
-                    ChannelInfo.title = reader.Value;
-                    isHeaderTitle = false;
-                }
-                else
-                {
-                }
-            }
+#if(APP_DEBUG)
+                reader.Close();
+                throw ex;
+#else
+                MessageBox.Show("Error Encountered!");
+                reader.Close();
+#endif
+            }*/
         }
+
         private void readATOM(object sender, EventArgs e, string openFileName)
         {
+            MessageBox.Show("This is an ATOM feed!");
             XmlTextReader reader = new XmlTextReader(openFileName);
             reader.WhitespaceHandling = WhitespaceHandling.None;
             bool isHeaderTitle = true;
