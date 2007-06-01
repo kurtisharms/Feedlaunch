@@ -538,7 +538,7 @@ namespace FeedCreator.NET
             this.toolStripSplitButton1});
             this.toolStrip1.Location = new System.Drawing.Point(3, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(132, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(101, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -704,7 +704,7 @@ namespace FeedCreator.NET
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "FeedCreator .NET";
+            this.Text = "Feed Launch .NET";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
