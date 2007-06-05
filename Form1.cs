@@ -72,7 +72,7 @@ namespace FeedCreator.NET
         private void Form1_Load(object sender, EventArgs e)
         {
 #if(APP_DEBUG)
-#warning The proprossor "APP_DEBUG" is defined. Feed Launch .NET will be compiled with optimizations for debugging. If you plan to distribute this app, please consider undefing this preprocessor variable before recompiling.
+#warning The proprossor "APP_DEBUG" is defined. Feed Launch .NET will be compiled with optimizations for debugging. If you plan to distribute this app, please consider undefining this preprocessor variable before recompiling.
 #endif
             ChannelInfo = new ChannelClass();
             newChannel = new newChannelForm();
@@ -326,7 +326,7 @@ namespace FeedCreator.NET
             //Make sure we aren't selecting an empty(null) item
             if (itemList.SelectedItem != null)
             {
-                if (itemList.SelectedItem != "EMPTY")
+                if (itemList.SelectedItem.ToString() != "EMPTY")
                 {
                     //create the form
                     createItemForm1 = new createItemForm();
@@ -342,7 +342,14 @@ namespace FeedCreator.NET
                             createItemForm1.descriptionBox.Text = f.description;
                             createItemForm1.linkBox.Text = f.link;
                             createItemForm1.authorEmail.Text = f.authorEmail;
-                            createItemForm1.dateTimePicker1.Value = f.pubDate;
+                            try
+                            {
+                                createItemForm1.dateTimePicker1.Value = f.pubDate;
+                            }
+                            catch
+                            {
+                                createItemForm1.dateTimePicker1.Value = DateTime.Today;
+                            }
                             createItemForm1.sourceText.Text = f.sourceText;
                             createItemForm1.sourceURL.Text = f.sourceURL;
                         }
@@ -623,7 +630,6 @@ namespace FeedCreator.NET
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            string shortFileName = "";
             try
             {
                 if (fileName == "Feed1.xml")
@@ -810,8 +816,8 @@ namespace FeedCreator.NET
         
         private void readRSS(object sender, EventArgs e, string openFileName)
         {
-            /*try
-            {*/
+            try
+            {
                 MessageBox.Show("This is an RSS feed!");
                 XmlTextReader reader = new XmlTextReader(openFileName);
                 reader.WhitespaceHandling = WhitespaceHandling.None;
@@ -821,7 +827,7 @@ namespace FeedCreator.NET
                 bool isImage = false;
                 //We need to clear the FeedItem List
                 FeedItemList.Clear();
-
+                itemList.Items.Clear();
                 while(reader.Read())
                     switch (reader.NodeType)
                     {
@@ -902,10 +908,6 @@ namespace FeedCreator.NET
                                 {
                                     isImage = false;
                                 }
-                                else if (reader.Name.ToLower() == "/rss")
-                                {
-                                    reader.Close();
-                                }
 
                             }
                             if (isHeaderTitle == false)
@@ -961,16 +963,6 @@ namespace FeedCreator.NET
                                         firstItem = false;
                                     }
                                 }
-                                else if (reader.Name.ToLower() == "/rss")
-                                {
-                                    reader.Close();
-                                    itemList.Items.Clear();
-                                    FeedItemList.ForEach(delegate(FeedItem f)
-                                    {
-                                        itemList.Items.Add(f.title);
-                                    });
-                                        
-                                }
                             }
 
 
@@ -980,17 +972,26 @@ namespace FeedCreator.NET
                 if(isHeaderTitle == false)
                 {
                 }
-            /*}
+                if (tmp.title != null && tmp.title != "")
+                {
+                    FeedItemList.Add(tmp);
+                }
+                itemList.Items.Clear();
+                FeedItemList.ForEach(delegate(FeedItem f)
+                {
+                    itemList.Items.Add(f.title);
+                });
+            }
          catch (Exception ex)
             {
 #if(APP_DEBUG)
                 reader.Close();
                 throw ex;
 #else
-                MessageBox.Show("Error Encountered!");
+                MessageBox.Show("Error encountered while trying to open the feed!");
                 reader.Close();
 #endif
-            }*/
+            }
         }
 
         private void readATOM(object sender, EventArgs e, string openFileName)
