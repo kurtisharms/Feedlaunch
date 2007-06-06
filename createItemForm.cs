@@ -71,19 +71,22 @@ namespace FeedCreator.NET
             
             if (exit != true)
             {
-                if (this.CreateFeedItem != null)
-                {
-                    if (this.Text == "Edit Feed Item")
+                    if (this.Text.StartsWith("E"))
                     {
+                        if(this.EditFeedItem != null)
+                        {
                         this.EditFeedItem(sender, e);
+                        }
                     }
                     else
                     {
+                        if(this.CreateFeedItem != null)
+                        {
                         this.CreateFeedItem(sender, e);
+                        }
                     }
-                }
-                this.Dispose();
             }
+                this.Dispose();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

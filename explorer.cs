@@ -59,6 +59,8 @@ namespace FeedCreator.NET
             //if the user hit "return" or "enter." In either case, this indicates that the
             //browser control's url should be updated/refreshed
             this.locationBox.KeyPress +=new KeyPressEventHandler(locationBox_KeyPress);
+            //Now we create an Event Handler for window resizing
+            this.Resize +=new EventHandler(explorer_Resize);
         }
         private void webBrowser1_StatusTextChanged(object sender, EventArgs e)
         {
@@ -106,6 +108,11 @@ namespace FeedCreator.NET
             catch (Exception ex)
             {
             }
+        }
+        private void explorer_Resize(object sender, EventArgs e)
+        {
+            webBrowser1.Height = this.Height - toolStrip1.Height - statusStrip2.Height - 15;
+            webBrowser1.Width = this.Width - 15;
         }
     }
 }

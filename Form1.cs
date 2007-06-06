@@ -154,8 +154,22 @@ namespace FeedCreator.NET
                newChannel.titleBox.Text = ChannelInfo.title;
                newChannel.linkBox.Text = ChannelInfo.link;
                newChannel.descriptionBox.Text = ChannelInfo.description;
-               newChannel.dateTimePicker1.Value = System.Convert.ToDateTime(ChannelInfo.pubDate);
-               newChannel.dateTimePicker2.Value = System.Convert.ToDateTime(ChannelInfo.buildDate);
+               try
+               {
+                   newChannel.dateTimePicker1.Value = System.Convert.ToDateTime(ChannelInfo.pubDate);
+               }
+               catch
+               {
+                   newChannel.dateTimePicker1.Value = System.DateTime.Today;
+               }
+               try
+               {
+                   newChannel.dateTimePicker2.Value = System.Convert.ToDateTime(ChannelInfo.buildDate);
+               }
+               catch
+               {
+                   newChannel.dateTimePicker2.Value = System.DateTime.Today;
+               }
                newChannel.copyrightBox.Text = ChannelInfo.copyright;
                newChannel.listBox1.SelectedValue = ChannelInfo.language;
                newChannel.webmasterBox.Text = ChannelInfo.webmaster;
@@ -280,6 +294,10 @@ namespace FeedCreator.NET
                 SystemSounds.Beep.Play();
                 MessageBox.Show("There is no item to delete!", "No Item to Delete!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
             }
+            if (itemList.Items.Count == 0)
+            {
+                itemList.Items.Add("EMPTY");
+            }
         }
 
         private void upItemButton_Click(object sender, EventArgs e)
@@ -403,195 +421,212 @@ namespace FeedCreator.NET
 
         private void feedButton_Click(object sender, EventArgs e)
         {
-
-            if (feedList.SelectedItem.ToString() == "ATOM 1.0")
+            try
             {
-                List<FeedItem> TMPopened = new List<FeedItem>();
-                List<FeedItem> SortedList = new List<FeedItem>();
-                int originalSelectedIndex;
-
-                //Prepare to write the ATOM feed
-                //First, create a new copy of XmlTextWriter
-                writer = new XmlTextWriter(this.fileName, System.Text.Encoding.UTF8);
-                //We'll use nice, indented formatting for readability
-                writer.Formatting = Formatting.Indented;
-                //Open the copy of XmlTextWriter for writing
-                writer.WriteStartDocument();
-                writer.WriteStartElement("feed");
-                writer.WriteAttributeString("xlmns", "http://www.w3.org/2005/Atom");
-                writer.WriteElementString("title", ChannelInfo.title);
-                writer.WriteRaw("<link href=\"" + ChannelInfo.link + "\"/>");
-                writer.WriteElementString("updated", ChannelInfo.buildDate);
-                writer.WriteElementString("id", ChannelInfo.link);
-
-                //Start the "author" element
-                writer.WriteStartElement("author");
-                writer.WriteElementString("name", ChannelInfo.webmaster);
-                //End the "author" element
-                writer.WriteEndElement();
-
-                writer.WriteElementString("rights", ChannelInfo.copyright);
-                writer.WriteStartElement("generator");
-                writer.WriteAttributeString("uri", "http://feedlaunch.sourceforge.net/");
-                writer.WriteAttributeString("version", "1.0.0");
-                writer.WriteRaw("Feed Launch .NET");
-                writer.WriteEndElement();
-
-
-                TMPopened = FeedItemList.FindAll(delegate(FeedItem f)
+                if (feedList.SelectedItem.ToString() == "ATOM 1.0")
                 {
-                    return itemList.Items.Contains(f.title) == true;
-                });
-                itemList.Select();
-                originalSelectedIndex = itemList.SelectedIndex;
-                if (itemList.Items.Count > 0)
-                {
-                    int i = 0;
-                    while (i < itemList.Items.Count)
-                    {
-                        itemList.SelectedIndex = i;
-                        TMPopened.ForEach(delegate(FeedItem f)
-                        {
+                    List<FeedItem> TMPopened = new List<FeedItem>();
+                    List<FeedItem> SortedList = new List<FeedItem>();
+                    int originalSelectedIndex;
 
-                            if (f.title == itemList.SelectedItem.ToString())
-                            {
-                                f.order = i;
-                            }
-                        });
-                        i = i + 1;
-                    }
-                }
-                itemList.SelectedIndex = originalSelectedIndex;
-                TMPopened.Sort(delegate(FeedItem f1, FeedItem f2)
-                {
-                    return f1.order.CompareTo(f2.order);
-                });
+                    //Prepare to write the ATOM feed
+                    //First, create a new copy of XmlTextWriter
+                    writer = new XmlTextWriter(this.fileName, System.Text.Encoding.UTF8);
+                    //We'll use nice, indented formatting for readability
+                    writer.Formatting = Formatting.Indented;
+                    //Open the copy of XmlTextWriter for writing
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("feed");
+                    writer.WriteAttributeString("xlmns", "http://www.w3.org/2005/Atom");
+                    writer.WriteElementString("title", ChannelInfo.title);
 
-                TMPopened.ForEach(delegate(FeedItem f)
-                {
-                    writer.WriteStartElement("entry");
-                    writer.WriteElementString("title", f.title);
-                    writer.WriteRaw("<link href=\"" + f.link.Trim() + "\"/>");
-                    writer.WriteElementString("id", ChannelInfo.link + "::" + f.title.Trim());
-                    writer.WriteElementString("published", f.pubDate.ToString());
+                    writer.WriteStartElement("link");
+                    writer.WriteAttributeString("href", ChannelInfo.link);
+                    writer.WriteEndElement();
 
+                    writer.WriteElementString("updated", ChannelInfo.buildDate);
+                    writer.WriteElementString("id", ChannelInfo.link);
+
+                    //Start the "author" element
                     writer.WriteStartElement("author");
-                    writer.WriteElementString("email", f.authorEmail);
+                    writer.WriteElementString("name", ChannelInfo.webmaster);
+                    //End the "author" element
                     writer.WriteEndElement();
 
-                    writer.WriteStartElement("content");
-                    writer.WriteAttributeString("type", "xhtml");
-                    writer.WriteAttributeString("xml:lang", ChannelInfo.language);
-                    writer.WriteAttributeString("xml:base", ChannelInfo.link);
-                    writer.WriteStartElement("div");
-                    writer.WriteAttributeString("xmlns", "http://www.w3.org/1999/xhtml");
-                    writer.WriteRaw(f.description);
-                    writer.WriteEndElement();
+                    writer.WriteElementString("rights", ChannelInfo.copyright);
+                    writer.WriteStartElement("generator");
+                    writer.WriteAttributeString("uri", "http://feedlaunch.sourceforge.net/");
+                    writer.WriteAttributeString("version", "1.0.0");
+                    writer.WriteAttributeString("name", "Feed Launch .NET");
                     writer.WriteEndElement();
 
-                    writer.WriteEndElement();
-                });
 
-                //This writes the end of the feed by completint the Element "</feed>"
-                writer.WriteEndElement();
-                writer.WriteEndDocument();
-                writer.Close();
-                //Update the status label, notifying the user that
-                //the operation was successful
-                statusLabel.Text = "Finished writing ATOM 1.0 Feed";
-            }
-            else
-            {
-                //Create a temporary List which will store the currently open
-                //items in the "items" listview
-                List<FeedItem> TMPopened = new List<FeedItem>();
-                List<FeedItem> SortedList = new List<FeedItem>();
-                int originalSelectedIndex;
-                //
-                //
-                writer = new XmlTextWriter(this.fileName, System.Text.Encoding.UTF8);
-                writer.Formatting = Formatting.Indented;
-                //Open Document
-                writer.WriteStartDocument();
-                //Write RSS Feed header
-                writer.WriteStartElement("rss");
-                writer.WriteAttributeString("version", "2.0");
-                writer.WriteStartElement("channel");
-                writer.WriteElementString("title", ChannelInfo.title);
-                writer.WriteElementString("link", ChannelInfo.link);
-                writer.WriteElementString("description", ChannelInfo.description);
-                writer.WriteElementString("language", ChannelInfo.language);
-                writer.WriteElementString("copyright", ChannelInfo.copyright);
-                writer.WriteElementString("managingEditor", "");
-                writer.WriteElementString("webMaster", ChannelInfo.webmaster);
-                writer.WriteElementString("pubDate", ChannelInfo.pubDate);
-                writer.WriteElementString("lastBuildDate", ChannelInfo.buildDate);
-                writer.WriteElementString("category", "");
-                writer.WriteElementString("generator", "Feed Launch .NET- http://feedlaunch.sourceforge.net/ or http://www.sourceforge.net/feedlaunch");
-                writer.WriteElementString("docs", "http://cyber.law.harvard.edu/rss/rss.html");
-                writer.WriteElementString("ttl", ChannelInfo.ttl.ToString());
-                if (ChannelInfo.imageText != null || ChannelInfo.imageText != "")
-                {
-                    writer.WriteStartElement("image");
-                    writer.WriteElementString("url", ChannelInfo.imageText);
-                    writer.WriteElementString("width", ChannelInfo.imageWidth.ToString());
-                    writer.WriteElementString("height", ChannelInfo.imageHeight.ToString());
-                    writer.WriteEndElement();
-                }
-
-                TMPopened = FeedItemList.FindAll(delegate(FeedItem f)
-                {
-                    return itemList.Items.Contains(f.title) == true;
-                });
-                itemList.Select();
-                originalSelectedIndex = itemList.SelectedIndex;
-                if (itemList.Items.Count > 0)
-                {
-                    int i = 0;
-                    while (i < itemList.Items.Count)
+                    TMPopened = FeedItemList.FindAll(delegate(FeedItem f)
                     {
-                        itemList.SelectedIndex = i;
-                        TMPopened.ForEach(delegate(FeedItem f)
+                        return itemList.Items.Contains(f.title) == true;
+                    });
+                    itemList.Select();
+                    originalSelectedIndex = itemList.SelectedIndex;
+                    if (itemList.Items.Count > 0)
+                    {
+                        int i = 0;
+                        while (i < itemList.Items.Count)
                         {
-
-                            if (f.title == itemList.SelectedItem.ToString())
+                            itemList.SelectedIndex = i;
+                            TMPopened.ForEach(delegate(FeedItem f)
                             {
-                                f.order = i;
-                            }
-                        });
-                        i = i + 1;
+
+                                if (f.title == itemList.SelectedItem.ToString())
+                                {
+                                    f.order = i;
+                                }
+                            });
+                            i = i + 1;
+                        }
                     }
+                    itemList.SelectedIndex = originalSelectedIndex;
+                    TMPopened.Sort(delegate(FeedItem f1, FeedItem f2)
+                    {
+                        return f1.order.CompareTo(f2.order);
+                    });
+
+                    TMPopened.ForEach(delegate(FeedItem f)
+                    {
+                        writer.WriteStartElement("entry");
+                        writer.WriteElementString("title", f.title);
+
+                        writer.WriteStartElement("link");
+                        writer.WriteAttributeString("href", f.link);
+                        writer.WriteEndElement();
+
+                        writer.WriteElementString("id", ChannelInfo.link + "::" + f.title.Trim());
+                        writer.WriteElementString("published", f.pubDate.ToString());
+
+                        writer.WriteStartElement("author");
+                        writer.WriteElementString("email", f.authorEmail);
+                        writer.WriteEndElement();
+
+                        writer.WriteStartElement("content");
+                        writer.WriteAttributeString("type", "xhtml");
+                        writer.WriteAttributeString("xml:lang", ChannelInfo.language);
+                        writer.WriteAttributeString("xml:base", ChannelInfo.link);
+                        writer.WriteStartElement("div");
+                        writer.WriteAttributeString("xmlns", "http://www.w3.org/1999/xhtml");
+                        writer.WriteAttributeString("description", f.description);
+                        writer.WriteEndElement();
+                        writer.WriteEndElement();
+
+                        writer.WriteEndElement();
+                    });
+
+                    //This writes the end of the feed by completint the Element "</feed>"
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
+                    writer.Close();
+                    //Update the status label, notifying the user that
+                    //the operation was successful
+                    statusLabel.Text = "Finished writing ATOM 1.0 Feed";
                 }
-                itemList.SelectedIndex = originalSelectedIndex;
-                TMPopened.Sort(delegate(FeedItem f1, FeedItem f2)
+                else
                 {
-                    return f1.order.CompareTo(f2.order);
-                });
+                    //Create a temporary List which will store the currently open
+                    //items in the "items" listview
+                    List<FeedItem> TMPopened = new List<FeedItem>();
+                    List<FeedItem> SortedList = new List<FeedItem>();
+                    int originalSelectedIndex;
+                    //
+                    //
+                    writer = new XmlTextWriter(this.fileName, System.Text.Encoding.UTF8);
+                    writer.Formatting = Formatting.Indented;
+                    //Open Document
+                    writer.WriteStartDocument();
+                    //Write RSS Feed header
+                    writer.WriteStartElement("rss");
+                    writer.WriteAttributeString("version", "2.0");
+                    writer.WriteStartElement("channel");
+                    writer.WriteElementString("title", ChannelInfo.title);
+                    writer.WriteElementString("link", ChannelInfo.link);
+                    writer.WriteElementString("description", ChannelInfo.description);
+                    writer.WriteElementString("language", ChannelInfo.language);
+                    writer.WriteElementString("copyright", ChannelInfo.copyright);
+                    writer.WriteElementString("managingEditor", "");
+                    writer.WriteElementString("webMaster", ChannelInfo.webmaster);
+                    writer.WriteElementString("pubDate", ChannelInfo.pubDate);
+                    writer.WriteElementString("lastBuildDate", ChannelInfo.buildDate);
+                    writer.WriteElementString("category", "");
+                    writer.WriteElementString("generator", "Feed Launch .NET- http://feedlaunch.sourceforge.net/ or http://www.sourceforge.net/feedlaunch");
+                    writer.WriteElementString("docs", "http://cyber.law.harvard.edu/rss/rss.html");
+                    writer.WriteElementString("ttl", ChannelInfo.ttl.ToString());
+                    if (ChannelInfo.imageText != null || ChannelInfo.imageText != "")
+                    {
+                        writer.WriteStartElement("image");
+                        writer.WriteElementString("url", ChannelInfo.imageText);
+                        writer.WriteElementString("width", ChannelInfo.imageWidth.ToString());
+                        writer.WriteElementString("height", ChannelInfo.imageHeight.ToString());
+                        writer.WriteEndElement();
+                    }
 
-                //Now begin writing the feed items
-                TMPopened.ForEach(delegate(FeedItem f)
-                {
-                    writer.WriteStartElement("item");
-                    writer.WriteElementString("title", f.title.ToString());
-                    writer.WriteElementString("link", f.link.ToString());
-                    writer.WriteElementString("description", f.description.ToString());
-                    writer.WriteElementString("author", f.authorEmail);
-                    writer.WriteElementString("pubDate", f.pubDate.ToString());
-                    writer.WriteStartElement("source");
-                    writer.WriteAttributeString("url", f.sourceURL);
-                    writer.WriteRaw(f.sourceText);
+                    TMPopened = FeedItemList.FindAll(delegate(FeedItem f)
+                    {
+                        return itemList.Items.Contains(f.title) == true;
+                    });
+                    itemList.Select();
+                    originalSelectedIndex = itemList.SelectedIndex;
+                    if (itemList.Items.Count > 0)
+                    {
+                        int i = 0;
+                        while (i < itemList.Items.Count)
+                        {
+                            itemList.SelectedIndex = i;
+                            TMPopened.ForEach(delegate(FeedItem f)
+                            {
+
+                                if (f.title == itemList.SelectedItem.ToString())
+                                {
+                                    f.order = i;
+                                }
+                            });
+                            i = i + 1;
+                        }
+                    }
+                    itemList.SelectedIndex = originalSelectedIndex;
+                    TMPopened.Sort(delegate(FeedItem f1, FeedItem f2)
+                    {
+                        return f1.order.CompareTo(f2.order);
+                    });
+
+                    //Now begin writing the feed items
+                    TMPopened.ForEach(delegate(FeedItem f)
+                    {
+                        writer.WriteStartElement("item");
+                        writer.WriteElementString("title", f.title.ToString());
+                        writer.WriteElementString("link", f.link.ToString());
+                        writer.WriteElementString("description", f.description.ToString());
+                        writer.WriteElementString("author", f.authorEmail);
+                        writer.WriteElementString("pubDate", f.pubDate.ToString());
+                        writer.WriteStartElement("source");
+                        writer.WriteAttributeString("url", f.sourceURL);
+                        writer.WriteRaw(f.sourceText);
+                        writer.WriteEndElement();
+                        writer.WriteEndElement();
+                    });
                     writer.WriteEndElement();
                     writer.WriteEndElement();
-                });
-                writer.WriteEndElement();
-                writer.WriteEndElement();
-                writer.WriteEndDocument();
-                writer.Close();
-                //Update the status label, notifying the user that
-                //the operation was successful
-                statusLabel.Text = "Finished writing RSS 2.0 Feed";
+                    writer.WriteEndDocument();
+                    writer.Close();
+                    //Update the status label, notifying the user that
+                    //the operation was successful
+                    statusLabel.Text = "Finished writing RSS 2.0 Feed";
+                }
             }
-
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show("File not found! Please click SAVE AS and specify a new name and location for this feed!", "File not found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured while trying to write this feed! If this problem persists, please contact the Feed Launch .Net team!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void visitCommToolStripMenuItem_Click(object sender, EventArgs e)
@@ -636,7 +671,7 @@ namespace FeedCreator.NET
                     {
 
                         MessageBox.Show("You have not selected a destination for this feed. The next dialog will allow you to choose one.", "No Destination Found!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM Feed (*.atom)|*.atom";
+                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM/RSS Xml Feed Files (*.xml)|*.xml|All Files (*.*)|*.*";
                         saveFileDialog1.FilterIndex = 1;
                         saveFileDialog1.Title = "Select a destination folder and filename-";
                         if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -653,7 +688,7 @@ namespace FeedCreator.NET
                     }
                     if (fileName == "_SaveAsFeed1.system")
                     {
-                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM Feed (*.atom)|*.atom";
+                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM/RSS Xml Feed Files (*.xml)|*.xml|All Files (*.*)|*.*";
                         saveFileDialog1.FilterIndex = 1;
                         saveFileDialog1.Title = "Save As...";
                         if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -713,7 +748,9 @@ namespace FeedCreator.NET
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             FeedItemList.Clear();
-            ChannelInfo = null;
+            ChannelInfo = new ChannelClass();
+            titleLabel.Text = "No Title Specified";
+            linkLabel.Text = "No Link Specified";
             itemList.Items.Clear();
             fileName = "Feed1.xml";
             this.Text = mainTitle + fileName + "*";
@@ -728,7 +765,7 @@ namespace FeedCreator.NET
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             itemList.Select();
-            if (itemList.SelectedValue != null)
+            if (itemList.SelectedValue.ToString() != null)
             {
                DialogResult result;
                 result = MessageBox.Show("Are you sure that you want to delete this feed?", "Delete Feed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -781,35 +818,49 @@ namespace FeedCreator.NET
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            
-            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            try
             {
-                if(openFileDialog1.FileName != null)
+                openFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM/RSS Xml Feed Files (*.xml)|*.xml|All Files (*.*)|*.*";
+                openFileDialog1.FilterIndex = 3;
+                openFileDialog1.Title = "Select File to Open";
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    reader = new XmlTextReader(openFileDialog1.FileName);
-                    reader.WhitespaceHandling = WhitespaceHandling.None;
-                    while(reader.Read())
-                        switch (reader.NodeType)
-                        {
-                            case XmlNodeType.Element:
-                                if(reader.Name.ToLower() == "rss")
-                                {
-                                    readRSS(sender, e, openFileDialog1.FileName);
+                    if (openFileDialog1.FileName != null)
+                    {
+                        reader = new XmlTextReader(openFileDialog1.FileName);
+                        reader.WhitespaceHandling = WhitespaceHandling.None;
+                        while (reader.Read())
+                            switch (reader.NodeType)
+                            {
+                                case XmlNodeType.Element:
+                                    if (reader.Name.ToLower() == "rss")
+                                    {
+                                        readRSS(sender, e, openFileDialog1.FileName);
+                                        saved = true;
+                                        fileName = openFileDialog1.FileName;
+                                        this.Text = String.Concat(mainTitle, fileName);
+                                        break;
+                                    }
+                                    if (reader.Name.ToLower() == "feed")
+                                    {
+                                        readATOM(sender, e, openFileDialog1.FileName);
+                                        saved = true;
+                                        fileName = openFileDialog1.FileName;
+                                        this.Text = String.Concat(mainTitle, fileName);
+                                        break;
+                                    }
                                     break;
-                                }
-                                if (reader.Name.ToLower() == "feed")
-                                {
-                                    readATOM(sender, e, openFileDialog1.FileName);
+                                case XmlNodeType.Text:
                                     break;
-                                }
-                                Thread.Sleep(50);
-                        
-                                break;
-                            case XmlNodeType.Text:
-                                break;
-                        }
-                    reader.Close();
+                            }
+                        reader.Close();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("The file you selected is not a proper RSS or ATOM feed file!", "Error encountered- " + ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
 
@@ -818,7 +869,6 @@ namespace FeedCreator.NET
         {
             try
             {
-                MessageBox.Show("This is an RSS feed!");
                 XmlTextReader reader = new XmlTextReader(openFileName);
                 reader.WhitespaceHandling = WhitespaceHandling.None;
                 bool isHeaderTitle = true;
@@ -912,11 +962,6 @@ namespace FeedCreator.NET
                             }
                             if (isHeaderTitle == false)
                             {
-                                
-                                /*if (firstItem == true)
-                                {
-                                    firstItem = false;
-                                }*/
                                 if (reader.Name.ToLower() == "title")
                                 {
                                     tmp.title = reader.ReadString();
@@ -981,6 +1026,10 @@ namespace FeedCreator.NET
                 {
                     itemList.Items.Add(f.title);
                 });
+                if (itemList.Items.Count == 0)
+                {
+                    itemList.Items.Add("EMPTY");
+                }
             }
          catch (Exception ex)
             {
@@ -996,20 +1045,169 @@ namespace FeedCreator.NET
 
         private void readATOM(object sender, EventArgs e, string openFileName)
         {
-            MessageBox.Show("This is an ATOM feed!");
-            XmlTextReader reader = new XmlTextReader(openFileName);
-            reader.WhitespaceHandling = WhitespaceHandling.None;
-            bool isHeaderTitle = true;
-            if (reader.Name.ToLower() == "title")
+            try
             {
-                if (isHeaderTitle == true)
+                XmlTextReader reader = new XmlTextReader(openFileName);
+                reader.WhitespaceHandling = WhitespaceHandling.None;
+                bool isHeaderTitle = true;
+                bool firstItem = true;
+                FeedItem tmp = new FeedItem();
+                //We need to clear the FeedItem List
+                FeedItemList.Clear();
+                itemList.Items.Clear();
+                while (reader.Read())
+                    switch (reader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            if (reader.Name.ToLower() == "entry")
+                            {
+                                isHeaderTitle = false;
+                            }
+                            if (isHeaderTitle == true)
+                            {
+                                if (reader.Name.ToLower() == "title")
+                                {
+                                    ChannelInfo.title = reader.ReadString();
+                                    titleLabel.Text = ChannelInfo.title;
+                                    ChannelInfo.empty = false;
+                                }
+                                else if (reader.Name.ToLower() == "link")
+                                {
+                                    try
+                                    {
+                                        ChannelInfo.link = reader.GetAttribute("href");
+                                    }
+                                    catch
+                                    {
+                                    }
+                                    linkLabel.Text = ChannelInfo.link;
+                                    ChannelInfo.empty = false;
+                                }
+                                /*else if (reader.Name.ToLower() == "description")
+                                {
+                                    ChannelInfo.description = reader.ReadString();
+                                    ChannelInfo.empty = false;
+                                }*/
+                                else if (reader.Name.ToLower() == "rights")
+                                {
+                                    ChannelInfo.copyright = reader.ReadString();
+                                }
+                                else if (reader.Name.ToLower() == "updated")
+                                {
+                                    ChannelInfo.buildDate = reader.ReadString();
+                                }
+
+                                #region Commented Image Management Code
+                                /*else if (reader.Name.ToLower() == "image")
+                                {
+                                    isImage = true;
+                                }
+                                else if (reader.Name.ToLower() == "url")
+                                {
+                                    if (isImage == true)
+                                    {
+                                        ChannelInfo.imageText = reader.ReadString();
+                                    }
+                                }
+                                else if (reader.Name.ToLower() == "width")
+                                {
+                                    if (isImage == true)
+                                    {
+                                        ChannelInfo.imageWidth = reader.ReadContentAsDecimal();
+                                    }
+                                }
+                                else if (reader.Name.ToLower() == "height")
+                                {
+                                    if (isImage == true)
+                                    {
+                                        ChannelInfo.imageHeight = reader.ReadContentAsDecimal();
+                                    }
+                                }*/
+                                #endregion
+
+                                else if (reader.Name.ToLower() == "name")
+                                {
+                                    ChannelInfo.webmaster = reader.ReadString();
+                                }
+
+                            }
+                            if (isHeaderTitle == false)
+                            {
+                                if (reader.Name.ToLower() == "title")
+                                {
+                                    tmp.title = reader.ReadString();
+                                }
+                                else if (reader.Name.ToLower() == "link")
+                                {
+                                    try
+                                    {
+                                        tmp.link = reader.GetAttribute("href");
+                                    }
+                                    catch
+                                    {
+                                    }
+                                }
+                                else if (reader.Name.ToLower() == "email")
+                                {
+                                    tmp.authorEmail = reader.ReadString();
+                                }
+                                else if (reader.Name.ToLower() == "published")
+                                {
+                                    try
+                                    {
+                                        tmp.pubDate = DateTime.Parse(reader.ReadString());
+                                    }
+                                    catch (Exception ex)
+                                    {
+#if(APP_DEBUG)
+                                        throw ex;
+#endif
+                                    }
+                                }
+                                else if (reader.Name.ToLower() == "entry")
+                                {
+                                    if (firstItem == false)
+                                    {
+                                        FeedItemList.Add(tmp);
+                                        tmp = new FeedItem();
+                                    }
+                                    else
+                                    {
+                                        firstItem = false;
+                                    }
+                                }
+                            }
+
+
+                            break;
+                    }
+
+                if (isHeaderTitle == false)
                 {
-                    ChannelInfo.title = reader.Value;
-                    isHeaderTitle = false;
                 }
-                else
+                if (tmp.title != null && tmp.title != "")
                 {
+                    FeedItemList.Add(tmp);
                 }
+                itemList.Items.Clear();
+                FeedItemList.ForEach(delegate(FeedItem f)
+                {
+                    itemList.Items.Add(f.title);
+                });
+                if (itemList.Items.Count == 0)
+                {
+                    itemList.Items.Add("EMPTY");
+                }
+            }
+            catch (Exception ex)
+            {
+#if(APP_DEBUG)
+                reader.Close();
+                throw ex;
+#else
+                MessageBox.Show("Error encountered while trying to open the feed!");
+                reader.Close();
+#endif
             }
         }
 

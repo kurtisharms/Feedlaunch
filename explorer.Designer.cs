@@ -77,7 +77,7 @@ namespace FeedCreator.NET
             this.locationBox});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(473, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(504, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -110,6 +110,7 @@ namespace FeedCreator.NET
             this.goButton.Name = "goButton";
             this.goButton.Size = new System.Drawing.Size(23, 22);
             this.goButton.Text = "toolStripButton3";
+            this.goButton.ToolTipText = "Click here to navigate to URL\r\n";
             this.goButton.Click += new System.EventHandler(this.goButton_Click);
             // 
             // locationBox
@@ -173,7 +174,7 @@ namespace FeedCreator.NET
             this.MaximizeBox = false;
             this.Name = "explorer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FeedLaunch Explorer";
+            this.Text = "Feed Launch Explorer";
             this.Load += new System.EventHandler(this.explorer_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

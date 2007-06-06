@@ -43,10 +43,10 @@ namespace FeedCreator.NET
             this.label5 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.SourceGroupBox = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.sourceText = new System.Windows.Forms.TextBox();
             this.sourceURL = new System.Windows.Forms.TextBox();
+            this.sourceText = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SourceGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -172,14 +172,19 @@ namespace FeedCreator.NET
             this.SourceGroupBox.TabStop = false;
             this.SourceGroupBox.Text = "Source";
             // 
-            // label6
+            // sourceURL
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(35, 20);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(28, 13);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Text";
+            this.sourceURL.Location = new System.Drawing.Point(118, 50);
+            this.sourceURL.Name = "sourceURL";
+            this.sourceURL.Size = new System.Drawing.Size(263, 20);
+            this.sourceURL.TabIndex = 3;
+            // 
+            // sourceText
+            // 
+            this.sourceText.Location = new System.Drawing.Point(118, 17);
+            this.sourceText.Name = "sourceText";
+            this.sourceText.Size = new System.Drawing.Size(263, 20);
+            this.sourceText.TabIndex = 2;
             // 
             // label7
             // 
@@ -190,19 +195,14 @@ namespace FeedCreator.NET
             this.label7.TabIndex = 1;
             this.label7.Text = "URL";
             // 
-            // sourceText
+            // label6
             // 
-            this.sourceText.Location = new System.Drawing.Point(118, 17);
-            this.sourceText.Name = "sourceText";
-            this.sourceText.Size = new System.Drawing.Size(263, 20);
-            this.sourceText.TabIndex = 2;
-            // 
-            // sourceURL
-            // 
-            this.sourceURL.Location = new System.Drawing.Point(118, 50);
-            this.sourceURL.Name = "sourceURL";
-            this.sourceURL.Size = new System.Drawing.Size(263, 20);
-            this.sourceURL.TabIndex = 3;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(35, 20);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(28, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Text";
             // 
             // createItemForm
             // 
@@ -227,6 +227,7 @@ namespace FeedCreator.NET
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Create Feed Item";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.createItemForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.SourceGroupBox.ResumeLayout(false);
