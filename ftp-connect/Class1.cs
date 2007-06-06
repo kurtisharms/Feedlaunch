@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-
 /*
 First version of this library was written by Jaimon Mathew(jaimonmathew@rediffmail.com) and later modified by
 Dan Rolander(Dan.Rolander@marriott.com) 
@@ -16,6 +9,12 @@ It is NOT released under the GPL, but rather a license similar to the ZLIB or Ne
 WARRANTY:There is no warranty for the library, to the extent permitted by applicable law. Except when otherwise stated in writing the copyright holders and/or other parties provide the content "as is" without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose. The entire risk of use of the content/library is with you. Should the content/library prove faulty, inaccurate, or otherwise unacceptable you assume the cost of all necessary repair or correction.
 */
 
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
 
 namespace FtpLib
 {
@@ -41,10 +40,10 @@ remoteHost,remotePath,remoteUser,remotePass,mes;
      public FTPConnect()
      {
 
-       remoteHost  = "localhost";
-       remotePath  = ".";
-       remoteUser  = "anonymous";
-       remotePass  = "jaimon@school2000.co.uk";
+       remoteHost  = "";
+       remotePath  = "";
+       remoteUser  = "";
+       remotePass  = "";
        remotePort  = 21;
        debug     = false;
        logined    = false;
@@ -801,40 +800,3 @@ IPEndPoint(Dns.GetHostEntry(ipAddress).AddressList[0], port);
 
    }
 }
-
-#region ExampleTestProgram
-//csc.exe /t:exe /r:System.DLL /r:FTPLib.dll /out:"Test.exe" 
-/*using System;
-using FtpLib;
-
-public class Test {
-
-   public static void Main() {
-
-     try {
-
-       Console.WriteLine("Starting...");
-
-       FTPConnect ff = new FTPConnect();
-       ff.setDebug(true);
-       ff.setRemoteHost("127.0.0.1");
-       ff.setRemoteUser("Kurtis");
-       ff.setRemotePass("Harms");
-       ff.login();
-       ff.chdir("incoming");
-
-       string[] fileNames = ff.getFileList("*.*");
-       for(int i=0;i < fileNames.Length;i++) {
-         Console.WriteLine(fileNames[i]);
-       }
-
-       ff.setBinaryMode(true);
-       ff.upload("c:\jaimon\tmp\Webdunia.ttf");
-       ff.close();
-
-     }catch(Exception e) {
-       Console.WriteLine("Caught Error :"+e.Message);
-     }
-   }
-}*/
-#endregion

@@ -26,6 +26,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 using FeedLaunch.NET;
 using FeedCreator.NET;
 using FtpLib;
@@ -35,7 +36,6 @@ namespace FeedCreator.NET
     public partial class UploadForm : Form
     {
         public string strFileName = "";
-        int uploadTry = 1;
         FTPConnect UploadConnection;
         public UploadForm()
         {
@@ -85,19 +85,23 @@ namespace FeedCreator.NET
                 errorProvider1.SetError(portTextBox, "Port number is invalid!");
                 run = false;
             }
-            /*if(fileName.Text.Contains("rss") == false && fileName.Text.Contains("xml") == false && fileName.Text.Contains(""))
-            {
-                errorProvider1.SetError(fileName, "Invalid Feed filename. Extension must be \"xml\" or \"rss\"!");
-                run = false;
-            }*/
             if(run == true)
             {
-                upload(sender, e);
+                startUpload(sender, e);
             }
                 
                 
         }
-        private void upload(object sender, EventArgs e)
+        private void startUpload(object sender, EventArgs e)
+        {
+
+            Thread uploadThread = new Thread(new ThreadStart(upload));
+            uploadThread.Start();
+            //Thread.Sleep(12000);
+            //uploadThread.Abort();
+        }
+
+        private void upload()
         {
             try
             {
@@ -114,16 +118,26 @@ namespace FeedCreator.NET
                 {
                     UploadConnection.chdir(directoryPath.Text);
                 }
-                progressBar1.Increment(10);
+                //string[] uploadedFiles = UploadConnection.getFileList("*.*");
+                Thread.Sleep(500);
+                /*for (int i = 0; i < uploadedFiles.Length; i++)
+                {
+                    if (uploadedFiles[i].ToLower() == strFileName.ToLower())
+                    {
+                        UploadConnection.deleteRemoteFile(uploadedFiles[i]);
+                        Thread.Sleep(500);
+                    }
+                }*/
+                progressBar1.Increment(20);
                 UploadConnection.upload(strFileName);
-                progressBar1.Increment(25);
+                progressBar1.Increment(35);
                 UploadConnection.close();
                 MessageBox.Show("Feed successfully uploaded!", "Upload Successful!", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                 this.Dispose();
             }
             catch (Exception ex)
             {
-                    MessageBox.Show("Connection Failed! It is possible that the FTP server you specified is unable to handle more connections currently, in which case try again later. Also verify your username, password, connection port, and desired output directory.", ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1);
+                    MessageBox.Show("Connection Failed! It is possible that the FTP server you specified is unable to handle more connections currently, in which case try again later. Also verify your username, password, connection port, and desired output directory.\n\nNOTE: Feed Launch .NET can't overwrite existing feeds with the same filename and location already uploaded to the FTP server!", String.Concat("Error encountered- ", ex.ToString()), MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1);
             }
             progressBar1.Value = 0;
             

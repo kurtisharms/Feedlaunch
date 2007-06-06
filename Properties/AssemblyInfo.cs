@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Feed Launch .NET")]
-[assembly: AssemblyDescription("Feed Launch .NET answers all your needs for creating web feeds. Upload projects and feeds directly from the application via FTP")]
+[assembly: AssemblyDescription("Feed Launch .NET answers all your needs for creating web feeds. Upload projects and feeds directly from the application via FTP.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Released under the GPL(Gnu Public License)")]
 [assembly: AssemblyProduct("Feed Launch .NET")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCopyright("KH 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.0.22.4")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.25.4")]
+[assembly: AssemblyFileVersion("0.8.0.0")]
