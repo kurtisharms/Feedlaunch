@@ -77,7 +77,7 @@ namespace FeedCreator.NET
             this.locationBox});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(504, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(473, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -127,11 +127,11 @@ namespace FeedCreator.NET
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.webBrowser1);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.statusStrip2);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(692, 441);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(776, 441);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(692, 466);
+            this.toolStripContainer1.Size = new System.Drawing.Size(776, 466);
             this.toolStripContainer1.TabIndex = 1;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -144,7 +144,7 @@ namespace FeedCreator.NET
             this.webBrowser1.Location = new System.Drawing.Point(0, 3);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(689, 413);
+            this.webBrowser1.Size = new System.Drawing.Size(773, 413);
             this.webBrowser1.TabIndex = 2;
             this.webBrowser1.Url = new System.Uri("http://TESTING.com/", System.UriKind.Absolute);
             // 
@@ -154,7 +154,7 @@ namespace FeedCreator.NET
             this.statusLabel});
             this.statusStrip2.Location = new System.Drawing.Point(0, 419);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(692, 22);
+            this.statusStrip2.Size = new System.Drawing.Size(776, 22);
             this.statusStrip2.TabIndex = 1;
             this.statusStrip2.Text = "statusStrip2";
             // 
@@ -168,7 +168,7 @@ namespace FeedCreator.NET
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(692, 466);
+            this.ClientSize = new System.Drawing.Size(776, 466);
             this.Controls.Add(this.toolStripContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

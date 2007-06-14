@@ -21,7 +21,7 @@
 ---------------------------------------------------------------------------------*/
 
 //If this program is being debugged, then define the following proprocessor variable:
-#define APP_DEBUG
+//#define APP_DEBUG
 
 using System;
 using System.Collections.Generic;
@@ -764,24 +764,46 @@ namespace FeedCreator.NET
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            itemList.Select();
-            if (itemList.SelectedValue.ToString() != null)
+#if(APP_DEBUG)
+#else
+            try
             {
-               DialogResult result;
-                result = MessageBox.Show("Are you sure that you want to delete this feed?", "Delete Feed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
+#endif
+                string strTMP;
+                itemList.Select();
+                object selectedObject = itemList.SelectedItem;
+                if (selectedObject != null)
                 {
-                    FeedItemList.ForEach(delegate(FeedItem f)
-                    {
-                        if (f.title == itemList.SelectedItem.ToString())
-                        {
-                            itemList.Items.Remove(itemList.SelectedItem);
-                            FeedItemList.Remove(f);
-                        }
-                    });
-                    saved = false;
+                    strTMP = selectedObject.ToString();
                 }
+                else
+                {
+                    strTMP = "EMPTY";
+                }
+                if (strTMP != null && strTMP.ToLower() != "null" && strTMP.ToLower() != "empty")
+                {
+                    DialogResult result;
+                    result = MessageBox.Show("Are you sure that you want to delete this feed item?", "Delete Feed Item?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        FeedItemList.ForEach(delegate(FeedItem f)
+                        {
+                            if (f.title == itemList.SelectedItem.ToString())
+                            {
+                                itemList.Items.Remove(itemList.SelectedItem);
+                                FeedItemList.Remove(f);
+                            }
+                        });
+                        saved = false;
+                    }
+                }
+#if(APP_DEBUG)
+#else
             }
+            catch
+            {
+            }
+#endif
         }
 
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)

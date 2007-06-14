@@ -87,25 +87,20 @@ namespace FeedCreator.NET
             }
             if(run == true)
             {
-                startUpload(sender, e);
+                upload();
             }
                 
                 
         }
-        private void startUpload(object sender, EventArgs e)
-        {
 
-            Thread uploadThread = new Thread(new ThreadStart(upload));
-            uploadThread.Start();
-            //Thread.Sleep(12000);
-            //uploadThread.Abort();
-        }
+            //Thread uploadThread = new Thread(new ThreadStart(upload));
+            //uploadThread.Start();
 
         private void upload()
         {
+            string strTMP = directoryPath.Text.Trim();
             try
             {
-                string strTMP = directoryPath.Text.Trim();
                 progressBar1.Value = 0;
                 progressBar1.Increment(15);
                 UploadConnection = new FTPConnect();
@@ -114,21 +109,11 @@ namespace FeedCreator.NET
                 UploadConnection.setRemotePass(passwordTextBox.Text);
                 UploadConnection.setRemotePort(Convert.ToInt32(portTextBox.Text));
                 UploadConnection.login();
-                if (directoryPath.Text != "" && strTMP != "/")
-                {
-                    UploadConnection.chdir(directoryPath.Text);
-                }
-                //string[] uploadedFiles = UploadConnection.getFileList("*.*");
-                Thread.Sleep(500);
-                /*for (int i = 0; i < uploadedFiles.Length; i++)
-                {
-                    if (uploadedFiles[i].ToLower() == strFileName.ToLower())
-                    {
-                        UploadConnection.deleteRemoteFile(uploadedFiles[i]);
-                        Thread.Sleep(500);
-                    }
-                }*/
                 progressBar1.Increment(20);
+                if (strTMP != "" && strTMP != "/")
+                {
+                    UploadConnection.chdir(strTMP);
+                }
                 UploadConnection.upload(strFileName);
                 progressBar1.Increment(35);
                 UploadConnection.close();
@@ -137,10 +122,29 @@ namespace FeedCreator.NET
             }
             catch (Exception ex)
             {
-                    MessageBox.Show("Connection Failed! It is possible that the FTP server you specified is unable to handle more connections currently, in which case try again later. Also verify your username, password, connection port, and desired output directory.\n\nNOTE: Feed Launch .NET can't overwrite existing feeds with the same filename and location already uploaded to the FTP server!", String.Concat("Error encountered- ", ex.ToString()), MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1);
+                try
+                {
+                    UploadConnection = new FTPConnect();
+                    UploadConnection.setRemoteHost(serverTextBox.Text);
+                    UploadConnection.setRemoteUser(usernameTextBox.Text);
+                    UploadConnection.setRemotePass(passwordTextBox.Text);
+                    UploadConnection.setRemotePort(Convert.ToInt32(portTextBox.Text));
+                    UploadConnection.login();
+                    if (strTMP != "" && strTMP != "/")
+                    {
+                        UploadConnection.chdir(strTMP);
+                    }
+                    UploadConnection.deleteRemoteFile(strFileName);
+                    UploadConnection.upload(strFileName);
+                    UploadConnection.close();
+                }
+                catch (Exception ex2)
+                {
+                    MessageBox.Show("Connection Failed! It is possible that the FTP server you specified is unable to handle more connections currently, in which case try again later. Also verify your username, password, connection port, and desired output directory.\n\nNOTE: Feed Launch .NET can't overwrite existing feeds with the same filename and location already uploaded to the FTP server!", String.Concat("Error encountered- ", ex2.ToString()), MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1);
+                }
             }
             progressBar1.Value = 0;
-            
+
         }
     }
 }
