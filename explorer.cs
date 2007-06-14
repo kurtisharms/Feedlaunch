@@ -45,6 +45,8 @@ namespace FeedCreator.NET
         {
             //update the browser location
             this.webBrowser1.Url = this.urlLocation;
+            //Update the location box to reflect the webbrowser's url
+            locationBox.Text = this.urlLocation.ToString();
             //set the title text
             this.Text = "FeedLaunch Explorer";
             //now we will wire an even handler so that whenever the browser's
@@ -93,8 +95,7 @@ namespace FeedCreator.NET
         }
         private void webBrowser1_DocumentTitleChanged(object sender, EventArgs e)
         {
-            //Update the form's title text
-            this.Text = this.webBrowser1.DocumentText + " - FeedLaunch Explorer";
+            
         }
         private void locationBox_KeyPress(object sender, KeyPressEventArgs e)
         {
