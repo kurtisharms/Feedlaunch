@@ -76,6 +76,7 @@ namespace FeedCreator.NET
                         if(this.EditFeedItem != null)
                         {
                         this.EditFeedItem(sender, e);
+                        this.Dispose();
                         }
                     }
                     else
@@ -83,10 +84,10 @@ namespace FeedCreator.NET
                         if(this.CreateFeedItem != null)
                         {
                         this.CreateFeedItem(sender, e);
+                        this.Dispose();
                         }
                     }
             }
-                this.Dispose();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

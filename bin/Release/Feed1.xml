@@ -1,23 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0">
-  <channel>
-    <title>best</title>
-    <link>www.</link>
-    <description>best</description>
-    <language>en</language>
-    <copyright />
-    <managingEditor />
-    <webMaster />
-    <pubDate>6/1/2007 2:44:42 AM</pubDate>
-    <lastBuildDate>6/1/2007 2:44:42 AM</lastBuildDate>
-    <category />
-    <generator>FeedLaunch .NET- http://feedlaunch.sourceforge.net/ or http://www.sourceforge.net/feedlaunch</generator>
-    <docs>http://cyber.law.harvard.edu/rss/rss.html</docs>
-    <ttl>180</ttl>
-    <image>
-      <url />
-      <width>88</width>
-      <height>31</height>
-    </image>
-  </channel>
-</rss>
+<feed xlmns="http://www.w3.org/2005/Atom">
+  <title />
+  <link href="" />
+  <updated />
+  <id />
+  <author>
+    <name />
+  </author>
+  <rights />
+  <generator uri="http://feedlaunch.sourceforge.net/" version="1.0.0" name="Feed Launch .NET" />
+</feed>
