@@ -115,5 +115,15 @@ namespace FeedCreator.NET
             webBrowser1.Height = this.Height - toolStrip1.Height - statusStrip2.Height - 15;
             webBrowser1.Width = this.Width - 15;
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Refresh();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Stop();
+        }
     }
 }

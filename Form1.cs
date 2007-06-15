@@ -35,6 +35,7 @@ using System.Xml.Schema;
 using System.Threading;
 using System.IO;
 using System.Media;
+using System.Net;
 using FeedLaunch.NET;
 using FeedCreator.NET;
 
@@ -89,6 +90,39 @@ namespace FeedCreator.NET
             this.Text = "Feed Launch .NET- Feed1.xml";
             this.Text = string.Concat(this.Text, "*");
             feedList.SelectedIndex = 0;
+
+            //Check for updates every time we start!
+            try
+            {
+                System.Net.WebClient wc = new WebClient();
+                Stream wcStream = wc.OpenRead("http://feedlaunch.sourceforge.net/version.txt");
+                StreamReader sr = new StreamReader(wcStream);
+                string line;
+                Uri url;
+                line = sr.ReadLine().Trim();
+                if (line != Application.ProductVersion)
+                {
+                    DialogResult result = MessageBox.Show("There are updates available for Feed Launch .NET. Do you wish to download and install them now?", "Updates found!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        line = sr.ReadLine().Trim();
+                        try
+                        {
+                            url = new Uri(line);
+                        }
+                        catch
+                        {
+                            url = new Uri("http://feedlaunch.sf.net/download.php");
+                        }
+                        explorer downloadExplorer = new explorer();
+                        downloadExplorer.urlLocation = url;
+                        downloadExplorer.Show();
+                    }
+                }
+            }
+            catch
+            {
+            }
 
         }
 
@@ -310,6 +344,7 @@ namespace FeedCreator.NET
                     int tmpIndex = itemList.SelectedIndex;
                     itemList.Items.Remove(tmpObject);
                     itemList.Items.Insert(tmpIndex - 1, tmpObject);
+                    itemList.SelectedIndex = tmpIndex - 1;
                     saved = false;
                 }
             }
@@ -321,12 +356,14 @@ namespace FeedCreator.NET
             {
                 if (itemList.SelectedItem != null)
                 {
-                    if (itemList.SelectedIndex < itemList.Items.Count)
+                    if (itemList.SelectedIndex < itemList.Items.Count && itemList.SelectedIndex < itemList.Items.Count - 1)
                     {
+
                         object tmpObject = itemList.SelectedItem;
                         int tmpIndex = itemList.SelectedIndex;
                         itemList.Items.Remove(tmpObject);
                         itemList.Items.Insert(tmpIndex + 1, tmpObject);
+                        itemList.SelectedIndex = tmpIndex + 1;
                         saved = false;
                     }
                 }
@@ -428,7 +465,23 @@ namespace FeedCreator.NET
                     List<FeedItem> TMPopened = new List<FeedItem>();
                     List<FeedItem> SortedList = new List<FeedItem>();
                     int originalSelectedIndex;
-
+                    //
+                    //
+                    if (fileName == "Feed1.xml")
+                    {
+                        MessageBox.Show("You have not selected a destination for this feed. The next dialog will allow you to choose one.", "No Destination Found!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM/RSS Xml Feed Files (*.xml)|*.xml|All Files (*.*)|*.*";
+                        saveFileDialog1.FilterIndex = 2;
+                        saveFileDialog1.Title = "Select a destination folder and filename-";
+                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                        {
+                            if (saveFileDialog1.FileName != null)
+                            {
+                                fileName = saveFileDialog1.FileName;
+                                saved = true;
+                            }
+                        }
+                    }
                     //Prepare to write the ATOM feed
                     //First, create a new copy of XmlTextWriter
                     writer = new XmlTextWriter(this.fileName, System.Text.Encoding.UTF8);
@@ -534,6 +587,23 @@ namespace FeedCreator.NET
                     List<FeedItem> TMPopened = new List<FeedItem>();
                     List<FeedItem> SortedList = new List<FeedItem>();
                     int originalSelectedIndex;
+                    //
+                    //
+                    if (fileName == "Feed1.xml")
+                    {
+                        MessageBox.Show("You have not selected a destination for this feed. The next dialog will allow you to choose one.", "No Destination Found!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM/RSS Xml Feed Files (*.xml)|*.xml|All Files (*.*)|*.*";
+                        saveFileDialog1.FilterIndex = 2;
+                        saveFileDialog1.Title = "Select a destination folder and filename-";
+                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                        {
+                            if (saveFileDialog1.FileName != null)
+                            {
+                                fileName = saveFileDialog1.FileName;
+                                saved = true;
+                            }
+                        }
+                    }
                     //
                     //
                     writer = new XmlTextWriter(this.fileName, System.Text.Encoding.UTF8);
@@ -708,7 +778,7 @@ namespace FeedCreator.NET
                             }
                         }
                     }
-                    else
+                    else if(fileName != "Feed1.xml")
                     {
                         if (fileName != null)
                         {
@@ -753,6 +823,7 @@ namespace FeedCreator.NET
             linkLabel.Text = "No Link Specified";
             itemList.Items.Clear();
             fileName = "Feed1.xml";
+            itemList.Items.Add("EMPTY");
             this.Text = mainTitle + fileName + "*";
         }
 
@@ -808,7 +879,42 @@ namespace FeedCreator.NET
 
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                System.Net.WebClient wc = new WebClient();
+                Stream wcStream = wc.OpenRead("http://feedlaunch.sourceforge.net/version.txt");
+                StreamReader sr = new StreamReader(wcStream);
+                string line;
+                Uri url;
+                line = sr.ReadLine().Trim();
+                if (line == Application.ProductVersion)
+                {
+                    MessageBox.Show("You are running the latest version of Feed Launch .NET! There are no updates currently!", "No Updates!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("There are updates available for Feed Launch .NET. Do you wish to download and install them now?", "Updates found!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        line = sr.ReadLine().Trim();
+                        try
+                        {
+                            url = new Uri(line);
+                        }
+                        catch
+                        {
+                            url = new Uri("http://feedlaunch.sf.net/download.php");
+                        }
+                        explorer downloadExplorer = new explorer();
+                        downloadExplorer.urlLocation = url;
+                        downloadExplorer.Show();
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Unable to connect to the internet and locate the Feed Launch .NET server. Please try again later!", "Please try again later!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void openStripMenuItem_Click(object sender, EventArgs e)
@@ -843,7 +949,7 @@ namespace FeedCreator.NET
             try
             {
                 openFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM/RSS Xml Feed Files (*.xml)|*.xml|All Files (*.*)|*.*";
-                openFileDialog1.FilterIndex = 3;
+                openFileDialog1.FilterIndex = 2;
                 openFileDialog1.Title = "Select File to Open";
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
@@ -976,10 +1082,6 @@ namespace FeedCreator.NET
                                         ChannelInfo.imageHeight = reader.ReadContentAsDecimal();
                                     }
                                 }
-                                else if (reader.Name.ToLower() == "/image")
-                                {
-                                    isImage = false;
-                                }
 
                             }
                             if (isHeaderTitle == false)
@@ -1105,11 +1207,6 @@ namespace FeedCreator.NET
                                     linkLabel.Text = ChannelInfo.link;
                                     ChannelInfo.empty = false;
                                 }
-                                /*else if (reader.Name.ToLower() == "description")
-                                {
-                                    ChannelInfo.description = reader.ReadString();
-                                    ChannelInfo.empty = false;
-                                }*/
                                 else if (reader.Name.ToLower() == "rights")
                                 {
                                     ChannelInfo.copyright = reader.ReadString();
@@ -1118,34 +1215,6 @@ namespace FeedCreator.NET
                                 {
                                     ChannelInfo.buildDate = reader.ReadString();
                                 }
-
-                                #region Commented Image Management Code
-                                /*else if (reader.Name.ToLower() == "image")
-                                {
-                                    isImage = true;
-                                }
-                                else if (reader.Name.ToLower() == "url")
-                                {
-                                    if (isImage == true)
-                                    {
-                                        ChannelInfo.imageText = reader.ReadString();
-                                    }
-                                }
-                                else if (reader.Name.ToLower() == "width")
-                                {
-                                    if (isImage == true)
-                                    {
-                                        ChannelInfo.imageWidth = reader.ReadContentAsDecimal();
-                                    }
-                                }
-                                else if (reader.Name.ToLower() == "height")
-                                {
-                                    if (isImage == true)
-                                    {
-                                        ChannelInfo.imageHeight = reader.ReadContentAsDecimal();
-                                    }
-                                }*/
-                                #endregion
 
                                 else if (reader.Name.ToLower() == "name")
                                 {
