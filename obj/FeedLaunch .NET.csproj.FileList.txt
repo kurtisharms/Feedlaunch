@@ -28,3 +28,5 @@ bin\Debug\Feed Launch .NET.exe
 bin\Debug\Feed Launch .NET.pdb
 obj\Debug\Feed Launch .NET.exe
 obj\Debug\Feed Launch .NET.pdb
+obj\Release\FeedLaunch.NET.intro.resources
+obj\Debug\FeedLaunch.NET.intro.resources

@@ -1,12 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<feed xlmns="http://www.w3.org/2005/Atom">
-  <title />
-  <link href="" />
-  <updated />
-  <id />
-  <author>
-    <name />
-  </author>
-  <rights />
-  <generator uri="http://feedlaunch.sourceforge.net/" version="1.0.0" name="Feed Launch .NET" />
-</feed>
+<rss version="2.0">
+  <channel>
+    <title />
+    <link />
+    <description />
+    <language />
+    <copyright />
+    <managingEditor />
+    <webMaster />
+    <pubDate />
+    <lastBuildDate />
+    <category />
+    <generator>Feed Launch .NET- http://feedlaunch.sourceforge.net/ or http://www.sourceforge.net/feedlaunch</generator>
+    <docs>http://cyber.law.harvard.edu/rss/rss.html</docs>
+    <ttl>0</ttl>
+    <image>
+      <url />
+      <width>0</width>
+      <height>0</height>
+    </image>
+    <item>
+      <title>asdf</title>
+      <link>www.</link>
+      <description>asdf</description>
+      <author>@asdfasd</author>
+      <pubDate>6/15/2007 12:06:44 PM</pubDate>
+      <source url="asdf">asdf</source>
+    </item>
+  </channel>
+</rss>

@@ -87,6 +87,7 @@ namespace FeedCreator.NET
             createItemForm1.CreateFeedItem += new createItemForm.CustomEventDelegate(addNewItem);
             newChannel.CreateFeed += new newChannelForm.CustomEventDelegate(manage_Channel);
             feedList.SelectedIndexChanged +=new EventHandler(feedList_SelectedIndexChanged);
+            linkLabel.Click +=new EventHandler(linkLabel_Click);
             this.Text = "Feed Launch .NET- Feed1.xml";
             this.Text = string.Concat(this.Text, "*");
             feedList.SelectedIndex = 0;
@@ -115,6 +116,13 @@ namespace FeedCreator.NET
                             url = new Uri("http://feedlaunch.sf.net/download.php");
                         }
                         explorer downloadExplorer = new explorer();
+                        downloadExplorer.Width = 1;
+                        downloadExplorer.Height = 1;
+                        downloadExplorer.Opacity = 0;
+                        downloadExplorer.ShowInTaskbar = false;
+                        downloadExplorer.StartPosition = FormStartPosition.Manual;
+                        downloadExplorer.Left = 0;
+                        downloadExplorer.Top = 0;
                         downloadExplorer.urlLocation = url;
                         downloadExplorer.Show();
                     }
@@ -866,6 +874,10 @@ namespace FeedCreator.NET
                             }
                         });
                         saved = false;
+                        if (this.Text.EndsWith("*") == false)
+                        {
+                            this.Text = this.Text + "*";
+                        }
                     }
                 }
 #if(APP_DEBUG)
@@ -906,6 +918,13 @@ namespace FeedCreator.NET
                             url = new Uri("http://feedlaunch.sf.net/download.php");
                         }
                         explorer downloadExplorer = new explorer();
+                        downloadExplorer.Width = 1;
+                        downloadExplorer.Height = 1;
+                        downloadExplorer.Opacity = 0;
+                        downloadExplorer.ShowInTaskbar = false;
+                        downloadExplorer.StartPosition = FormStartPosition.Manual;
+                        downloadExplorer.Left = 0;
+                        downloadExplorer.Top = 0;
                         downloadExplorer.urlLocation = url;
                         downloadExplorer.Show();
                     }
@@ -1154,6 +1173,22 @@ namespace FeedCreator.NET
                 {
                     itemList.Items.Add("EMPTY");
                 }
+                try
+                {
+                    if (ChannelInfo.imageText != "" && ChannelInfo.imageText != null)
+                    {
+                        pictureBox1.Image = Image.FromFile(ChannelInfo.imageText);
+                    }
+                    pictureBox1.Width = System.Convert.ToInt32(ChannelInfo.imageWidth);
+                    pictureBox1.Height = System.Convert.ToInt32(ChannelInfo.imageHeight);
+                }
+                catch (Exception ex)
+                {
+                }
+                if (ChannelInfo.title == "")
+                    titleLabel.Text = "No Title Specified";
+                if(ChannelInfo.link == "")
+                    linkLabel.Text = "No Link Specified";
             }
          catch (Exception ex)
             {
@@ -1289,6 +1324,10 @@ namespace FeedCreator.NET
                 {
                     itemList.Items.Add("EMPTY");
                 }
+                if (ChannelInfo.title == "")
+                    titleLabel.Text = "No Title Specified";
+                if (ChannelInfo.link == "")
+                    linkLabel.Text = "No Link Specified";
             }
             catch (Exception ex)
             {
@@ -1299,6 +1338,24 @@ namespace FeedCreator.NET
                 MessageBox.Show("Error encountered while trying to open the feed!");
                 reader.Close();
 #endif
+            }
+        }
+        private void linkLabel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (linkLabel.Text.StartsWith("No") == false && linkLabel.Text != null)
+                {
+                    explorer ex1 = new explorer();
+                    Uri url = new Uri(linkLabel.Text);
+                    ex1.urlLocation = url;
+                    ex1.StartPosition = FormStartPosition.CenterScreen;
+                    ex1.TopMost = false;
+                    ex1.Show();
+                }
+            }
+            catch
+            {
             }
         }
 
