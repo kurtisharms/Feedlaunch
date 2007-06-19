@@ -55,9 +55,10 @@ namespace FeedCreator.NET
                 errorProvider1.SetError(descriptionBox, "Description can't be empty!");
                 exit = true;
             }
-            if (linkBox.Text == "")
+            if (linkBox.Text.Contains("http://") == false && linkBox.Text.Contains("ftp:") == false && linkBox.Text.Contains("news:") == false && linkBox.Text.Contains("https://") == false && linkBox.Text.Contains("www.") == false && linkBox.Text.Contains(".com") == false && linkBox.Text.Contains(".org") == false && linkBox.Text.Contains(".net") == false && linkBox.Text.Contains(".ca") == false)
             {
-                errorProvider1.SetError(linkBox, "Link can't be empty!");
+                System.Media.SystemSounds.Beep.Play();
+                errorProvider1.SetError(linkBox, "Enter a valid web/link address!");
                 exit = true;
             }
             if (authorEmail.Text != "" && authorEmail.Text != null)
