@@ -117,4 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Welcome to the  Feed Launch .NET Intro. The next window 
+will display a FLASH tutorial which will guide you through the 
+simple step of creating a feed. If at anytime you wish to skip 
+this intruction, simply click the Skip button. 
+
+To view this introduction again, go to the Feed Launch Help 
+menu and click Introduction.
+
+To proceed, please click Forward.
+</value>
+  </data>
 </root>
