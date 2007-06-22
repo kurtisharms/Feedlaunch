@@ -46,3 +46,5 @@ obj\Release\FeedLaunch .NET.csproj.ResolveComReference.cache
 bin\Release\Interop.DIRECTORSHOCKWAVELib.dll
 bin\Release\Interop.ShockwaveFlashObjects.dll
 bin\Release\AxInterop.DIRECTORSHOCKWAVELib.dll
+bin\Release\AxInterop.ShockwaveFlashObjects.dll
+obj\Release\AxInterop.ShockwaveFlashObjects.dll
