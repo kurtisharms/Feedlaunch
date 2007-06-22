@@ -32,6 +32,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Schema;
+using System.Diagnostics;
 using System.Threading;
 using System.IO;
 using System.Media;
@@ -75,11 +76,13 @@ namespace FeedCreator.NET
 #if(APP_DEBUG)
 #warning The proprossor "APP_DEBUG" is defined. Feed Launch .NET will be compiled with optimizations for debugging. If you plan to distribute this app, please consider undefining this preprocessor variable before recompiling.
 #endif
+            //Here we set the new instances of our classes/forms
             ChannelInfo = new ChannelClass();
             newChannel = new newChannelForm();
             createItemForm1 = new createItemForm();
-            this.Disposed += new EventHandler(Form1_Disposed);
             FeedItemList = new List<FeedItem>();
+            //When the form opens, there won't be any feed items. Therefore, fill the 
+            //itemList with "EMPTY"
             itemList.Items.Add("EMPTY");
             feedList.SetSelected(1, true);
             feedList.SelectedValueChanged += new EventHandler(feedList_SelectedValueChanged);
@@ -88,8 +91,6 @@ namespace FeedCreator.NET
             newChannel.CreateFeed += new newChannelForm.CustomEventDelegate(manage_Channel);
             feedList.SelectedIndexChanged +=new EventHandler(feedList_SelectedIndexChanged);
             linkLabel.Click +=new EventHandler(linkLabel_Click);
-            this.Text = "Feed Launch .NET- Feed1.xml";
-            this.Text = string.Concat(this.Text, "*");
             feedList.SelectedIndex = 0;
 
             //Check for updates every time we start!
@@ -99,7 +100,6 @@ namespace FeedCreator.NET
                 Stream wcStream = wc.OpenRead("http://feedlaunch.sourceforge.net/version.txt");
                 StreamReader sr = new StreamReader(wcStream);
                 string line;
-                Uri url;
                 line = sr.ReadLine().Trim();
                 if (line != Application.ProductVersion)
                 {
@@ -107,24 +107,12 @@ namespace FeedCreator.NET
                     if (result == DialogResult.Yes)
                     {
                         line = sr.ReadLine().Trim();
-                        try
-                        {
-                            url = new Uri(line);
-                        }
-                        catch
-                        {
-                            url = new Uri("http://feedlaunch.sf.net/download.php");
-                        }
-                        explorer downloadExplorer = new explorer();
-                        downloadExplorer.Width = 1;
-                        downloadExplorer.Height = 1;
-                        downloadExplorer.Opacity = 0;
-                        downloadExplorer.ShowInTaskbar = false;
-                        downloadExplorer.StartPosition = FormStartPosition.Manual;
-                        downloadExplorer.Left = 0;
-                        downloadExplorer.Top = 0;
-                        downloadExplorer.urlLocation = url;
-                        downloadExplorer.Show();
+                        Process p = new Process();
+                        p.EnableRaisingEvents = false;
+                        p.StartInfo.FileName = "iexplore";
+                        p.StartInfo.Arguments = line;
+                        p.Start();
+                        this.Dispose();
                     }
                 }
             }
@@ -132,28 +120,72 @@ namespace FeedCreator.NET
             {
             }
 
+            //Now we check to load the data file. If the data file does not exist,
+            //then this must be the first time that Feed Launch .NET is running. Therefore,
+            //we display the welcome and introduction wizard.
+            try
+            {
+                FileStream testfs = new FileStream("data.dat", FileMode.Open, FileAccess.Read);
+                //Set the title
+                this.Text = "Feed Launch .NET- Feed1.xml";
+                this.Text = string.Concat(this.Text, "*");
+                //If the program execution reaches the next line, then the file "data.dat"
+                //already exists
+                testfs.Close();
+            }
+            //If the file does NOT exist, then create it and open the intro window
+            catch (System.IO.FileNotFoundException ex)
+            {
+                //Note that we set FileMode.OpenOrCreate.
+                FileStream fs = new FileStream("data.dat", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                StreamWriter sw = new StreamWriter(fs);
+                //We write out the application data
+                sw.WriteLine(Application.ProductName);
+                sw.WriteLine(Application.ProductVersion);
+                sw.WriteLine(Application.StartupPath);
+                //Finally, close both the file and writer streams
+                sw.Close();
+                fs.Close();
+                //Create a new instance of the intro form
+                intro welcomeForm = new intro();
+                //Create a callback
+                welcomeForm.introClosed +=new intro.CustomEventDelegate(welcomeForm_introClosed);
+                //Make the main form "invisible" and change the title
+                this.Width = 1;
+                this.Height = 1;
+                this.Opacity = 0;
+                this.Text = "Feed Launch .NET Intro";
+                //Display the form's instance
+                welcomeForm.Show();
+            }
+            //This final catch statement is just here to make sure that nothing ruins the 
+            //user's experience
+            catch
+            {
+            }
+
+
         }
 
         private void channelsBox_Enter(object sender, EventArgs e)
         {
-            
+            //Nothing here
         }
 
         private void itemList_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
-        }
-        private void Form1_Disposed(object sender, EventArgs e)
-        {
-            
+            //Nothing here
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //This function manages the "Exit" command on the File menu
+            //If the value "saved" is true, then the currently opened feed is saved
             if (saved == true)
             {
                 this.Dispose();
             }
+            // ...Otherwise, we have to ask the user if he/she wishes to save the opened feed
             else
             {
                 if (saved == false)
@@ -182,9 +214,10 @@ namespace FeedCreator.NET
             }
 
         }
+
         private void saveFeed()
         {
-
+            //Nothing here
         }
 
         private void newChannelButton_Click(object sender, EventArgs e)
@@ -767,7 +800,7 @@ namespace FeedCreator.NET
                     if (fileName == "_SaveAsFeed1.system")
                     {
                         saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM/RSS Xml Feed Files (*.xml)|*.xml|All Files (*.*)|*.*";
-                        saveFileDialog1.FilterIndex = 1;
+                        saveFileDialog1.FilterIndex = 2;
                         saveFileDialog1.Title = "Save As...";
                         if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                         {
@@ -897,7 +930,6 @@ namespace FeedCreator.NET
                 Stream wcStream = wc.OpenRead("http://feedlaunch.sourceforge.net/version.txt");
                 StreamReader sr = new StreamReader(wcStream);
                 string line;
-                Uri url;
                 line = sr.ReadLine().Trim();
                 if (line == Application.ProductVersion)
                 {
@@ -909,29 +941,19 @@ namespace FeedCreator.NET
                     if (result == DialogResult.Yes)
                     {
                         line = sr.ReadLine().Trim();
-                        try
-                        {
-                            url = new Uri(line);
-                        }
-                        catch
-                        {
-                            url = new Uri("http://feedlaunch.sf.net/download.php");
-                        }
-                        explorer downloadExplorer = new explorer();
-                        downloadExplorer.Width = 1;
-                        downloadExplorer.Height = 1;
-                        downloadExplorer.Opacity = 0;
-                        downloadExplorer.ShowInTaskbar = false;
-                        downloadExplorer.StartPosition = FormStartPosition.Manual;
-                        downloadExplorer.Left = 0;
-                        downloadExplorer.Top = 0;
-                        downloadExplorer.urlLocation = url;
-                        downloadExplorer.Show();
+                        line = sr.ReadLine().Trim();
+                        Process p = new Process();
+                        p.EnableRaisingEvents = false;
+                        p.StartInfo.FileName = "iexplore";
+                        p.StartInfo.Arguments = line;
+                        p.Start();
+                        this.Dispose();
                     }
                 }
             }
             catch
             {
+                SystemSounds.Beep.Play();
                 MessageBox.Show("Unable to connect to the internet and locate the Feed Launch .NET server. Please try again later!", "Please try again later!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
@@ -1196,6 +1218,7 @@ namespace FeedCreator.NET
                 reader.Close();
                 throw ex;
 #else
+                SystemSounds.Beep.Play();
                 MessageBox.Show("Error encountered while trying to open the feed!");
                 reader.Close();
 #endif
@@ -1335,6 +1358,7 @@ namespace FeedCreator.NET
                 reader.Close();
                 throw ex;
 #else
+                SystemSounds.Beep.Play();
                 MessageBox.Show("Error encountered while trying to open the feed!");
                 reader.Close();
 #endif
@@ -1357,6 +1381,20 @@ namespace FeedCreator.NET
             catch
             {
             }
+        }
+        private void welcomeForm_introClosed(object sender, EventArgs e)
+        {
+            this.Width = 635;
+            this.Height = 545;
+            this.Opacity = 100;
+            this.Text = "Feed Launch .NET- Feed1.xml";
+            this.Text = string.Concat(this.Text, "*");
+        }
+
+        private void introToolStripItem_Click(object sender, EventArgs e)
+        {
+            intro introForm = new intro();
+            introForm.Show();
         }
 
     }

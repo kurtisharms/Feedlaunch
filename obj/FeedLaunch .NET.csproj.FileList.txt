@@ -30,3 +30,19 @@ obj\Debug\Feed Launch .NET.exe
 obj\Debug\Feed Launch .NET.pdb
 obj\Release\FeedLaunch.NET.intro.resources
 obj\Debug\FeedLaunch.NET.intro.resources
+bin\Debug\Interop.DIRECTORSHOCKWAVELib.dll
+bin\Debug\Interop.ShockwaveFlashObjects.dll
+bin\Debug\AxInterop.DIRECTORSHOCKWAVELib.dll
+bin\Debug\AxInterop.ShockwaveFlashObjects.dll
+obj\Debug\Interop.DIRECTORSHOCKWAVELib.dll
+obj\Debug\Interop.ShockwaveFlashObjects.dll
+obj\Debug\AxInterop.DIRECTORSHOCKWAVELib.dll
+obj\Debug\AxInterop.ShockwaveFlashObjects.dll
+obj\Debug\FeedLaunch .NET.csproj.ResolveComReference.cache
+obj\Release\Interop.DIRECTORSHOCKWAVELib.dll
+obj\Release\Interop.ShockwaveFlashObjects.dll
+obj\Release\AxInterop.DIRECTORSHOCKWAVELib.dll
+obj\Release\FeedLaunch .NET.csproj.ResolveComReference.cache
+bin\Release\Interop.DIRECTORSHOCKWAVELib.dll
+bin\Release\Interop.ShockwaveFlashObjects.dll
+bin\Release\AxInterop.DIRECTORSHOCKWAVELib.dll
