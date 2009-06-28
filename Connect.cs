@@ -29,6 +29,7 @@ using System.Windows.Forms;
 using System.Threading;
 using FeedLaunch.NET;
 using FeedCreator.NET;
+using System.IO;
 using FtpLib;
 
 namespace FeedCreator.NET
@@ -55,6 +56,30 @@ namespace FeedCreator.NET
         private void UploadForm_Load(object sender, EventArgs e)
         {
             UploadConnection = new FTPConnect();
+            //Now we check to load the data file. If the data file does not exist,
+            //then there is no password stores. 
+   
+            try
+            {
+                FileStream testfs = new FileStream("store.dat", FileMode.Open, FileAccess.Read);
+      			// HERE WE SHOULD LOAD SAVED PASSWORDS
+ 
+                testfs.Close();
+            }
+            //If the file does NOT exist, then create it and open the intro window
+            catch (System.IO.FileNotFoundException ex)
+            {
+                //Note that we set FileMode.OpenOrCreate.
+                FileStream fs = new FileStream("store.dat", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                StreamWriter sw = new StreamWriter(fs);
+                //We write out the application data
+                sw.WriteLine(Application.ProductName);
+                sw.WriteLine(Application.ProductVersion);
+                sw.WriteLine(Application.StartupPath);
+                //Finally, close both the file and writer streams
+                sw.Close();
+                fs.Close();
+            }
         }
 
         private void uploadButton_Click(object sender, EventArgs e)
