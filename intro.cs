@@ -29,11 +29,6 @@ namespace FeedLaunch.NET
             this.Dispose();
         }
 
-        private void axShockwaveCtl1_ExternalEvent(object sender, AxDIRECTORSHOCKWAVELib._ShockwaveEvents_ExternalEventEvent e)
-        {
-
-        }
-
         private void intro_Load(object sender, EventArgs e)
         {
             page = 1;
