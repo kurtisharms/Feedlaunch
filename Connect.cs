@@ -64,6 +64,24 @@ namespace FeedCreator.NET
                 FileStream testfs = new FileStream("store.dat", FileMode.Open, FileAccess.Read);
       			// HERE WE SHOULD LOAD SAVED PASSWORDS
  
+      			StreamReader sr = new StreamReader(testfs);
+      			string line = "";
+      			bool passedOnce = false;
+      			while ((line = sr.ReadLine()) != null) 
+                {
+      				if(!passedOnce)
+      				{
+      					usernameTextBox.Text = line.Trim();
+      					passedOnce = true;
+      				}
+      				else
+      				{
+      					passwordTextBox.Text = line.Trim();
+      				}
+      					
+                    //HERE WE NEED TO LOAD USERNAME AND PASSWORD
+                }
+      			sr.Close();
                 testfs.Close();
             }
             //If the file does NOT exist, then create it and open the intro window
@@ -72,10 +90,6 @@ namespace FeedCreator.NET
                 //Note that we set FileMode.OpenOrCreate.
                 FileStream fs = new FileStream("store.dat", FileMode.OpenOrCreate, FileAccess.ReadWrite);
                 StreamWriter sw = new StreamWriter(fs);
-                //We write out the application data
-                sw.WriteLine(Application.ProductName);
-                sw.WriteLine(Application.ProductVersion);
-                sw.WriteLine(Application.StartupPath);
                 //Finally, close both the file and writer streams
                 sw.Close();
                 fs.Close();
@@ -110,6 +124,60 @@ namespace FeedCreator.NET
                 errorProvider1.SetError(portTextBox, "Port number is invalid!");
                 run = false;
             }
+            
+            try
+            {
+                FileStream testfs = new FileStream("store.dat", FileMode.Open, FileAccess.Read);
+      			// HERE WE SHOULD LOAD SAVED PASSWORDS
+ 
+      			StreamReader sr = new StreamReader(testfs);
+      			string line = "";
+      			bool passedOnce = false;
+      			bool creditSame = true;
+      			while ((line = sr.ReadLine()) != null) 
+                {
+      				if(!passedOnce)
+      				{
+      					if(usernameTextBox.Text.Trim() != line.Trim())
+      						creditSame = false;
+      				}
+      				else
+      				{
+      					if(passwordTextBox.Text.Trim() != line.Trim())
+      						creditSame = false;
+      				}
+      					
+      				if(creditSame == false)
+      				{
+      					DialogResult result = MessageBox.Show("Do you wish to save your username and password?", "Username and Password", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    	if (result == DialogResult.Yes)
+                    	{
+                    		try {
+                    			//Note that we set FileMode.OpenOrCreate.
+                				FileStream fs = new FileStream("store.dat", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                				StreamWriter sw = new StreamWriter(fs);
+                				//We write out the application data
+                				sw.WriteLine(usernameTextBox.Text.Trim());
+                				sw.WriteLine(passwordTextBox.Text.Trim());
+                				//Finally, close both the file and writer streams
+                				sw.Close();
+                				fs.Close();
+                    		}
+                    		catch (Exception ex)
+                    		{
+                    		}
+
+                    	}
+      				}
+                }
+      			sr.Close();
+                testfs.Close();
+            }
+            catch (Exception ex)
+            {
+            }
+            
+            
             if(run == true)
             {
                 upload();
