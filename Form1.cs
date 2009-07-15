@@ -37,6 +37,7 @@ using System.Threading;
 using System.IO;
 using System.Media;
 using System.Net;
+using Microsoft.Win32;
 using FeedLaunch.NET;
 using FeedCreator.NET;
 
@@ -76,6 +77,11 @@ namespace FeedCreator.NET
 #if(APP_DEBUG)
 #warning The proprossor "APP_DEBUG" is defined. Feed Launch .NET will be compiled with optimizations for debugging. If you plan to distribute this app, please consider undefining this preprocessor variable before recompiling.
 #endif
+
+		
+
+			//There are no items in the itemList yet
+			itemList.Enabled = false;
             //Here we set the new instances of our classes/forms
             ChannelInfo = new ChannelClass();
             newChannel = new newChannelForm();
@@ -120,33 +126,16 @@ namespace FeedCreator.NET
             {
             }
 
-            //Now we check to load the data file. If the data file does not exist,
+            //Now we check for the registry key "intro". If the key does not exist(null),
             //then this must be the first time that Feed Launch .NET is running. Therefore,
             //we display the welcome and introduction wizard.
-            try
-            {
-                FileStream testfs = new FileStream("data.dat", FileMode.Open, FileAccess.Read);
-                //Set the title
-                this.Text = "Feed Launch .NET- Feed1.xml";
-                this.Text = string.Concat(this.Text, "*");
-                //If the program execution reaches the next line, then the file "data.dat"
-                //already exists
-                testfs.Close();
-            }
-            //If the file does NOT exist, then create it and open the intro window
-            catch (System.IO.FileNotFoundException ex)
-            {
-                //Note that we set FileMode.OpenOrCreate.
-                FileStream fs = new FileStream("data.dat", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-                StreamWriter sw = new StreamWriter(fs);
-                //We write out the application data
-                sw.WriteLine(Application.ProductName);
-                sw.WriteLine(Application.ProductVersion);
-                sw.WriteLine(Application.StartupPath);
-                //Finally, close both the file and writer streams
-                sw.Close();
-                fs.Close();
-                //Create a new instance of the intro form
+            this.Text = "Feed Launch .NET- Feed1.xml";
+            this.Text = string.Concat(this.Text, "*");
+            RegistryManager appRegistry = new RegistryManager();
+			appRegistry.BaseRegistryKey = Registry.CurrentUser;
+			if(appRegistry.Read("intro") == null)
+			{
+				//Create a new instance of the intro form
                 intro welcomeForm = new intro();
                 //Create a callback
                 welcomeForm.introClosed +=new intro.CustomEventDelegate(welcomeForm_introClosed);
@@ -155,16 +144,11 @@ namespace FeedCreator.NET
                 this.Height = 1;
                 this.Opacity = 0;
                 this.Text = "Feed Launch .NET Intro";
+                //Ensure that this welcome form isn't displayed on startup in the future.
+                appRegistry.Write("intro","shown");
                 //Display the form's instance
                 welcomeForm.Show();
-            }
-            //This final catch statement is just here to make sure that nothing ruins the 
-            //user's experience
-            catch
-            {
-            }
-
-
+			}
         }
 
         private void channelsBox_Enter(object sender, EventArgs e)
@@ -350,7 +334,7 @@ namespace FeedCreator.NET
             if (itemList.SelectedItem != tmpObj && itemList.SelectedItem != tmpObj2 && itemList.SelectedItem != null)
             {
                 DialogResult result;
-                result = MessageBox.Show("Are you sure that you want to delete this feed?", "Delete Feed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                result = MessageBox.Show("Are you sure that you want to delete this feed item?", "Delete Feed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
                     FeedItemList.ForEach(delegate(FeedItem f)
@@ -367,11 +351,12 @@ namespace FeedCreator.NET
             else
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("There is no item to delete!", "No Item to Delete!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                MessageBox.Show("Select an item to delete!", "No Item Selected!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
             }
             if (itemList.Items.Count == 0)
             {
                 itemList.Items.Add("EMPTY");
+                itemList.Enabled = false;
             }
         }
 
@@ -771,7 +756,7 @@ namespace FeedCreator.NET
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Application.ProductName + "\n" + "Version " + Application.ProductVersion + "\n" + Application.CompanyName, "About FeedLaunch", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(Application.ProductName + "\n" + "Version " + Application.ProductVersion + "\n" + Application.CompanyName + "\nOpen Source - Released under the GPL(Gnu Public License)", "About FeedLaunch", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -1397,5 +1382,21 @@ namespace FeedCreator.NET
             introForm.Show();
         }
 
+        
+        void LinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+        	if(linkLabel.Text.Contains("http") || linkLabel.Text.Contains("www."))
+        	{
+        		explorer LinkExplorer = new explorer();
+            	//Assign the new url to the form- make sure to assign this
+            	//before the explorer form loads
+            	try {
+            		            	LinkExplorer.urlLocation = new System.Uri(linkLabel.Text.Trim());
+				}
+            	catch(Exception ex) { }
+            	//And now just display our explorer form
+            	LinkExplorer.Show();
+        	}
+        }
     }
 }

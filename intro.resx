@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -119,7 +119,7 @@
   </resheader>
   <data name="label1.Text" xml:space="preserve">
     <value>Welcome to the  Feed Launch .NET Intro. The next window 
-will display a FLASH tutorial which will guide you through the 
+will display a Flash tutorial which will guide you through the 
 simple step of creating a feed. If at anytime you wish to skip 
 this intruction, simply click the Skip button. 
 
@@ -127,6 +127,7 @@ To view this introduction again, go to the Feed Launch Help
 menu and click Introduction.
 
 To proceed, please click Forward.
-</value>
+
+NOTE: Flash must already be installed for the tutorial to work</value>
   </data>
 </root>

@@ -125,5 +125,10 @@ namespace FeedCreator.NET
         {
             webBrowser1.Stop();
         }
+        
+        void TopToolStripPanelClick(object sender, EventArgs e)
+        {
+        	
+        }
     }
 }
