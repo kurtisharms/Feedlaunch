@@ -134,6 +134,7 @@ namespace FeedCreator.NET
         	this.statusStrip1.Location = new System.Drawing.Point(0, 0);
         	this.statusStrip1.Name = "statusStrip1";
         	this.statusStrip1.Size = new System.Drawing.Size(627, 22);
+        	this.statusStrip1.SizingGrip = false;
         	this.statusStrip1.TabIndex = 0;
         	this.statusStrip1.Text = "Ready";
         	// 
@@ -177,7 +178,7 @@ namespace FeedCreator.NET
         	// 
         	this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
         	this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-        	this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+        	this.newToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
         	this.newToolStripMenuItem.Text = "&New";
         	this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
         	// 
@@ -185,7 +186,7 @@ namespace FeedCreator.NET
         	// 
         	this.openStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openStripMenuItem.Image")));
         	this.openStripMenuItem.Name = "openStripMenuItem";
-        	this.openStripMenuItem.Size = new System.Drawing.Size(152, 22);
+        	this.openStripMenuItem.Size = new System.Drawing.Size(143, 22);
         	this.openStripMenuItem.Text = "&Open...";
         	this.openStripMenuItem.Click += new System.EventHandler(this.openStripMenuItem_Click);
         	// 
@@ -193,38 +194,38 @@ namespace FeedCreator.NET
         	// 
         	this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
         	this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-        	this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+        	this.saveToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
         	this.saveToolStripMenuItem.Text = "&Save";
         	this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
         	// 
         	// saveAsToolStripMenuItem
         	// 
         	this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-        	this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+        	this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
         	this.saveAsToolStripMenuItem.Text = "Save &As...";
         	this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
         	// 
         	// toolStripSeparator1
         	// 
         	this.toolStripSeparator1.Name = "toolStripSeparator1";
-        	this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+        	this.toolStripSeparator1.Size = new System.Drawing.Size(140, 6);
         	// 
         	// saveSettingsToolStripMenuItem
         	// 
         	this.saveSettingsToolStripMenuItem.Enabled = false;
         	this.saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
-        	this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+        	this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
         	this.saveSettingsToolStripMenuItem.Text = "Save Se&ttings";
         	// 
         	// toolStripSeparator2
         	// 
         	this.toolStripSeparator2.Name = "toolStripSeparator2";
-        	this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+        	this.toolStripSeparator2.Size = new System.Drawing.Size(140, 6);
         	// 
         	// exitToolStripMenuItem
         	// 
         	this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-        	this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+        	this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
         	this.exitToolStripMenuItem.Text = "&Exit";
         	this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
         	// 
@@ -521,7 +522,7 @@ namespace FeedCreator.NET
         	this.itemList.FormattingEnabled = true;
         	this.itemList.Location = new System.Drawing.Point(7, 19);
         	this.itemList.Name = "itemList";
-        	this.itemList.Size = new System.Drawing.Size(459, 121);
+        	this.itemList.Size = new System.Drawing.Size(459, 134);
         	this.itemList.TabIndex = 0;
         	this.toolTip1.SetToolTip(this.itemList, "List of Feed Items");
         	this.itemList.UseTabStops = false;
@@ -624,7 +625,7 @@ namespace FeedCreator.NET
         	this.feedButton.Image = ((System.Drawing.Image)(resources.GetObject("feedButton.Image")));
         	this.feedButton.Location = new System.Drawing.Point(267, 347);
         	this.feedButton.Name = "feedButton";
-        	this.feedButton.Size = new System.Drawing.Size(179, 23);
+        	this.feedButton.Size = new System.Drawing.Size(179, 30);
         	this.feedButton.TabIndex = 5;
         	this.feedButton.Text = "button1";
         	this.feedButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
