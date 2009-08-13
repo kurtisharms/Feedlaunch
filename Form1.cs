@@ -939,7 +939,7 @@ namespace FeedCreator.NET
             catch
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Unable to connect to the internet and locate the Feed Launch .NET server. Please try again later!", "Please try again later!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Unable to connect to the internet and locate the Feed Launch .NET server. Check that your internet connection is properly working before retrying. If the automatic updater continues to fail, please check the Feed Launch .NET website directly for any updates at feedlaunch.sf.net", "Please try again later!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
