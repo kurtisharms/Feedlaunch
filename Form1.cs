@@ -129,7 +129,7 @@ namespace FeedCreator.NET
             //Now we check for the registry key "intro". If the key does not exist(null),
             //then this must be the first time that Feed Launch .NET is running. Therefore,
             //we display the welcome and introduction wizard.
-            this.Text = "Feed Launch .NET- Feed1.xml";
+            /*this.Text = "Feed Launch .NET- Feed1.xml";
             this.Text = string.Concat(this.Text, "*");
             RegistryManager appRegistry = new RegistryManager();
 			appRegistry.BaseRegistryKey = Registry.CurrentUser;
@@ -148,7 +148,12 @@ namespace FeedCreator.NET
                 appRegistry.Write("intro","shown");
                 //Display the form's instance
                 welcomeForm.Show();
-			}
+			}*/
+
+            // Setup layout 
+            itemList.Height = downItemButton.Top + downItemButton.Height - itemList.Top;
+            feedButton.Height = feedList.Height;
+            feedButton.Top = feedList.Top;
         }
 
         private void channelsBox_Enter(object sender, EventArgs e)

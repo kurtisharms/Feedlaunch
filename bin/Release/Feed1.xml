@@ -1,39 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
   <channel>
-    <title>This is a title!</title>
-    <link>http://feedlaunch.sf.net</link>
-    <description>Enter the description here!</description>
-    <language>en</language>
-    <copyright>2007 Feed Launch Team</copyright>
+    <title />
+    <link />
+    <description />
+    <language />
+    <copyright />
     <managingEditor />
-    <webMaster>Feed Launch Team</webMaster>
-    <pubDate>7/5/2007 10:41:43 AM</pubDate>
-    <lastBuildDate>7/13/2007 10:41:43 AM</lastBuildDate>
+    <webMaster />
+    <pubDate />
+    <lastBuildDate />
     <category />
     <generator>Feed Launch .NET- http://feedlaunch.sourceforge.net/ or http://www.sourceforge.net/feedlaunch</generator>
     <docs>http://cyber.law.harvard.edu/rss/rss.html</docs>
-    <ttl>180</ttl>
+    <ttl>0</ttl>
     <image>
       <url />
-      <width>88</width>
-      <height>31</height>
+      <width>0</width>
+      <height>0</height>
     </image>
-    <item>
-      <title>This is a feed item</title>
-      <link>http://feedlaunch.sf.net/download.php</link>
-      <description>Enter the item's description here!</description>
-      <author />
-      <pubDate>6/19/2007 10:42:36 AM</pubDate>
-      <source url=""></source>
-    </item>
-    <item>
-      <title>Another Feed Item!</title>
-      <link>http://feedlaunch.sf.net/links.php</link>
-      <description>Enter another feed item!</description>
-      <author />
-      <pubDate>6/19/2007 10:43:07 AM</pubDate>
-      <source url=""></source>
-    </item>
   </channel>
 </rss>
