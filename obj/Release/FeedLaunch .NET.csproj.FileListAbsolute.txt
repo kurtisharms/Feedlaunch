@@ -16,3 +16,20 @@ C:\Users\Kurtis\Documents\Visual Studio 2010\Projects\feedlaunch\obj\Release\Gen
 C:\Users\Kurtis\Documents\Visual Studio 2010\Projects\feedlaunch\obj\Release\GenerateResource.write.1.tlog
 C:\Users\Kurtis\Documents\Visual Studio 2010\Projects\feedlaunch\obj\Release\Feed Launch .NET.exe
 C:\Users\Kurtis\Documents\Visual Studio 2010\Projects\feedlaunch\obj\Release\Feed Launch .NET.pdb
+C:\Users\kurtis\Source\Repos\Feedlaunch\bin\Release\Feed Launch .NET.exe.config
+C:\Users\kurtis\Source\Repos\Feedlaunch\obj\Release\Feed Launch .NET.exe
+C:\Users\kurtis\Source\Repos\Feedlaunch\obj\Release\Feed Launch .NET.pdb
+C:\Users\kurtis\Source\Repos\Feedlaunch\bin\Release\Feed Launch .NET.exe
+C:\Users\kurtis\Source\Repos\Feedlaunch\bin\Release\Feed Launch .NET.pdb
+C:\Users\kurtis\Source\Repos\Feedlaunch\bin\Release\ftp-connect.dll
+C:\Users\kurtis\Source\Repos\Feedlaunch\bin\Release\ftp-connect.pdb
+C:\Users\kurtis\Source\Repos\Feedlaunch\obj\Release\FeedLaunch .NET.csprojResolveAssemblyReference.cache
+C:\Users\kurtis\Source\Repos\Feedlaunch\obj\Release\FeedCreator.NET.About.resources
+C:\Users\kurtis\Source\Repos\Feedlaunch\obj\Release\FeedCreator.NET.UploadForm.resources
+C:\Users\kurtis\Source\Repos\Feedlaunch\obj\Release\FeedCreator.NET.createItemForm.resources
+C:\Users\kurtis\Source\Repos\Feedlaunch\obj\Release\FeedCreator.NET.explorer.resources
+C:\Users\kurtis\Source\Repos\Feedlaunch\obj\Release\FeedCreator.NET.Form1.resources
+C:\Users\kurtis\Source\Repos\Feedlaunch\obj\Release\FeedLaunch.NET.intro.resources
+C:\Users\kurtis\Source\Repos\Feedlaunch\obj\Release\FeedCreator.NET.newChannelForm.resources
+C:\Users\kurtis\Source\Repos\Feedlaunch\obj\Release\FeedLaunch.NET.Properties.Resources.resources
+C:\Users\kurtis\Source\Repos\Feedlaunch\obj\Release\FeedLaunch .NET.csproj.GenerateResource.Cache
