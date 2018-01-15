@@ -130,11 +130,12 @@ namespace FeedCreator.NET
             // statusStrip1
             // 
             this.statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 0);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(836, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(940, 30);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "Ready";
@@ -142,12 +143,13 @@ namespace FeedCreator.NET
             // statusLabel
             // 
             this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(50, 20);
+            this.statusLabel.Size = new System.Drawing.Size(60, 25);
             this.statusLabel.Text = "Ready";
             // 
             // menuStrip1
             // 
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
@@ -156,7 +158,7 @@ namespace FeedCreator.NET
             this.helToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(836, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(940, 33);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -172,14 +174,14 @@ namespace FeedCreator.NET
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(50, 29);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(202, 30);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -187,7 +189,7 @@ namespace FeedCreator.NET
             // 
             this.openStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openStripMenuItem.Image")));
             this.openStripMenuItem.Name = "openStripMenuItem";
-            this.openStripMenuItem.Size = new System.Drawing.Size(166, 24);
+            this.openStripMenuItem.Size = new System.Drawing.Size(202, 30);
             this.openStripMenuItem.Text = "&Open...";
             this.openStripMenuItem.Click += new System.EventHandler(this.openStripMenuItem_Click);
             // 
@@ -195,38 +197,38 @@ namespace FeedCreator.NET
             // 
             this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(202, 30);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(202, 30);
             this.saveAsToolStripMenuItem.Text = "Save &As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(163, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(199, 6);
             // 
             // saveSettingsToolStripMenuItem
             // 
             this.saveSettingsToolStripMenuItem.Enabled = false;
             this.saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
-            this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
+            this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(202, 30);
             this.saveSettingsToolStripMenuItem.Text = "Save Se&ttings";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(163, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(199, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(202, 30);
             this.exitToolStripMenuItem.Text = "&Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -241,7 +243,7 @@ namespace FeedCreator.NET
             this.pasteToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(54, 29);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // undoToolStripMenuItem
@@ -249,7 +251,7 @@ namespace FeedCreator.NET
             this.undoToolStripMenuItem.Enabled = false;
             this.undoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("undoToolStripMenuItem.Image")));
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(146, 30);
             this.undoToolStripMenuItem.Text = "&Undo";
             // 
             // redoToolStripMenuItem
@@ -257,20 +259,20 @@ namespace FeedCreator.NET
             this.redoToolStripMenuItem.Enabled = false;
             this.redoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("redoToolStripMenuItem.Image")));
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(146, 30);
             this.redoToolStripMenuItem.Text = "&Redo";
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(119, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(143, 6);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Enabled = false;
             this.cutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripMenuItem.Image")));
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(146, 30);
             this.cutToolStripMenuItem.Text = "Cu&t";
             // 
             // copyToolStripMenuItem
@@ -278,7 +280,7 @@ namespace FeedCreator.NET
             this.copyToolStripMenuItem.Enabled = false;
             this.copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripMenuItem.Image")));
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(146, 30);
             this.copyToolStripMenuItem.Text = "&Copy";
             // 
             // pasteToolStripMenuItem
@@ -286,14 +288,14 @@ namespace FeedCreator.NET
             this.pasteToolStripMenuItem.Enabled = false;
             this.pasteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripMenuItem.Image")));
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(146, 30);
             this.pasteToolStripMenuItem.Text = "&Paste";
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolStripMenuItem.Image")));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(146, 30);
             this.deleteToolStripMenuItem.Text = "&Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -301,7 +303,7 @@ namespace FeedCreator.NET
             // 
             this.viewToolStripMenuItem.Enabled = false;
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(61, 29);
             this.viewToolStripMenuItem.Text = "&View";
             // 
             // connectToolStripMenuItem
@@ -309,13 +311,13 @@ namespace FeedCreator.NET
             this.connectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.uploadFeedToolStripMenuItem});
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(89, 29);
             this.connectToolStripMenuItem.Text = "&Connect";
             // 
             // uploadFeedToolStripMenuItem
             // 
             this.uploadFeedToolStripMenuItem.Name = "uploadFeedToolStripMenuItem";
-            this.uploadFeedToolStripMenuItem.Size = new System.Drawing.Size(172, 24);
+            this.uploadFeedToolStripMenuItem.Size = new System.Drawing.Size(209, 30);
             this.uploadFeedToolStripMenuItem.Text = "&Upload Feed...";
             this.uploadFeedToolStripMenuItem.Click += new System.EventHandler(this.uploadFeedToolStripMenuItem_Click);
             // 
@@ -330,52 +332,52 @@ namespace FeedCreator.NET
             this.visitCommToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helToolStripMenuItem.Name = "helToolStripMenuItem";
-            this.helToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.helToolStripMenuItem.Size = new System.Drawing.Size(61, 29);
             this.helToolStripMenuItem.Text = "&Help";
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("helpToolStripMenuItem.Image")));
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(266, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(320, 30);
             this.helpToolStripMenuItem.Text = "Online &Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // introToolStripItem
             // 
             this.introToolStripItem.Name = "introToolStripItem";
-            this.introToolStripItem.Size = new System.Drawing.Size(266, 24);
+            this.introToolStripItem.Size = new System.Drawing.Size(320, 30);
             this.introToolStripItem.Text = "Feed Launch &Intro && Tutorial";
             this.introToolStripItem.Click += new System.EventHandler(this.introToolStripItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(263, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(317, 6);
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(266, 24);
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(320, 30);
             this.checkForUpdatesToolStripMenuItem.Text = "&Check for updates...";
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(263, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(317, 6);
             // 
             // visitCommToolStripMenuItem
             // 
             this.visitCommToolStripMenuItem.Name = "visitCommToolStripMenuItem";
-            this.visitCommToolStripMenuItem.Size = new System.Drawing.Size(266, 24);
+            this.visitCommToolStripMenuItem.Size = new System.Drawing.Size(320, 30);
             this.visitCommToolStripMenuItem.Text = "&Visit Community Website...";
             this.visitCommToolStripMenuItem.Click += new System.EventHandler(this.visitCommToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(266, 24);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(320, 30);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -385,11 +387,11 @@ namespace FeedCreator.NET
             this.channelsBox.Controls.Add(this.linkLabel);
             this.channelsBox.Controls.Add(this.titleLabel);
             this.channelsBox.Controls.Add(this.editChannelButton);
-            this.channelsBox.Location = new System.Drawing.Point(37, 23);
-            this.channelsBox.Margin = new System.Windows.Forms.Padding(4);
+            this.channelsBox.Location = new System.Drawing.Point(42, 29);
+            this.channelsBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.channelsBox.Name = "channelsBox";
-            this.channelsBox.Padding = new System.Windows.Forms.Padding(4);
-            this.channelsBox.Size = new System.Drawing.Size(745, 133);
+            this.channelsBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.channelsBox.Size = new System.Drawing.Size(838, 166);
             this.channelsBox.TabIndex = 2;
             this.channelsBox.TabStop = false;
             this.channelsBox.Text = "Feed Channel Information";
@@ -397,8 +399,8 @@ namespace FeedCreator.NET
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(349, 34);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Location = new System.Drawing.Point(393, 42);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 50);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -409,10 +411,10 @@ namespace FeedCreator.NET
             // linkLabel
             // 
             this.linkLabel.AutoSize = true;
-            this.linkLabel.Location = new System.Drawing.Point(43, 78);
+            this.linkLabel.Location = new System.Drawing.Point(48, 98);
             this.linkLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel.Name = "linkLabel";
-            this.linkLabel.Size = new System.Drawing.Size(118, 17);
+            this.linkLabel.Size = new System.Drawing.Size(132, 20);
             this.linkLabel.TabIndex = 7;
             this.linkLabel.TabStop = true;
             this.linkLabel.Text = "No Link Specified";
@@ -422,10 +424,10 @@ namespace FeedCreator.NET
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Location = new System.Drawing.Point(43, 34);
+            this.titleLabel.Location = new System.Drawing.Point(48, 42);
             this.titleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(119, 17);
+            this.titleLabel.Size = new System.Drawing.Size(132, 20);
             this.titleLabel.TabIndex = 6;
             this.titleLabel.Text = "No Title Specified";
             this.toolTip1.SetToolTip(this.titleLabel, "The channel title");
@@ -433,10 +435,10 @@ namespace FeedCreator.NET
             // editChannelButton
             // 
             this.editChannelButton.Image = ((System.Drawing.Image)(resources.GetObject("editChannelButton.Image")));
-            this.editChannelButton.Location = new System.Drawing.Point(588, 47);
-            this.editChannelButton.Margin = new System.Windows.Forms.Padding(4);
+            this.editChannelButton.Location = new System.Drawing.Point(662, 59);
+            this.editChannelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.editChannelButton.Name = "editChannelButton";
-            this.editChannelButton.Size = new System.Drawing.Size(100, 28);
+            this.editChannelButton.Size = new System.Drawing.Size(112, 35);
             this.editChannelButton.TabIndex = 5;
             this.editChannelButton.Text = "Edit";
             this.editChannelButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -452,11 +454,11 @@ namespace FeedCreator.NET
             this.itemsBox.Controls.Add(this.deleteItemButton);
             this.itemsBox.Controls.Add(this.newItemButton);
             this.itemsBox.Controls.Add(this.itemList);
-            this.itemsBox.Location = new System.Drawing.Point(37, 185);
-            this.itemsBox.Margin = new System.Windows.Forms.Padding(4);
+            this.itemsBox.Location = new System.Drawing.Point(42, 231);
+            this.itemsBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.itemsBox.Name = "itemsBox";
-            this.itemsBox.Padding = new System.Windows.Forms.Padding(4);
-            this.itemsBox.Size = new System.Drawing.Size(745, 212);
+            this.itemsBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.itemsBox.Size = new System.Drawing.Size(838, 265);
             this.itemsBox.TabIndex = 3;
             this.itemsBox.TabStop = false;
             this.itemsBox.Text = "Feed Items";
@@ -464,10 +466,10 @@ namespace FeedCreator.NET
             // editItemButton
             // 
             this.editItemButton.Image = ((System.Drawing.Image)(resources.GetObject("editItemButton.Image")));
-            this.editItemButton.Location = new System.Drawing.Point(631, 58);
-            this.editItemButton.Margin = new System.Windows.Forms.Padding(4);
+            this.editItemButton.Location = new System.Drawing.Point(710, 72);
+            this.editItemButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.editItemButton.Name = "editItemButton";
-            this.editItemButton.Size = new System.Drawing.Size(100, 28);
+            this.editItemButton.Size = new System.Drawing.Size(112, 35);
             this.editItemButton.TabIndex = 6;
             this.editItemButton.Text = "Edit";
             this.editItemButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -478,10 +480,10 @@ namespace FeedCreator.NET
             // downItemButton
             // 
             this.downItemButton.Image = ((System.Drawing.Image)(resources.GetObject("downItemButton.Image")));
-            this.downItemButton.Location = new System.Drawing.Point(631, 165);
-            this.downItemButton.Margin = new System.Windows.Forms.Padding(4);
+            this.downItemButton.Location = new System.Drawing.Point(710, 206);
+            this.downItemButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.downItemButton.Name = "downItemButton";
-            this.downItemButton.Size = new System.Drawing.Size(100, 28);
+            this.downItemButton.Size = new System.Drawing.Size(112, 35);
             this.downItemButton.TabIndex = 5;
             this.downItemButton.Text = "Down";
             this.downItemButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -492,10 +494,10 @@ namespace FeedCreator.NET
             // upItemButton
             // 
             this.upItemButton.Image = ((System.Drawing.Image)(resources.GetObject("upItemButton.Image")));
-            this.upItemButton.Location = new System.Drawing.Point(631, 129);
-            this.upItemButton.Margin = new System.Windows.Forms.Padding(4);
+            this.upItemButton.Location = new System.Drawing.Point(710, 161);
+            this.upItemButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.upItemButton.Name = "upItemButton";
-            this.upItemButton.Size = new System.Drawing.Size(100, 28);
+            this.upItemButton.Size = new System.Drawing.Size(112, 35);
             this.upItemButton.TabIndex = 4;
             this.upItemButton.Text = "Up";
             this.upItemButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -506,10 +508,10 @@ namespace FeedCreator.NET
             // deleteItemButton
             // 
             this.deleteItemButton.Image = ((System.Drawing.Image)(resources.GetObject("deleteItemButton.Image")));
-            this.deleteItemButton.Location = new System.Drawing.Point(631, 93);
-            this.deleteItemButton.Margin = new System.Windows.Forms.Padding(4);
+            this.deleteItemButton.Location = new System.Drawing.Point(710, 116);
+            this.deleteItemButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.deleteItemButton.Name = "deleteItemButton";
-            this.deleteItemButton.Size = new System.Drawing.Size(100, 28);
+            this.deleteItemButton.Size = new System.Drawing.Size(112, 35);
             this.deleteItemButton.TabIndex = 3;
             this.deleteItemButton.Text = "Delete";
             this.deleteItemButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -520,10 +522,10 @@ namespace FeedCreator.NET
             // newItemButton
             // 
             this.newItemButton.Image = ((System.Drawing.Image)(resources.GetObject("newItemButton.Image")));
-            this.newItemButton.Location = new System.Drawing.Point(631, 23);
-            this.newItemButton.Margin = new System.Windows.Forms.Padding(4);
+            this.newItemButton.Location = new System.Drawing.Point(710, 29);
+            this.newItemButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.newItemButton.Name = "newItemButton";
-            this.newItemButton.Size = new System.Drawing.Size(100, 28);
+            this.newItemButton.Size = new System.Drawing.Size(112, 35);
             this.newItemButton.TabIndex = 1;
             this.newItemButton.Text = "New";
             this.newItemButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -534,11 +536,11 @@ namespace FeedCreator.NET
             // itemList
             // 
             this.itemList.FormattingEnabled = true;
-            this.itemList.ItemHeight = 16;
-            this.itemList.Location = new System.Drawing.Point(12, 23);
-            this.itemList.Margin = new System.Windows.Forms.Padding(4);
+            this.itemList.ItemHeight = 20;
+            this.itemList.Location = new System.Drawing.Point(14, 29);
+            this.itemList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.itemList.Name = "itemList";
-            this.itemList.Size = new System.Drawing.Size(611, 164);
+            this.itemList.Size = new System.Drawing.Size(687, 204);
             this.itemList.TabIndex = 0;
             this.toolTip1.SetToolTip(this.itemList, "List of Feed Items");
             this.itemList.UseTabStops = false;
@@ -548,6 +550,7 @@ namespace FeedCreator.NET
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
             this.toolStripButton2,
@@ -556,7 +559,7 @@ namespace FeedCreator.NET
             this.toolStripSplitButton1});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(101, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(121, 31);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -566,7 +569,7 @@ namespace FeedCreator.NET
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Size = new System.Drawing.Size(28, 28);
             this.toolStripButton1.Text = "toolStripButton1";
             this.toolStripButton1.ToolTipText = "Creates new feed";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
@@ -577,7 +580,7 @@ namespace FeedCreator.NET
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Size = new System.Drawing.Size(28, 28);
             this.toolStripButton2.Text = "toolStripButton2";
             this.toolStripButton2.ToolTipText = "Opens an existing feed";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
@@ -588,7 +591,7 @@ namespace FeedCreator.NET
             this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Size = new System.Drawing.Size(28, 28);
             this.toolStripButton3.Text = "toolStripButton3";
             this.toolStripButton3.ToolTipText = "Saves current feed";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
@@ -596,7 +599,7 @@ namespace FeedCreator.NET
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
             // toolStripSplitButton1
             // 
@@ -604,7 +607,7 @@ namespace FeedCreator.NET
             this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
             this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(28, 28);
             this.toolStripSplitButton1.Text = "toolStripSplitButton1";
             this.toolStripSplitButton1.ToolTipText = "Upload feed via FTP";
             this.toolStripSplitButton1.Click += new System.EventHandler(this.toolStripSplitButton1_Click);
@@ -623,13 +626,13 @@ namespace FeedCreator.NET
             this.toolStripContainer1.ContentPanel.Controls.Add(this.feedList);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.itemsBox);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.channelsBox);
-            this.toolStripContainer1.ContentPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(836, 551);
+            this.toolStripContainer1.ContentPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(940, 692);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
-            this.toolStripContainer1.Margin = new System.Windows.Forms.Padding(4);
+            this.toolStripContainer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(836, 601);
+            this.toolStripContainer1.Size = new System.Drawing.Size(940, 753);
             this.toolStripContainer1.TabIndex = 5;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -640,10 +643,10 @@ namespace FeedCreator.NET
             // feedButton
             // 
             this.feedButton.Image = ((System.Drawing.Image)(resources.GetObject("feedButton.Image")));
-            this.feedButton.Location = new System.Drawing.Point(356, 427);
-            this.feedButton.Margin = new System.Windows.Forms.Padding(4);
+            this.feedButton.Location = new System.Drawing.Point(400, 534);
+            this.feedButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.feedButton.Name = "feedButton";
-            this.feedButton.Size = new System.Drawing.Size(239, 37);
+            this.feedButton.Size = new System.Drawing.Size(269, 46);
             this.feedButton.TabIndex = 5;
             this.feedButton.Text = "button1";
             this.feedButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -655,14 +658,14 @@ namespace FeedCreator.NET
             // 
             this.feedList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.feedList.FormattingEnabled = true;
-            this.feedList.ItemHeight = 17;
+            this.feedList.ItemHeight = 20;
             this.feedList.Items.AddRange(new object[] {
             "RSS 2.0",
             "ATOM 1.0"});
-            this.feedList.Location = new System.Drawing.Point(188, 427);
-            this.feedList.Margin = new System.Windows.Forms.Padding(4);
+            this.feedList.Location = new System.Drawing.Point(212, 534);
+            this.feedList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.feedList.Name = "feedList";
-            this.feedList.Size = new System.Drawing.Size(159, 38);
+            this.feedList.Size = new System.Drawing.Size(178, 44);
             this.feedList.TabIndex = 4;
             this.toolTip1.SetToolTip(this.feedList, "Lets you select a type of feed");
             // 
@@ -673,13 +676,13 @@ namespace FeedCreator.NET
             // 
             this.toolStripContainer2.ContentPanel.AutoScroll = true;
             this.toolStripContainer2.ContentPanel.Controls.Add(this.toolStripContainer1);
-            this.toolStripContainer2.ContentPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.toolStripContainer2.ContentPanel.Size = new System.Drawing.Size(836, 601);
+            this.toolStripContainer2.ContentPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.toolStripContainer2.ContentPanel.Size = new System.Drawing.Size(940, 753);
             this.toolStripContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer2.Location = new System.Drawing.Point(0, 0);
-            this.toolStripContainer2.Margin = new System.Windows.Forms.Padding(4);
+            this.toolStripContainer2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.toolStripContainer2.Name = "toolStripContainer2";
-            this.toolStripContainer2.Size = new System.Drawing.Size(836, 629);
+            this.toolStripContainer2.Size = new System.Drawing.Size(940, 786);
             this.toolStripContainer2.TabIndex = 6;
             this.toolStripContainer2.Text = "toolStripContainer2";
             // 
@@ -693,6 +696,7 @@ namespace FeedCreator.NET
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
@@ -704,7 +708,7 @@ namespace FeedCreator.NET
             // 
             this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.notifyIcon1.BalloonTipText = "FeedCreator .NET has successfully opened!\r\nGo to Help->Content to read how to get" +
-                " started!";
+    " started!";
             this.notifyIcon1.BalloonTipTitle = "Welcome to FeedCreator!";
             this.notifyIcon1.Text = "FeedCreator .NET";
             this.notifyIcon1.Visible = true;
@@ -722,15 +726,15 @@ namespace FeedCreator.NET
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(836, 629);
+            this.ClientSize = new System.Drawing.Size(940, 786);
             this.Controls.Add(this.toolStripContainer2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

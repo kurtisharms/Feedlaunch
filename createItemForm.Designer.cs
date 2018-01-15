@@ -55,27 +55,27 @@ namespace FeedCreator.NET
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(17, 34);
+            this.label1.Location = new System.Drawing.Point(19, 42);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 17);
+            this.label1.Size = new System.Drawing.Size(46, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Title";
             // 
             // titleBox
             // 
-            this.titleBox.Location = new System.Drawing.Point(137, 34);
-            this.titleBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.titleBox.Location = new System.Drawing.Point(154, 42);
+            this.titleBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titleBox.Name = "titleBox";
-            this.titleBox.Size = new System.Drawing.Size(404, 22);
+            this.titleBox.Size = new System.Drawing.Size(454, 26);
             this.titleBox.TabIndex = 1;
             // 
             // descriptionBox
             // 
-            this.descriptionBox.Location = new System.Drawing.Point(137, 75);
-            this.descriptionBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.descriptionBox.Location = new System.Drawing.Point(154, 94);
+            this.descriptionBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.descriptionBox.Name = "descriptionBox";
-            this.descriptionBox.Size = new System.Drawing.Size(404, 117);
+            this.descriptionBox.Size = new System.Drawing.Size(454, 145);
             this.descriptionBox.TabIndex = 2;
             this.descriptionBox.Text = "";
             // 
@@ -83,10 +83,10 @@ namespace FeedCreator.NET
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(17, 85);
+            this.label2.Location = new System.Drawing.Point(19, 106);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 17);
+            this.label2.Size = new System.Drawing.Size(106, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "Description";
             // 
@@ -94,27 +94,27 @@ namespace FeedCreator.NET
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(19, 208);
+            this.label3.Location = new System.Drawing.Point(21, 260);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 17);
+            this.label3.Size = new System.Drawing.Size(44, 20);
             this.label3.TabIndex = 4;
             this.label3.Text = "Link";
             // 
             // linkBox
             // 
-            this.linkBox.Location = new System.Drawing.Point(137, 204);
-            this.linkBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.linkBox.Location = new System.Drawing.Point(154, 255);
+            this.linkBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.linkBox.Name = "linkBox";
-            this.linkBox.Size = new System.Drawing.Size(404, 22);
+            this.linkBox.Size = new System.Drawing.Size(454, 26);
             this.linkBox.TabIndex = 5;
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(184, 523);
-            this.okButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.okButton.Location = new System.Drawing.Point(207, 654);
+            this.okButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(100, 28);
+            this.okButton.Size = new System.Drawing.Size(112, 35);
             this.okButton.TabIndex = 6;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
@@ -122,10 +122,10 @@ namespace FeedCreator.NET
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(323, 523);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cancelButton.Location = new System.Drawing.Point(363, 654);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(100, 28);
+            this.cancelButton.Size = new System.Drawing.Size(112, 35);
             this.cancelButton.TabIndex = 7;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -138,37 +138,37 @@ namespace FeedCreator.NET
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 252);
+            this.label4.Location = new System.Drawing.Point(21, 315);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 17);
+            this.label4.Size = new System.Drawing.Size(110, 20);
             this.label4.TabIndex = 8;
             this.label4.Text = "Author (Email)";
             // 
             // authorEmail
             // 
-            this.authorEmail.Location = new System.Drawing.Point(137, 249);
-            this.authorEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.authorEmail.Location = new System.Drawing.Point(154, 311);
+            this.authorEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.authorEmail.Name = "authorEmail";
-            this.authorEmail.Size = new System.Drawing.Size(404, 22);
+            this.authorEmail.Size = new System.Drawing.Size(454, 26);
             this.authorEmail.TabIndex = 9;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 306);
+            this.label5.Location = new System.Drawing.Point(26, 382);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(111, 17);
+            this.label5.Size = new System.Drawing.Size(125, 20);
             this.label5.TabIndex = 10;
             this.label5.Text = "Publication Date";
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(144, 302);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePicker1.Location = new System.Drawing.Point(162, 378);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(277, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(311, 26);
             this.dateTimePicker1.TabIndex = 11;
             // 
             // SourceGroupBox
@@ -177,56 +177,56 @@ namespace FeedCreator.NET
             this.SourceGroupBox.Controls.Add(this.sourceText);
             this.SourceGroupBox.Controls.Add(this.label7);
             this.SourceGroupBox.Controls.Add(this.label6);
-            this.SourceGroupBox.Location = new System.Drawing.Point(27, 372);
-            this.SourceGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SourceGroupBox.Location = new System.Drawing.Point(30, 465);
+            this.SourceGroupBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SourceGroupBox.Name = "SourceGroupBox";
-            this.SourceGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.SourceGroupBox.Size = new System.Drawing.Size(516, 101);
+            this.SourceGroupBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SourceGroupBox.Size = new System.Drawing.Size(580, 126);
             this.SourceGroupBox.TabIndex = 12;
             this.SourceGroupBox.TabStop = false;
             this.SourceGroupBox.Text = "Source";
             // 
             // sourceURL
             // 
-            this.sourceURL.Location = new System.Drawing.Point(157, 62);
-            this.sourceURL.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.sourceURL.Location = new System.Drawing.Point(177, 78);
+            this.sourceURL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.sourceURL.Name = "sourceURL";
-            this.sourceURL.Size = new System.Drawing.Size(349, 22);
+            this.sourceURL.Size = new System.Drawing.Size(392, 26);
             this.sourceURL.TabIndex = 3;
             // 
             // sourceText
             // 
-            this.sourceText.Location = new System.Drawing.Point(157, 21);
-            this.sourceText.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.sourceText.Location = new System.Drawing.Point(177, 26);
+            this.sourceText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.sourceText.Name = "sourceText";
-            this.sourceText.Size = new System.Drawing.Size(349, 22);
+            this.sourceText.Size = new System.Drawing.Size(392, 26);
             this.sourceText.TabIndex = 2;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(47, 71);
+            this.label7.Location = new System.Drawing.Point(53, 89);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 17);
+            this.label7.Size = new System.Drawing.Size(42, 20);
             this.label7.TabIndex = 1;
             this.label7.Text = "URL";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(47, 25);
+            this.label6.Location = new System.Drawing.Point(53, 31);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 17);
+            this.label6.Size = new System.Drawing.Size(39, 20);
             this.label6.TabIndex = 0;
             this.label6.Text = "Text";
             // 
             // createItemForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(572, 587);
+            this.ClientSize = new System.Drawing.Size(653, 738);
             this.ControlBox = false;
             this.Controls.Add(this.SourceGroupBox);
             this.Controls.Add(this.dateTimePicker1);
@@ -242,7 +242,7 @@ namespace FeedCreator.NET
             this.Controls.Add(this.titleBox);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "createItemForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
