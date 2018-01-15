@@ -87,24 +87,12 @@
     <Compile Include="createItemForm.Designer.cs">
       <DependentUpon>createItemForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="explorer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="explorer.Designer.cs">
-      <DependentUpon>explorer.cs</DependentUpon>
-    </Compile>
     <Compile Include="FeedItem.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="intro.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="intro.Designer.cs">
-      <DependentUpon>intro.cs</DependentUpon>
     </Compile>
     <Compile Include="newChannelForm.cs">
       <SubType>Form</SubType>
@@ -126,17 +114,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>createItemForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="explorer.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>explorer.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="intro.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>intro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="newChannelForm.resx">
       <SubType>Designer</SubType>

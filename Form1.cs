@@ -51,8 +51,6 @@ namespace FeedCreator.NET
         UploadForm uploadFeedForm;
         newChannelForm newChannel;
         createItemForm createItemForm1;
-        explorer ExplorerForm1;
-        explorer HelpExplorerForm1;
         //Here is the list which is used to store all the feed items
         //in memory
         List<FeedItem> FeedItemList;
@@ -74,14 +72,14 @@ namespace FeedCreator.NET
 
         private void Form1_Load(object sender, EventArgs e)
         {
-#if(APP_DEBUG)
+#if (APP_DEBUG)
 #warning The proprossor "APP_DEBUG" is defined. Feed Launch .NET will be compiled with optimizations for debugging. If you plan to distribute this app, please consider undefining this preprocessor variable before recompiling.
 #endif
 
-		
 
-			//There are no items in the itemList yet
-			itemList.Enabled = false;
+
+            //There are no items in the itemList yet
+            itemList.Enabled = false;
             //Here we set the new instances of our classes/forms
             ChannelInfo = new ChannelClass();
             newChannel = new newChannelForm();
@@ -95,60 +93,9 @@ namespace FeedCreator.NET
             feedButton.Text = "Create RSS 2.0 Feed";
             createItemForm1.CreateFeedItem += new createItemForm.CustomEventDelegate(addNewItem);
             newChannel.CreateFeed += new newChannelForm.CustomEventDelegate(manage_Channel);
-            feedList.SelectedIndexChanged +=new EventHandler(feedList_SelectedIndexChanged);
-            linkLabel.Click +=new EventHandler(linkLabel_Click);
+            feedList.SelectedIndexChanged += new EventHandler(feedList_SelectedIndexChanged);
+            linkLabel.Click += new EventHandler(linkLabel_Click);
             feedList.SelectedIndex = 0;
-
-            //Check for updates every time we start!
-            try
-            {
-                System.Net.WebClient wc = new WebClient();
-                Stream wcStream = wc.OpenRead("http://feedlaunch.sourceforge.net/version.txt");
-                StreamReader sr = new StreamReader(wcStream);
-                string line;
-                line = sr.ReadLine().Trim();
-                if (line != Application.ProductVersion)
-                {
-                    DialogResult result = MessageBox.Show("There are updates available for Feed Launch .NET. Do you wish to download and install them now?", "Updates found!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.Yes)
-                    {
-                        line = sr.ReadLine().Trim();
-                        Process p = new Process();
-                        p.EnableRaisingEvents = false;
-                        p.StartInfo.FileName = "iexplore";
-                        p.StartInfo.Arguments = line;
-                        p.Start();
-                        this.Dispose();
-                    }
-                }
-            }
-            catch
-            {
-            }
-
-            //Now we check for the registry key "intro". If the key does not exist(null),
-            //then this must be the first time that Feed Launch .NET is running. Therefore,
-            //we display the welcome and introduction wizard.
-            /*this.Text = "Feed Launch .NET- Feed1.xml";
-            this.Text = string.Concat(this.Text, "*");
-            RegistryManager appRegistry = new RegistryManager();
-			appRegistry.BaseRegistryKey = Registry.CurrentUser;
-			if(appRegistry.Read("intro") == null)
-			{
-				//Create a new instance of the intro form
-                intro welcomeForm = new intro();
-                //Create a callback
-                welcomeForm.introClosed +=new intro.CustomEventDelegate(welcomeForm_introClosed);
-                //Make the main form "invisible" and change the title
-                this.Width = 1;
-                this.Height = 1;
-                this.Opacity = 0;
-                this.Text = "Feed Launch .NET Intro";
-                //Ensure that this welcome form isn't displayed on startup in the future.
-                appRegistry.Write("intro","shown");
-                //Display the form's instance
-                welcomeForm.Show();
-			}*/
 
             // Setup layout 
             itemList.Height = downItemButton.Top + downItemButton.Height - itemList.Top;
@@ -211,84 +158,84 @@ namespace FeedCreator.NET
 
         private void newChannelButton_Click(object sender, EventArgs e)
         {
-           newChannel = new newChannelForm();
-           newChannel.CreateFeed += new newChannelForm.CustomEventDelegate(manage_Channel);
-           if (ChannelInfo.empty == false)
-           {
-               newChannel.titleBox.Text = ChannelInfo.title;
-               newChannel.linkBox.Text = ChannelInfo.link;
-               newChannel.descriptionBox.Text = ChannelInfo.description;
-               try
-               {
-                   newChannel.dateTimePicker1.Value = System.Convert.ToDateTime(ChannelInfo.pubDate);
-               }
-               catch
-               {
-                   newChannel.dateTimePicker1.Value = System.DateTime.Today;
-               }
-               try
-               {
-                   newChannel.dateTimePicker2.Value = System.Convert.ToDateTime(ChannelInfo.buildDate);
-               }
-               catch
-               {
-                   newChannel.dateTimePicker2.Value = System.DateTime.Today;
-               }
-               newChannel.copyrightBox.Text = ChannelInfo.copyright;
-               newChannel.listBox1.SelectedValue = ChannelInfo.language;
-               newChannel.webmasterBox.Text = ChannelInfo.webmaster;
-               newChannel.numericUpDown1.Value = ChannelInfo.ttl;
-               newChannel.imageText.Text = ChannelInfo.imageText;
-               newChannel.numericUpDown2.Value = ChannelInfo.imageWidth;
-               newChannel.numericUpDown3.Value = ChannelInfo.imageHeight;
-           }
+            newChannel = new newChannelForm();
+            newChannel.CreateFeed += new newChannelForm.CustomEventDelegate(manage_Channel);
+            if (ChannelInfo.empty == false)
+            {
+                newChannel.titleBox.Text = ChannelInfo.title;
+                newChannel.linkBox.Text = ChannelInfo.link;
+                newChannel.descriptionBox.Text = ChannelInfo.description;
+                try
+                {
+                    newChannel.dateTimePicker1.Value = System.Convert.ToDateTime(ChannelInfo.pubDate);
+                }
+                catch
+                {
+                    newChannel.dateTimePicker1.Value = System.DateTime.Today;
+                }
+                try
+                {
+                    newChannel.dateTimePicker2.Value = System.Convert.ToDateTime(ChannelInfo.buildDate);
+                }
+                catch
+                {
+                    newChannel.dateTimePicker2.Value = System.DateTime.Today;
+                }
+                newChannel.copyrightBox.Text = ChannelInfo.copyright;
+                newChannel.listBox1.SelectedValue = ChannelInfo.language;
+                newChannel.webmasterBox.Text = ChannelInfo.webmaster;
+                newChannel.numericUpDown1.Value = ChannelInfo.ttl;
+                newChannel.imageText.Text = ChannelInfo.imageText;
+                newChannel.numericUpDown2.Value = ChannelInfo.imageWidth;
+                newChannel.numericUpDown3.Value = ChannelInfo.imageHeight;
+            }
             newChannel.Show();
         }
 
         private void deleteChannelButton_Click(object sender, EventArgs e)
         {
-            
+
         }
         private void manage_Channel(object sender, EventArgs e)
         {
-                ChannelInfo.title = newChannel.titleBox.Text;
-                ChannelInfo.description = newChannel.descriptionBox.Text;
-                ChannelInfo.link = newChannel.linkBox.Text;
-                ChannelInfo.pubDate = newChannel.dateTimePicker1.Value.ToString();
-                ChannelInfo.buildDate = newChannel.dateTimePicker2.Value.ToString();
-                ChannelInfo.copyright = newChannel.copyrightBox.Text;
-                if (newChannel.listBox1.SelectedValue != null)
+            ChannelInfo.title = newChannel.titleBox.Text;
+            ChannelInfo.description = newChannel.descriptionBox.Text;
+            ChannelInfo.link = newChannel.linkBox.Text;
+            ChannelInfo.pubDate = newChannel.dateTimePicker1.Value.ToString();
+            ChannelInfo.buildDate = newChannel.dateTimePicker2.Value.ToString();
+            ChannelInfo.copyright = newChannel.copyrightBox.Text;
+            if (newChannel.listBox1.SelectedValue != null)
+            {
+                ChannelInfo.language = newChannel.listBox1.SelectedValue.ToString();
+            }
+            else
+            {
+                ChannelInfo.language = "en";
+            }
+            ChannelInfo.webmaster = newChannel.webmasterBox.Text;
+            ChannelInfo.ttl = newChannel.numericUpDown1.Value;
+            ChannelInfo.imageText = newChannel.imageText.Text;
+            ChannelInfo.imageWidth = newChannel.numericUpDown2.Value;
+            ChannelInfo.imageHeight = newChannel.numericUpDown3.Value;
+            titleLabel.Text = ChannelInfo.title;
+            linkLabel.Text = ChannelInfo.link;
+            try
+            {
+                if (ChannelInfo.imageText != "" && ChannelInfo.imageText != null)
                 {
-                    ChannelInfo.language = newChannel.listBox1.SelectedValue.ToString();
+                    pictureBox1.Image = Image.FromFile(ChannelInfo.imageText);
                 }
-                else
-                {
-                    ChannelInfo.language = "en";
-                }
-                ChannelInfo.webmaster = newChannel.webmasterBox.Text;
-                ChannelInfo.ttl = newChannel.numericUpDown1.Value;
-                ChannelInfo.imageText = newChannel.imageText.Text;
-                ChannelInfo.imageWidth = newChannel.numericUpDown2.Value;
-                ChannelInfo.imageHeight = newChannel.numericUpDown3.Value;
-                titleLabel.Text = ChannelInfo.title;
-                linkLabel.Text = ChannelInfo.link;
-                try
-                {
-                    if (ChannelInfo.imageText != "" && ChannelInfo.imageText != null)
-                    {
-                        pictureBox1.Image = Image.FromFile(ChannelInfo.imageText);
-                    }
-                }
-                catch (Exception ex)
-                {
-                }
-                pictureBox1.Width = System.Convert.ToInt32(ChannelInfo.imageWidth);
-                pictureBox1.Height = System.Convert.ToInt32(ChannelInfo.imageHeight);
+            }
+            catch (Exception ex)
+            {
+            }
+            pictureBox1.Width = System.Convert.ToInt32(ChannelInfo.imageWidth);
+            pictureBox1.Height = System.Convert.ToInt32(ChannelInfo.imageHeight);
             //We update the "empty" variable to signify that the ChannelInfo class contains data
             //This is used by the function which opens the newChannel form.
             //If the ChannelInfo class is "empty," then the form is obviously opened for
             //the first time.
-                ChannelInfo.empty = false;
+            ChannelInfo.empty = false;
             //    MessageBox.Show("An Error has been encountered. Please submit a bug report if this problem persists!", ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             this.saved = false;
         }
@@ -303,7 +250,7 @@ namespace FeedCreator.NET
             itemList.Enabled = false;
             createItemForm1 = new createItemForm();
             createItemForm1.CreateFeedItem += new createItemForm.CustomEventDelegate(addNewItem);
-            createItemForm1.CancelCreateFeedItem +=new createItemForm.CustomEventDelegate(createItemForm1_CancelCreateFeedItem);
+            createItemForm1.CancelCreateFeedItem += new createItemForm.CustomEventDelegate(createItemForm1_CancelCreateFeedItem);
             createItemForm1.Text = "Create New Feed Item";
             createItemForm1.Show();
         }
@@ -321,11 +268,11 @@ namespace FeedCreator.NET
             {
                 txt = String.Concat(txt, " ");
             }
-  FeedItemList.Add(new FeedItem(txt, 
-                createItemForm1.descriptionBox.Text,
-                createItemForm1.linkBox.Text, itemList.Items.Count + 1, createItemForm1.authorEmail.Text, createItemForm1.dateTimePicker1.Value, createItemForm1.sourceText.Text, createItemForm1.sourceURL.Text));
+            FeedItemList.Add(new FeedItem(txt,
+                          createItemForm1.descriptionBox.Text,
+                          createItemForm1.linkBox.Text, itemList.Items.Count + 1, createItemForm1.authorEmail.Text, createItemForm1.dateTimePicker1.Value, createItemForm1.sourceText.Text, createItemForm1.sourceURL.Text));
             itemList.Items.Clear();
-            FeedItemList.ForEach(delegate(FeedItem f)
+            FeedItemList.ForEach(delegate (FeedItem f)
             {
                 itemList.Items.Add(f.title);
             });
@@ -342,7 +289,7 @@ namespace FeedCreator.NET
                 result = MessageBox.Show("Are you sure that you want to delete this feed item?", "Delete Feed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    FeedItemList.ForEach(delegate(FeedItem f)
+                    FeedItemList.ForEach(delegate (FeedItem f)
                     {
                         if (f.title == itemList.SelectedItem.ToString())
                         {
@@ -399,7 +346,7 @@ namespace FeedCreator.NET
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
             }
 
@@ -420,7 +367,7 @@ namespace FeedCreator.NET
                     //"Create" or "OK"
                     createItemForm1.EditFeedItem += new createItemForm.CustomEventDelegate(editFeedItem);
                     createItemForm1.CancelCreateFeedItem += new createItemForm.CustomEventDelegate(createItemForm1_CancelCreateFeedItem);
-                    FeedItemList.ForEach(delegate(FeedItem f)
+                    FeedItemList.ForEach(delegate (FeedItem f)
                     {
                         if (f.title == itemList.SelectedItem.ToString())
                         {
@@ -461,7 +408,7 @@ namespace FeedCreator.NET
         }
         private void editFeedItem(object sender, EventArgs e)
         {
-            FeedItemList.ForEach(delegate(FeedItem f)
+            FeedItemList.ForEach(delegate (FeedItem f)
             {
                 if (f.title != null && createItemForm1.titleOnLoad != null)
                 {
@@ -480,7 +427,7 @@ namespace FeedCreator.NET
                 }
             });
             itemList.Enabled = true;
-  
+
         }
         private void feedList_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -545,7 +492,7 @@ namespace FeedCreator.NET
                     writer.WriteEndElement();
 
 
-                    TMPopened = FeedItemList.FindAll(delegate(FeedItem f)
+                    TMPopened = FeedItemList.FindAll(delegate (FeedItem f)
                     {
                         return itemList.Items.Contains(f.title) == true;
                     });
@@ -557,7 +504,7 @@ namespace FeedCreator.NET
                         while (i < itemList.Items.Count)
                         {
                             itemList.SelectedIndex = i;
-                            TMPopened.ForEach(delegate(FeedItem f)
+                            TMPopened.ForEach(delegate (FeedItem f)
                             {
 
                                 if (f.title == itemList.SelectedItem.ToString())
@@ -569,12 +516,12 @@ namespace FeedCreator.NET
                         }
                     }
                     itemList.SelectedIndex = originalSelectedIndex;
-                    TMPopened.Sort(delegate(FeedItem f1, FeedItem f2)
+                    TMPopened.Sort(delegate (FeedItem f1, FeedItem f2)
                     {
                         return f1.order.CompareTo(f2.order);
                     });
 
-                    TMPopened.ForEach(delegate(FeedItem f)
+                    TMPopened.ForEach(delegate (FeedItem f)
                     {
                         writer.WriteStartElement("entry");
                         writer.WriteElementString("title", f.title);
@@ -667,7 +614,7 @@ namespace FeedCreator.NET
                         writer.WriteEndElement();
                     }
 
-                    TMPopened = FeedItemList.FindAll(delegate(FeedItem f)
+                    TMPopened = FeedItemList.FindAll(delegate (FeedItem f)
                     {
                         return itemList.Items.Contains(f.title) == true;
                     });
@@ -679,7 +626,7 @@ namespace FeedCreator.NET
                         while (i < itemList.Items.Count)
                         {
                             itemList.SelectedIndex = i;
-                            TMPopened.ForEach(delegate(FeedItem f)
+                            TMPopened.ForEach(delegate (FeedItem f)
                             {
 
                                 if (f.title == itemList.SelectedItem.ToString())
@@ -691,13 +638,13 @@ namespace FeedCreator.NET
                         }
                     }
                     itemList.SelectedIndex = originalSelectedIndex;
-                    TMPopened.Sort(delegate(FeedItem f1, FeedItem f2)
+                    TMPopened.Sort(delegate (FeedItem f1, FeedItem f2)
                     {
                         return f1.order.CompareTo(f2.order);
                     });
 
                     //Now begin writing the feed items
-                    TMPopened.ForEach(delegate(FeedItem f)
+                    TMPopened.ForEach(delegate (FeedItem f)
                     {
                         writer.WriteStartElement("item");
                         writer.WriteElementString("title", f.title.ToString());
@@ -732,26 +679,42 @@ namespace FeedCreator.NET
 
         private void visitCommToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Create a new explorer form
-            ExplorerForm1 = new explorer();
-            //Assign the new url to the form- make sure to assign this
-            //before the explorer form loads
-            ExplorerForm1.urlLocation = new System.Uri("http://feedlaunch.sourceforge.net/");
-            //And now just display our explorer form
-            ExplorerForm1.Show();
+            string url = "http://feedlaunch.sourceforge.net/";
+            try
+            {
+                System.Diagnostics.Process.Start(url);
+            }
+            catch
+                (
+                 System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Create a new explorer form
-            HelpExplorerForm1 = new explorer();
-            //Set the form's title text
-            HelpExplorerForm1.Text = "FeedLaunch On-line Help and Documentation";
-            //Assign the new url to the form- make sure to assign this
-            //before the help form loads
-            HelpExplorerForm1.urlLocation = new System.Uri("http://feedlaunch.sourceforge.net/docs/");
-            //And now just display our help form
-            HelpExplorerForm1.Show();
+            string url = "http://feedlaunch.sourceforge.net/docs/";
+            try
+            {
+                System.Diagnostics.Process.Start(url);
+            }
+            catch
+                (
+                 System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
         }
         private void feedList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -769,61 +732,61 @@ namespace FeedCreator.NET
             try
             {
                 if (fileName == "Feed1.xml")
-                    {
+                {
 
-                        MessageBox.Show("You have not selected a destination for this feed. The next dialog will allow you to choose one.", "No Destination Found!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM/RSS Xml Feed Files (*.xml)|*.xml|All Files (*.*)|*.*";
-                        saveFileDialog1.FilterIndex = 1;
-                        saveFileDialog1.Title = "Select a destination folder and filename-";
-                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    MessageBox.Show("You have not selected a destination for this feed. The next dialog will allow you to choose one.", "No Destination Found!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM/RSS Xml Feed Files (*.xml)|*.xml|All Files (*.*)|*.*";
+                    saveFileDialog1.FilterIndex = 1;
+                    saveFileDialog1.Title = "Select a destination folder and filename-";
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        if (saveFileDialog1.FileName != null)
                         {
-                            if (saveFileDialog1.FileName != null)
-                            {
-                                fileName = saveFileDialog1.FileName;
-                                saved = true;
-                                feedButton_Click(sender, e);
-                                statusLabel.Text = "Feed successfully saved";
-                                this.Text = mainTitle + fileName;
-                            }
+                            fileName = saveFileDialog1.FileName;
+                            saved = true;
+                            feedButton_Click(sender, e);
+                            statusLabel.Text = "Feed successfully saved";
+                            this.Text = mainTitle + fileName;
                         }
                     }
-                    if (fileName == "_SaveAsFeed1.system")
+                }
+                if (fileName == "_SaveAsFeed1.system")
+                {
+                    saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM/RSS Xml Feed Files (*.xml)|*.xml|All Files (*.*)|*.*";
+                    saveFileDialog1.FilterIndex = 2;
+                    saveFileDialog1.Title = "Save As...";
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
-                        saveFileDialog1.Filter = "Rss Feed (*.rss)|*.rss|ATOM/RSS Xml Feed Files (*.xml)|*.xml|All Files (*.*)|*.*";
-                        saveFileDialog1.FilterIndex = 2;
-                        saveFileDialog1.Title = "Save As...";
-                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                        saveFileDialog1.FileName.Trim();
+                        if (saveFileDialog1.FileName != null)
                         {
-                            saveFileDialog1.FileName.Trim();
-                            if (saveFileDialog1.FileName != null)
-                            {
-                                if (saveFileDialog1.FileName.EndsWith(".rss"))
-                                    feedList.SelectedIndex = 0;
-                                else
-                                    feedList.SelectedIndex = 1;
-                                fileName = saveFileDialog1.FileName;
-                                feedButton_Click(sender, e);
-                                saved = true;
-                                statusLabel.Text = "Feed successfully saved";
-                                this.Text = mainTitle + fileName;
-                            }
-                        }
-                    }
-                    else if(fileName != "Feed1.xml")
-                    {
-                        if (fileName != null)
-                        {
-                            if (fileName.EndsWith(".rss"))
+                            if (saveFileDialog1.FileName.EndsWith(".rss"))
                                 feedList.SelectedIndex = 0;
                             else
                                 feedList.SelectedIndex = 1;
+                            fileName = saveFileDialog1.FileName;
                             feedButton_Click(sender, e);
                             saved = true;
                             statusLabel.Text = "Feed successfully saved";
                             this.Text = mainTitle + fileName;
                         }
                     }
-                
+                }
+                else if (fileName != "Feed1.xml")
+                {
+                    if (fileName != null)
+                    {
+                        if (fileName.EndsWith(".rss"))
+                            feedList.SelectedIndex = 0;
+                        else
+                            feedList.SelectedIndex = 1;
+                        feedButton_Click(sender, e);
+                        saved = true;
+                        statusLabel.Text = "Feed successfully saved";
+                        this.Text = mainTitle + fileName;
+                    }
+                }
+
 
 
             }
@@ -832,7 +795,7 @@ namespace FeedCreator.NET
                 MessageBox.Show("An Error has been encountered. Please submit a bug report if this problem persists!", ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-                
+
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -861,7 +824,7 @@ namespace FeedCreator.NET
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             toolStripButton1_Click(sender, e);
-            
+
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -888,7 +851,7 @@ namespace FeedCreator.NET
                     result = MessageBox.Show("Are you sure that you want to delete this feed item?", "Delete Feed Item?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
-                        FeedItemList.ForEach(delegate(FeedItem f)
+                        FeedItemList.ForEach(delegate (FeedItem f)
                         {
                             if (f.title == itemList.SelectedItem.ToString())
                             {
@@ -914,6 +877,8 @@ namespace FeedCreator.NET
 
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Version latestVersion = null; // variable for storing version stated online
+            Version currentVersion = Version.Parse(Application.ProductVersion); // current version of the application
             try
             {
                 System.Net.WebClient wc = new WebClient();
@@ -921,9 +886,15 @@ namespace FeedCreator.NET
                 StreamReader sr = new StreamReader(wcStream);
                 string line;
                 line = sr.ReadLine().Trim();
-                if (line == Application.ProductVersion)
+                if (!Version.TryParse(line, out latestVersion))
                 {
-                    MessageBox.Show("You are running the latest version of Feed Launch .NET! There are no updates currently!", "No Updates!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("There was an error checking for updates. Please try again later. Contact the developer if this error persists", "Please try again later!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                if (latestVersion <= currentVersion)
+                {
+                    MessageBox.Show("You are running the latest version of Feed Launch .NET! There are currently no updates!", "No Updates!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -943,7 +914,6 @@ namespace FeedCreator.NET
             }
             catch
             {
-                SystemSounds.Beep.Play();
                 MessageBox.Show("Unable to connect to the internet and locate the Feed Launch .NET server. Check that your internet connection is properly working before retrying. If the automatic updater continues to fail, please check the Feed Launch .NET website directly for any updates at feedlaunch.sf.net", "Please try again later!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
@@ -1023,7 +993,7 @@ namespace FeedCreator.NET
             }
         }
 
-        
+
         private void readRSS(object sender, EventArgs e, string openFileName)
         {
             try
@@ -1037,7 +1007,7 @@ namespace FeedCreator.NET
                 //We need to clear the FeedItem List
                 FeedItemList.Clear();
                 itemList.Items.Clear();
-                while(reader.Read())
+                while (reader.Read())
                     switch (reader.NodeType)
                     {
                         case XmlNodeType.Element:
@@ -1168,8 +1138,8 @@ namespace FeedCreator.NET
 
                             break;
                     }
-             
-                if(isHeaderTitle == false)
+
+                if (isHeaderTitle == false)
                 {
                 }
                 if (tmp.title != null && tmp.title != "")
@@ -1177,7 +1147,7 @@ namespace FeedCreator.NET
                     FeedItemList.Add(tmp);
                 }
                 itemList.Items.Clear();
-                FeedItemList.ForEach(delegate(FeedItem f)
+                FeedItemList.ForEach(delegate (FeedItem f)
                 {
                     itemList.Items.Add(f.title);
                 });
@@ -1199,10 +1169,10 @@ namespace FeedCreator.NET
                 }
                 if (ChannelInfo.title == "")
                     titleLabel.Text = "No Title Specified";
-                if(ChannelInfo.link == "")
+                if (ChannelInfo.link == "")
                     linkLabel.Text = "No Link Specified";
             }
-         catch (Exception ex)
+            catch (Exception ex)
             {
 #if(APP_DEBUG)
                 reader.Close();
@@ -1329,7 +1299,7 @@ namespace FeedCreator.NET
                     FeedItemList.Add(tmp);
                 }
                 itemList.Items.Clear();
-                FeedItemList.ForEach(delegate(FeedItem f)
+                FeedItemList.ForEach(delegate (FeedItem f)
                 {
                     itemList.Items.Add(f.title);
                 });
@@ -1360,18 +1330,31 @@ namespace FeedCreator.NET
             {
                 if (linkLabel.Text.StartsWith("No") == false && linkLabel.Text != null)
                 {
-                    explorer ex1 = new explorer();
-                    Uri url = new Uri(linkLabel.Text);
-                    ex1.urlLocation = url;
-                    ex1.StartPosition = FormStartPosition.CenterScreen;
-                    ex1.TopMost = false;
-                    ex1.Show();
+                    string url = linkLabel.Text.Trim();
+                    if(!url.StartsWith("http") && !url.StartsWith("HTTP") && !url.StartsWith("www") && !url.StartsWith("WWW"))
+                        url = "www." + url; // if the url doesn't start with 'http' or 'www', then prepend 'www.' in order for it to be interpreted as a valid url
+                    try
+                    {
+                        System.Diagnostics.Process.Start(url);
+                    }
+                    catch
+                        (
+                         System.ComponentModel.Win32Exception noBrowser)
+                    {
+                        if (noBrowser.ErrorCode == -2147467259)
+                            MessageBox.Show(noBrowser.Message);
+                    }
+                    catch (System.Exception other)
+                    {
+                        MessageBox.Show(other.Message);
+                    }
                 }
             }
             catch
             {
             }
         }
+
         private void welcomeForm_introClosed(object sender, EventArgs e)
         {
             this.Width = 635;
@@ -1381,27 +1364,27 @@ namespace FeedCreator.NET
             this.Text = string.Concat(this.Text, "*");
         }
 
-        private void introToolStripItem_Click(object sender, EventArgs e)
-        {
-            intro introForm = new intro();
-            introForm.Show();
-        }
-
-        
         void LinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-        	if(linkLabel.Text.Contains("http") || linkLabel.Text.Contains("www."))
-        	{
-        		explorer LinkExplorer = new explorer();
-            	//Assign the new url to the form- make sure to assign this
-            	//before the explorer form loads
-            	try {
-            		            	LinkExplorer.urlLocation = new System.Uri(linkLabel.Text.Trim());
-				}
-            	catch(Exception ex) { }
-            	//And now just display our explorer form
-            	LinkExplorer.Show();
-        	}
+            if (linkLabel.Text.Contains("http") || linkLabel.Text.Contains("www."))
+            {
+                string url = linkLabel.Text.Trim();
+                try
+                {
+                    System.Diagnostics.Process.Start(url);
+                }
+                catch
+                    (
+                     System.ComponentModel.Win32Exception noBrowser)
+                {
+                    if (noBrowser.ErrorCode == -2147467259)
+                        MessageBox.Show(noBrowser.Message);
+                }
+                catch (System.Exception other)
+                {
+                    MessageBox.Show(other.Message);
+                }
+            }
         }
     }
 }

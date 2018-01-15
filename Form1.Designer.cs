@@ -76,7 +76,6 @@ namespace FeedCreator.NET
             this.uploadFeedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.introToolStripItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -325,7 +324,6 @@ namespace FeedCreator.NET
             // 
             this.helToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpToolStripMenuItem,
-            this.introToolStripItem,
             this.toolStripSeparator4,
             this.checkForUpdatesToolStripMenuItem,
             this.toolStripSeparator5,
@@ -342,13 +340,6 @@ namespace FeedCreator.NET
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(320, 30);
             this.helpToolStripMenuItem.Text = "Online &Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
-            // 
-            // introToolStripItem
-            // 
-            this.introToolStripItem.Name = "introToolStripItem";
-            this.introToolStripItem.Size = new System.Drawing.Size(320, 30);
-            this.introToolStripItem.Text = "Feed Launch &Intro && Tutorial";
-            this.introToolStripItem.Click += new System.EventHandler(this.introToolStripItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -829,7 +820,6 @@ namespace FeedCreator.NET
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem uploadFeedToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripSplitButton1;
-        private System.Windows.Forms.ToolStripMenuItem introToolStripItem;
     }
 }
 
