@@ -1,5 +1,0 @@
-obj\Release\ResolveAssemblyReference.cache
-bin\Release\ftp-connect.dll
-bin\Release\ftp-connect.pdb
-obj\Release\ftp-connect.dll
-obj\Release\ftp-connect.pdb
